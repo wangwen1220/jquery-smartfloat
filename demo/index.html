@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<title>jQuery 页面滚动浮动层智能定位插件</title>
+	<link rel="stylesheet" href="css/demo.css" />
+	<link rel="stylesheet" href="css/hl.css" />
+	<script src="js/jquery.js"></script>
+	<script src="js/hl.js"></script>
+	<script src="../jquery.smartfloat.js"></script>
+	<script>
+		$(function(){
+			// 语法高亮
+			DlHighlight.HELPERS.highlightByName("code", "pre");//<pre>标签添加属性name="code"以及class="LANG" (LANG可以是"js", "css", "xml" and "html")
+
+			// 绑定浮动层智能定位
+			$("#float").smartFloat();
+		});
+	</script>
+</head>
+
+<body>
+<div id="header">
+	<a href="http://www.zhangxinxu.com/" class="logo" title="回到鑫空间-鑫生活首页">
+		<img src="img/zxx_home.png" border="0" />
+	</a>
+</div>
+<div id="main">
+	<h1>js页面滚动浮动层智能定位(jQuery)实例页面</h1>
+    <div id="body" class="light">
+    	<div id="content" class="show">
+        	<h3>代码</h3>
+            <div class="article_new"><a href="http://www.zhangxinxu.com/wordpress/?p=1242">回到相关文章 &gt;&gt;</a></div>
+            <div class="demo">
+                <h5>HTML代码：</h5>
+                <pre name="code" class="html">
+&lt;div class="float" id="float"&gt;
+    我是个腼腆羞涩的浮动层...
+&lt;/div&gt;
+                </pre>
+                <h5>JS代码：</h5>
+                <pre name="code" class="js">
+/*!
+ * jQuery 页面滚动浮动层智能定位插件
+ * smartFloat 1.0
+ * Date: 2012-10-27
+ * © 2009-2011 Steven, http://www.seosteven.com/
+ *
+ * This is licensed under the GNU LGPL, version 2.1 or later.
+ * For details, see: http://creativecommons.org/licenses/LGPL/2.1/
+ *
+ * 2010-12-06 v1.0.0 看了张鑫旭的浮动层智能定位例子，有了想改成插件的冲动，于是就有了此插件
+ * 说明：需要注意的一点，导航的宽度必须是固定值，不能是 auto 或者 100% 因为 fixed 和 absolute 都不认识
+ * 当然你也可以手动获取到导航的宽度，然后写到浮动导航样式里
+ * 不过有个前提，导航原先样式里不能有 position:relative，情况可能比较多，最简单的方法还是 把导航宽度定死。
+ * 注意：静态流元素添加占位元素，否则当窗口高度稍大于文档高度时定位会失效
+ */
+$.fn.smartFloat = function(config) {
+    return this.each(function() {
+        var $this = $(this),
+            // 距离屏幕顶部和左侧的距离
+            offset_top = $this.offset().top,
+            offset_left = $this.offset().left,
+            // 默认样式记录，还原初始样式时候需要
+            default_position = $this.css('position'),
+            default_top = $this.css('top'),
+            default_left = $this.css('left'),
+            default_zindex = $this.css('z-index'),
+            default_width = $this.css('width');
+
+        // 默认设置
+        config = $.extend({
+            top: 0,
+            left: offset_left,
+            zindex: 99999,
+            width: default_width,
+            holder: false// 若浮动元素为静态流元素，需添加占位元素，默不添加
+        }, config || {});
+        var top = config.top,
+            left = config.left,
+            zindex = config.zindex,
+            width = config.width,
+            holder = config.holder;
+
+        // 设置占位元素
+        if(holder) {
+            var $holder = $('<div class="smart-float-holder" />').insertAfter($this);
+            $holder.width($this.outerWidth(true)).height($this.outerHeight(true)).hide();
+        }
+
+        //鼠标滚动事件
+        $(window).scroll(function() {
+            var scroll_top = $(this).scrollTop();
+            if(scroll_top > offset_top) {
+                // 显示占位元素
+                if(holder) $holder.show();
+
+                // 添加类来控制一些复杂的布局
+                $this.addClass('smart-float');
+                if(window.XMLHttpRequest) {// for !IE6
+                    $this.css({
+                        'position': 'fixed',
+                        'top': top,
+                        'left': left,
+                        'z-index': zindex,
+                        'width': width
+                    });
+                } else {// only for IE6
+                    // IE6 不认识 position: fixed，单独用 position: absolute 模拟
+                    $this.css({
+                        'position': 'absolute',
+                        'top': scroll_top,
+                        'left': default_left,
+                        'z-index': zindex,
+                        'width': width
+                    });
+                    // 防止出现抖动 - 请慎用，会替换 html 已定义的背景图
+                    $("html").css({'background-image': 'url(about:blank)', 'background-attachment': 'fixed'});
+                }
+            } else {
+                // 隐藏占位元素
+                if(holder) $holder.hide();
+
+                // 还原初始样式
+                $this.removeClass('smart-float').css({
+                    'position': default_position,
+                    'top': default_top,
+                    'left': default_left,
+                    'z-index': default_zindex,
+                    'width': default_width
+                });
+            }
+        });
+    });
+};
+
+// 绑定
+$("#float").smartFloat();
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="float" id="float">
+	我是个腼腆羞涩的浮动层<img src="img/face.gif" title="含羞">，你可以轻轻地<a href="http://www.zhangxinxu.com/php/regist.php">点击我</a>(去注册页)。<br />
+	<a href='test.htm'>静态元素流定位 Demo</a>
+</div>
+<div id="footer">
+		Designed &amp; Powerd by <a href="http://www.zhangxinxu.com/">zhangxinxu</a><br>
+		Copyright© 张鑫旭-鑫空间-鑫生活<br>
+		<a href="http://www.miibeian.gov.cn/" target="_blank">鄂ICP备09015569号</a>
+</div>
+</body>
+</html>

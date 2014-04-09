@@ -1,0 +1,8017 @@
+@charset "utf-8";
+/*
+Myshow CSS Reset
+理念：
+	1. 基于 KISSY CSS Reset
+	2. 目的不是清除浏览器的默认样式，这仅是部分工作，清除和重置是紧密不可分的
+	3. 目的不是让默认样式在所有浏览器下一致，而是减少默认样式有可能带来的问题
+特色：1. 适应中文；2. 基于最新主流浏览器。
+维护：王文<wangwen1220@gmail.com>
+*/
+
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td /* table elements 表格元素 */ {
+	margin: 0;
+	padding: 0;
+}
+
+/** 设置默认字体 **/
+html { /* 去除最小字体限制 */
+	-webkit-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+}
+body,
+button, input, select, textarea /* for ie */ {
+	font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 统一等宽字体 */
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/** 重置列表元素 **/
+ul, ol { list-style: none; }
+
+/** 重置文本格式元素 **/
+a { color: #999; text-decoration: none; outline: none; }
+a:hover {}
+
+sup { vertical-align: text-top; } /* 重置，减少对行高的影响 */
+sub { vertical-align: text-bottom; }
+
+/** 重置表单元素 **/
+legend { color: #000; } /* for ie6 */
+fieldset, img { border: 0; } /* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea { font-size: 100%; } /* 使得表单元素在 ie 下能继承字体大小 */
+/* 注：optgroup 无法扶正 */
+button::-moz-focus-inner { /* 去除button 点击时在火狐下的虚线框 */
+	border-color: transparent;
+}
+
+/** 重置表格元素 **/
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* 重置 HTML5 元素 */
+article, aside, details, figcaption, figure, footer,header, hgroup, menu, nav, section,
+summary, time, mark, audio, video {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+mark { background: #ff0; }
+
+/*
+双飞翼栅格布局 Flying Swing Grids Layout
+理念：简单质朴，语义化布局。
+*/
+
+/* 居中 */
+#header, #content, #footer {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/** 布局基础样式 **/
+.col-main {
+	float: left;
+	width: 100%;
+	min-height: 1px; /* bug fix: 主栏没有内容时，在 Firefox 和 Chrome 等浏览器下，布局不对 */
+}
+.col-sub, .col-extra {
+	float: left;
+	/*position: relative; 按需设置，仅在需要时添加 */
+}
+
+/** 清除浮动 **/
+.ks-clear:after, .fn-clear:after, .layout:after, .main-wrap:after, .col-sub:after, .col-extra:after {
+	content: '\20';
+	display: block;
+	height: 0;
+	clear: both;
+}
+.ks-clear, .fn-clear, .layout, .main-wrap, .col-sub, .col-extra {
+	*zoom: 1;
+}
+.clear {
+	clear: both;
+}
+
+/** 设置内联, 减少浮动带来的 bug **/
+.fl, .fr, .fn-left, .fn-right { display: inline; }
+.fl, .fn-left { float: left; }
+.fr, .fn-right { float: right; }
+
+/* 更简洁的清理浮动方式 */
+.cf:before, .cf:after {/* 这里的 :before 伪类。其实他是来用处理 top-margin 边折叠的，跟清理浮动没有多大的关系。 */
+	content: "";
+	display: table;/* 隐藏这个空白使用的是 display: table */
+}
+.cf:after {
+	clear: both;
+}
+.cf {
+	*zoom: 1;
+}
+
+/*
+常用的通用样式 Common Style
+理念：少而精
+*/
+
+/* 隐藏 */
+.ks-hidden, .fn-hide { display: none; }
+.fn-show { display: block; }
+.ks-invisible { visibility: hidden; }
+
+/* inline block */
+.ks-inline-block { display: inline-block; *display: inline; }
+
+/* 半透明遮罩 */
+.overlay, .login-overlay {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 999;
+	background-color: rgba(255, 255, 255, 0.93);
+	background-color: #fff\9;
+	opacity: .93\9;
+	filter: alpha(opacity=93);
+	_position: absolute;
+	_width: 100%;
+	_height: 2100px;
+}
+.login-overlay { top: 79px; }
+#page-overlay {
+	/* top: 74px; */
+	top: 0;
+	z-index: 1000;
+	overflow: auto;
+	display: none;
+	background-color: rgba(246, 244, 245, 0.84);
+	background-color: #fff\9;
+	opacity: .84\9;
+	filter: alpha(opacity=84);
+}
+#show-overlay {
+	position: absolute;
+	z-index: 1;
+	top: 79px;
+	opacity: .3;
+	filter: alpha(opacity=30);
+}
+
+/* 浏览器兼容解决方案
+---------------------------------------------- */
+/*
+名称：IE6 position: fixed
+用法：添加 class
+注意：
+		* 如果需要多个方向的固定位置，比如 top + right，需要加两个 class
+		* 如果加了 .sl-fixed-top, 那么就别给这个元素加 top 属性的值
+		* 为了不出现异常，这个只作为套用。比如要 top: 30px 的时候，请在 .sl-fixed-top 的子元素内设置
+		* 由于我们有打包，所以，改 solution 是可以的，但这是强烈不推荐的，因为不利于维护
+*/
+
+.sl-fixed {
+	position: fixed;
+}
+
+/* 相当于正常的 position: fixed; top: 0; */
+.sl-fixed-top {
+	bottom: auto;
+	top: 0;
+	_bottom: auto;
+	_top: expression(documentElement.scrollTop);
+}
+
+/* 相当于正常的 position: fixed; bottom: 0px; */
+.sl-fixed-bottom {
+	bottom: 0;
+	top: auto;
+	_bottom: auto;
+	_top:expression(eval(documentElement.scrollTop+documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+}
+
+/* 相当于正常的 position: fixed; left: 0px; */
+.sl-fixed-left {
+	left: 0;
+	_position: absolute;
+	right:auto;
+	_left: expression(documentElement.scrollLeft);
+}
+
+/* 相当于正常的 position: fixed; right: 0; */
+.sl-fixed-right {
+	right: 0;
+	left: auto;
+	_right: auto;
+	_left:expression(eval(documentElement.scrollLeft+documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft,10)||0)-(parseInt(this.currentStyle.marginRight,10)||0));
+}
+
+/* 当不是 https 时，可以把 # 换成 about:blank 以提升效率 */
+html {
+	/* _background-image: url('about:blank'); */
+	_background-image: url(../images/myshow/bg.jpg);
+	_background-attachment: fixed;
+}
+
+/* hack for ie6 */
+.sl-fixed-top, .sl-fixed-right, .sl-fixed-bottom, .sl-fixed-left {
+	_position: absolute;
+}
+
+/*
+名称：强制换行
+用法：
+		* 一般块级元素用：.sl-wrap
+		* table 标签中需添加：.sl-wrap-table
+例子：
+	<p class="sl-wrap">…</p>
+	<table class="sl-wrap sl-wrap-table"></table>
+*/
+
+/* 一般 block-level 元素 */
+.sl-wrap, .sl-wrap td, .sl-wrap th {
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+/* table */
+.sl-wrap-table {
+	table-layout: fixed;
+}
+
+/*
+名称：元素垂直居中
+用法：添加类
+注意：主要是为了解决 IE 直居中问题，此方法需添加一个空标签，高级浏览器可用更高级的解决立法
+*/
+.sl-box {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	*display: inline;
+	*zoom: 1;
+}
+
+/* 通用样式
+---------------------------------------------- */
+body {
+	background: #F3F1F2 url(../images/myshow/bg.jpg) repeat 0 0;
+	color: #444;
+	font-family: "helvetica neue",arial,sans-serif,'宋体';
+	_font-family: '宋体',"helvetica neue",arial,sans-serif;
+	*padding-top: 30px;
+}
+
+/** topbar **/
+#topbar {
+	position: absolute;
+	/* position: fixed; */
+	z-index: 10;
+	left:0;
+	right:0;
+	top:0;
+	background: url(../images/common/top_nav_bg.png) repeat scroll 0 0;
+	/* _position: absolute; */
+	/* _top: expression(documentElement.scrollTop); */
+}
+#topbar a {
+	color: #414141;
+}
+#topbar a:hover {
+	color: #DA0614;
+}
+#topbar .nav {
+	float: left;
+	height: 30px;
+	line-height: 30px;
+}
+#topbar .nav a {
+	padding: 0 5px;
+}
+#topbar .help {
+	float: right;
+	height: 30px;
+	line-height: 30px;
+}
+#topbar .help a {
+	padding: 0 18px;
+}
+#topbar .help a.home {
+	background: url(../images/myshow/icon_home.png) no-repeat 0 60%;
+	_background: url(../images/myshow/ie6_icon_home.png) no-repeat 0 60%;
+}
+#topbar .help a.fav {
+	background: url(../images/myshow/icon_fav.png) no-repeat 0 60%;
+	_background: url(../images/myshow/ie6_icon_fav.png) no-repeat 0 60%;
+}
+#topbar .help a.home:hover {
+	background-image: url(../images/myshow/icon_home_hover.png);
+	_background-image: url(../images/myshow/ie6_icon_home_hover.png);
+}
+#topbar .help a.fav:hover {
+	background-image: url(../images/myshow/icon_fav_hover.png);
+	_background-image: url(../images/myshow/ie6_icon_fav_hover.png);
+}
+
+/** header **/
+#header {
+	margin-top: 30px;
+	border-bottom: 1px solid #CFCACA;
+	background-color: #000;
+	*position: relative;
+	*z-index: 10;
+	*zoom: 1;
+}
+#header.smart-float {
+	width: 100%;
+	margin-top: 0;
+}
+#header .wrapper {
+	height: 44px;
+	width: 960px;
+	margin: 0 auto;
+	background-color: #000;
+	*z-index: 10;
+	*position: relative;/* 解决 IE6 下用户菜单会蛋疼的消失问题 */
+}
+#header h1 {
+	float: left;
+	height: 100%;
+	width: 176px;
+	margin-right: 10px;
+}
+#header h1 a {
+	display: block;
+	height: 100%;
+	font-size: 30px;
+	line-height: 44px;
+	color: #D60921;
+	text-indent: -9999px;
+	background: url(../images/myshow/logo.png) no-repeat 0 0;
+}
+
+/* nav */
+#nav {
+	float: left;
+}
+#nav .nav-item {
+	position: relative;
+	float: left;
+	_float: none;
+	_display: inline;
+	*zoom: 1;
+}
+#nav .nav-item:hover,
+#nav .nav-item.hover,
+#nav .nav-item-current {
+	background: #E34141 url(../images/myshow/bg_nav.png) repeat-x 0 0;
+}
+#nav .nav-item-my-huoshow {
+	/* display: none; */
+}
+#nav .nav-item .nav-item-link {
+	display: block;
+	height: 44px;
+	line-height: 44px;
+	padding: 0 10px;
+	color: #C5C5C5;
+	font-size: 16px;
+	font-weight: bold;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	_display: inline-block;
+}
+#nav .nav-item .icon {
+	position: absolute;
+	right: 2px;
+	top: 2px;
+	display: block;
+	height: 11px;
+	line-height: 11px;
+	width: 21px;
+	text-align: center;
+	color: #fff;
+	font-size: 8px;
+	background-color: #E34141;
+}
+#nav .nav-item:hover .nav-item-link,
+#nav .nav-item.hover .nav-item-link,
+#nav .nav-item-current .nav-item-link {
+	color: #fff;
+	border-color: #E75C5C;
+}
+
+/* sub-nav */
+#nav .nav-item-all {
+	position: relative;
+	/* background: #E34141 url(../images/myshow/bg_nav.png) repeat-x 0 0; */
+}
+#nav .nav-item-all .nav-item-link {
+	padding-right: 22px;
+	/* border-color: #E75C5C; */
+	/* color: #fff; */
+	background: url(../images/myshow/nav-icon-down.png) no-repeat 92% 50%;
+	_background-image: url(../images/myshow/nav-icon-down-ie6.png);
+}
+#nav .nav-item-all:hover .sub-nav,
+#nav .nav-item-all.hover .sub-nav {
+	display: block;
+}
+#nav .sub-nav {
+	display: none;
+	position: absolute;
+	z-index: 11;
+	left: 0;
+	top: 44px;
+	width: 428px;
+	height: 152px;
+	overflow: hidden;
+	border: 1px solid #262626;
+	border-left: none;
+	background-color: #333333;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+	border-radius: 0 0 2px 2px;
+}
+#nav .sub-nav-list {
+	float: left;
+	width: 106px;
+	height: 100%;
+	overflow: hidden;
+	border-left: 1px solid #262626;
+}
+#nav .sub-nav-item {
+	position: relative;
+}
+#nav .sub-nav-item .icon {
+	right: 5px;
+	top: 7px;
+}
+#nav .sub-nav-item .icon-hot {
+	background-color: #FA9601;
+}
+#nav .sub-nav-item-link {
+	display: block;
+	height: 25px;
+	line-height: 25px;
+	overflow: hidden;
+	padding: 0 10px;
+	font-size: 12px;
+	color: #c5c5c5;
+}
+#nav .sub-nav-item .sub-nav-item-link:hover {
+	color: #fff;
+	background-color: #222222;
+}
+
+/* 采集菜单 */
+#add {
+	position: relative;
+	float: right;
+	width: 38px;
+	height: 100%;
+	left: 3px;
+	background: #000 url(../images/myshow/btn_add.png) no-repeat 50% 50%;
+	_background: #000 url(../images/myshow/ie6_btn_add.png) no-repeat 50% 50%;
+	cursor: pointer;
+}
+#add:hover, #add.hover {
+	background-color: #EA5265;
+	_background-image: url(../images/myshow/ie6h_btn_add.png);
+}
+#add .add-list {
+	display: none;
+	position: absolute;
+	z-index: 10;
+	top: 44px;
+	right: 0;
+	width: 88px;
+	padding: 10px 20px;
+	background-color: #EA5265;
+	cursor: default;
+}
+#add .add-list li a {
+	display: block;
+	height: 35px;
+	padding-left: 30px;
+	background: url(../images/myshow/icon_collect.png) no-repeat left center;
+	font-size: 14px;
+	color: #fff;
+	line-height: 35px;
+}
+#add .add-list li a.collect {
+	background-image: url(../images/myshow/icon_collect.png);
+	_background-image: url(../images/myshow/icon_collect_ie6.png);
+}
+#add .add-list li a.collect:hover {
+	background-image: url(../images/myshow/icon_collect_hover.png);
+	_background-image: url(../images/myshow/icon_collect_hover_ie6.png);
+}
+#add .add-list li a.create {
+	background-image: url(../images/myshow/icon_create.png);
+	_background-image: url(../images/myshow/icon_create_ie6.png);
+}
+#add .add-list li a.create:hover {
+	background-image: url(../images/myshow/icon_create_hover.png);
+	_background-image: url(../images/myshow/icon_create_hover_ie6.png);
+}
+#add .add-list li a.upload {
+	background-image: url(../images/myshow/icon_upload.png);
+	_background-image: url(../images/myshow/icon_upload_ie6.png);
+}
+#add .add-list li a.upload:hover {
+	background-image: url(../images/myshow/icon_upload_hover.png);
+	_background-image: url(../images/myshow/icon_upload_hover_ie6.png);
+}
+#search {
+	position: relative;
+	float: right;
+	height: 26px;
+	width: 140px;
+	margin-top: 9px;
+	/* border-radius: 5px 0 0 5px; */
+	background-color: #FAFAFA;
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+}
+#search.focus {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#search-wd {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 112px;
+	height: 24px;
+	line-height: 24px;
+	border: 1px solid #D1CFCF;
+	border-radius: 5px 0 0 5px;
+	background-color: #FAFAFA;
+	text-indent: 2px;
+	color: #A9A9A9;
+}
+#search-wd:focus {
+	color: #444;
+}
+#search .label {
+	left: 0;
+	height: 24px;
+	line-height: 24px;
+	width: 102px;
+	background-color: #e8e8e8\0;
+}
+#search-submit {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 26px;
+	height: 26px;
+	text-indent: -9999px;
+	border: none;
+	background: #FAFAFA url(../images/myshow/btn_search_submit.png) no-repeat 0 0;
+	filter: alpha(opacity=75)\0;
+}
+#menu {
+	display: none;
+	float: right;
+}
+#menu .msg {
+	float: left;
+}
+#menu .msg a {
+	position: relative;
+	display: block;
+	height: 44px;
+	width: 30px;
+	line-height: 44px;
+	text-align: center;
+	text-indent: -9999px;
+	color: #fff;
+	background: url(../images/myshow/icon_notice.png) no-repeat center center;
+	_background: url(../images/myshow/ie6_icon_notice.png) no-repeat center center;
+}
+#menu .user-msg a {
+	background-image: url(../images/myshow/icon_msg.png);
+	_background-image: url(../images/myshow/ie6_icon_msg.png);
+}
+#menu .msg a span {
+	position: absolute;
+	right: 0;
+	top: 8px;
+	display: block;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	text-align: center;
+	text-indent: 0;
+	color: #fff;
+	background-color: #D60921;
+	opacity: 0.88;
+	filter: alpha(opacity=88);
+	display: none;
+}
+#menu .msg a:hover span {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#menu_user {
+	position: relative;
+	float: left;
+	padding: 8px 0 8px 7px;
+}
+#menu_user .nav {
+	position: relative;
+	display: block;
+	padding: 4px 18px 4px 4px;
+	color: #fff;
+	background-color: #404040;
+	/* background: #404040 url(../images/myshow/arrow_down.png) no-repeat 96% 40%; */
+}
+#menu_user .nav img {
+	height: 20px;
+	width: 20px;
+	vertical-align: middle;
+}
+#menu_user .nav strong {
+	display: inline-block;
+	margin-left: 4px;
+	max-width: 77px;
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+	vertical-align: middle;
+}
+#menu_user .nav em {
+	position: absolute;
+	right: 5px;
+	top: 10px;
+	display: block;
+	height: 6px;
+	width: 11px;
+	background: url(../images/myshow/arrow_down.png) no-repeat 0 0;
+	_background: url(../images/myshow/ie6_arrow_down.png) no-repeat 0 0;
+}
+#menu_user ul:before {
+	content: "";
+	display: block;
+	margin: 0 -10px;
+	border-bottom: 1px solid #E0DEDE;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
+#menu_user ul {
+	display: none;
+	position: absolute;
+	z-index: 11;
+	top: 44px;
+	right: 0;
+	width: 145px;
+	overflow: hidden;
+	text-align: left;
+	font-size: 14px;
+	color: #221919;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+	background-color: #fff;
+	border-top: 1px solid #E1DFDF\9;
+	*right: -1px;
+}
+#menu_user ul li {
+	position: relative;
+	display: block;
+	border-bottom: 1px solid #E1DFDF;
+	border: 1px solid #E1DFDF\9;
+	border-top: none\9;
+}
+#menu_user ul li div {
+	*zoom: 1;
+}
+#menu_user ul li a {
+	display: block;
+	font-weight: 400;
+	line-height: 12px;
+	padding: 8px 10px 8px 36px;
+	text-align: left;
+	*position: relative;
+	_padding: 14px 10px 14px 36px;
+}
+#menu_user ul li a:last-child {
+	padding-bottom: 12px;
+}
+#menu_user ul li a:first-child {
+	padding-top: 12px;
+}
+#menu_user ul li a:hover {
+	color: #221919;
+	background-color: #F2F2F2;
+}
+#menu_user ul li a .info {
+	color: #A1A1A1;
+	font-size: 12px;
+	margin-top: 10px;
+}
+#menu_user ul li.friends a .info {
+	height: 15px;
+	width: 64px;
+	background: url(../images/myshow/icon_find_btn.png) no-repeat 0 0;
+	cursor: pointer;
+}
+#menu_user ul li.friends a:hover .info {
+	background-position: 0 -30px;
+}
+#menu_user ul li a .info span {
+	margin-right: 10px;
+}
+#menu_user ul li em {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	width: 16px;
+	height: 16px;
+	background: url(../images/myshow/header_sprite.png) no-repeat 0 -1px;
+	_background: url(../images/myshow/header_sprite_ie6.png) no-repeat 0 -1px;
+}
+#menu_user ul li.mine em {
+	background-position: 0 -1px;
+}
+#menu_user ul li.mine:hover em {
+	background-position: -140px -1px;
+}
+#menu_user ul li.mobile em {
+	background-position: 0 -31px;
+}
+#menu_user ul li.mobile:hover em {
+	background-position: -140px -31px;
+}
+#menu_user ul li.friends em {
+	background-position: 0 -61px;
+}
+#menu_user ul li.friends:hover em {
+	background-position: -140px -61px;
+}
+#menu_user ul li.goodies em {
+	background-position: 0 -91px;
+}
+#menu_user ul li.goodies:hover em {
+	background-position: -140px -91px;
+}
+#menu_user ul li.papers em {
+	background-position: 0 -121px;
+}
+#menu_user ul li.papers:hover em {
+	background-position: -140px -121px;
+}
+#menu_user ul li.settings em {
+	background-position: 0 -181px;
+}
+#menu_user ul li.settings:hover em {
+	background-position: -140px -181px;
+}
+
+/* 通用外层包裹 */
+#wrapper {
+	position: relative;
+	margin: 20px auto;
+	width: 960px;
+}
+
+/* 正在加载 */
+#loading-pins {
+	display: none;
+	position: absolute;
+	bottom: -30px;
+	margin: 0 auto;
+	width: 960px;
+	height: 36px;
+	line-height: 36px;
+	border-top: 1px solid #DFDFDF;
+	font-size: 16px;
+	text-align: center;
+}
+
+/* 没有更多了 */
+#loading-end {
+	display: none;
+	width: 960px;
+	margin: 15px auto 0;
+	padding-top: 15px;
+	border-top: 1px solid #dfdfdf;
+	text-align: center;
+	height: 80px\9;
+	background: url(../images/myshow/loading-end-ie.png) no-repeat 50% 50%\9;/* IE 下有个操蛋的阴影 */
+	_background-image: url(../images/myshow/loading-end-ie6.png);
+}
+#loading-end img {
+	vertical-align: bottom;
+	display: none\9;
+	/* _display: block; */
+}
+
+/* 回到顶部 */
+#scroll-to-top {
+	display: none;
+	position: fixed;
+	z-index: 999;
+	left: 50%;
+	bottom: 15px;
+	margin-left: 488px;
+	width: 50px;
+	height: 50px;
+	/* border-radius: 8px; */
+	/* box-shadow: 0 0 2px rgba(0,0,0,0.21); */
+	background: url(../images/myshow/icon_scroll_to_top.png) no-repeat 50% 50%;
+	*background: url(../images/myshow/icon_scroll_to_top.gif) no-repeat 50% 50%;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	text-indent: -9999px;
+	/* _position: absolute; */
+}
+#scroll-to-top:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+/* 发送私信弹窗 */
+#send-msg-form textarea {
+	width: 360px;
+	height: 70px;
+	padding: 0 0 0 8px;
+}
+#send-msg-form label {
+	padding: 0;
+}
+
+/* 用户登录后 */
+body.logged #nav .my-huoshow, body.logged #menu {/* 显示我的火秀和用户菜单 */
+	display: block;
+}
+body.logged #nav .my-huoshow {
+	*display: inline;
+	*zoom: 1;
+}
+body.logged #login-dialog, body.logged #loginbar {/* 隐藏登录条 */
+	display: none;
+}
+
+/* =tpl 通用模板
+---------------------------------------------- */
+/* 通用 input */
+.input {
+	padding: 0 5px;
+	width: 200px;
+	height: 32px;
+	line-height: 32px;
+	border: 1px solid #BBBBBB;
+	border-radius: 3px;
+	font-size: 14px;
+	color: #bcbcbc;
+	background: #fff url(../images/myshow/bg_input.png) repeat-x 0 0;
+	/* color: #666;todo */
+}
+.input:focus {
+	box-shadow: 0 0 4px rgba(170, 0, 20, 0.6);
+	color: #666;
+}
+.label {
+	padding: 0 5px;
+	width: 200px;
+	height: 32px;
+	line-height: 32px;
+	font-size: 14px;
+	color: #bcbcbc;
+}
+
+/* jQuery divselect */
+.divselect {
+	position: relative;
+	width: 262px;
+	height: 34px;
+	line-height: 34px;
+	font-size: 14px;
+	font-weight: bold;
+	background: #fff url(../images/myshow/bg_divselect.png) repeat-x 0 1px;
+}
+.divselect .selected {
+	display: block;
+	padding: 0 4px;
+	height: 34px;
+	line-height: 34px;
+	overflow: hidden;
+	border: 1px solid #A4A2A2;
+	border-radius: 3px;
+	background: url(../images/myshow/arrow_down_black.png) no-repeat 95% 50%;
+	cursor: pointer;
+	font-style: normal;
+	color: #666;
+}
+.divselect .options {
+	position: absolute;
+	width: 260px;
+	display: none;
+	max-height: 300px;
+	overflow: auto;
+	margin-top: -36px;
+	border: 1px solid #A4A2A2;
+	border-radius: 3px;
+	background: #fff url(../images/myshow/bg_input.png) repeat-x 0 0;
+	_height: expression(document.body.clientHeight > 238 ? '239px' : 'auto');
+}
+.divselect .option {
+	display: block;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 6px;
+	overflow: hidden;
+	color: #666;
+	text-decoration: none;
+}
+.divselect li:hover,
+.divselect li.hover,
+.divselect .option:hover {
+	background-color: #F8F8F8;
+}
+.divselect .selected:active, .divselect .option:active {
+	background-color: #D60921;
+	color: #fff;
+}
+
+/* 创建专辑 */
+.divselect .options .option-list {
+	max-height: 170px;
+	overflow: auto;
+	_height: expression(document.body.clientHeight > 169 ? '170px' : 'auto');
+	_width: 100%;
+	_overflow-x: hidden;
+}
+.divselect .options .create-album {
+	margin: 0;
+	padding: 10px;
+	border-top: 1px solid #EBEBEB;
+}
+.divselect .options .create-album input {
+	width: 163px;
+	height: 32px;
+	line-height: 32px;
+	margin: 0;
+	padding: 0 4px;
+	border: 1px solid #EBEBEB;
+	border-radius: 3px;
+	color: #666;
+	vertical-align: middle;
+}
+.divselect .options .create-album input:focus {
+	border: 1px solid #bebebe;
+}
+.divselect .options .create-album .button {
+	width: 56px;
+	margin-left: 5px;
+	border: 1px solid #bebebe;
+	color: #666;
+	_margin-left: 0;
+}
+.divselect .options .create-album .disabled {
+	border: 1px solid #EBEBEB;
+	color: #D9D6D6;
+	cursor: default;
+}
+.divselect .options .create-album input:focus {
+	box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+}
+
+/* dbtn */
+.dbtn {
+	height: 32px;
+	line-height: 32px;
+	padding: 0 1em;
+	border: 1px solid #CFCFCF;
+	border-radius: 3px;
+	color: #333333;
+	font-size: 14px;
+	font-weight: bold;
+	background: #F6F6F6 url(../images/myshow/bg_btn.png) repeat-x 0 0;
+	text-shadow: 0 1px rgba(255, 255, 255, 0.9);
+	box-shadow: inset 0 1px rgba(255, 255, 255, 0.8), 0 1px rgba(255, 255, 255, 0.35);
+}
+.dbtn:hover {
+	text-decoration: none;
+	background: #FCFCFC;
+}
+
+/* sbtn */
+.sbtn {
+	display: block;
+	width: 78px;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+	color: #fff;
+	font-size: 18px;
+	border: none;
+	font-weight: bold;
+	background: url(../images/myshow/btn_default_small.png) no-repeat 0 0;
+	cursor: pointer;
+}
+.sbtn:hover, .sbtn:active {
+	opacity: 0.95;
+	filter: alpha(opacity=95);
+}
+
+/* lbtn */
+.lbtn {/* 登录按钮，与 sbtn 结合使用 */
+	height: 42px;
+	line-height: 43px;
+	width: 85px;
+	background-image: url("../images/myshow/btn_login_dialog.png");
+}
+
+/* wbtn */
+.wbtn {
+	width: 122px;
+	height: 42px;
+	line-height: 43px;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+	border: none;
+	font-weight: bold;
+	background: url(../images/myshow/btn_default.png) no-repeat 0 0;
+	cursor: pointer;
+}
+.wbtn:hover, .wbtn:active {
+	opacity: 0.95;
+	filter: alpha(opacity=95);
+}
+
+/* ebtn */
+.ebtn {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	background: url(../images/myshow/bg_ebtn_left.png) no-repeat 0 0;
+}
+.ebtn .sbtn {
+	width: auto;
+	height: 42px;
+	line-height: 42px;
+	padding: 0 20px;
+	background: url(../images/myshow/bg_ebtn_right.png) no-repeat 100% 0;
+}
+
+/* esbtn */
+.esbtn {
+	display: inline-block;
+	background: url(../images/myshow/bg_esbtn_left.png) no-repeat 0 0;
+	*display: inline;
+	*zoom: 1;
+}
+.esbtn .sbtn {
+	width: auto;
+	padding: 0 20px;
+	background: url(../images/myshow/bg_esbtn_right.png) no-repeat 100% 0;
+}
+
+/* button */
+.button {
+	display: inline-block;
+	margin-left: 15px;
+	width: 86px;
+	height: 32px;
+	line-height: 32px;
+	border: 1px solid #A4A2A2;
+	border-radius: 3px;
+	background-color: #fff;
+	font-weight: bold;
+	text-align: center;
+	color: #333333;
+	cursor: pointer;
+}
+.button:hover { background-color: #f6f6f6; }
+
+/* bbutton */
+.bbutton {
+	display: inline-block;
+	width: 160px;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #BBBBBB;
+	border-radius: 3px;
+	font-size: 15px;
+	font-weight: bold;
+	color: #444;
+	text-align: center;
+	background: #F2F2F2 url(../images/myshow/bg_button.png) repeat-x 0 0;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+}
+.bbutton:hover {
+	opacity: 0.91;
+	filter: alpha(opacity=91);
+}
+
+/* share-btn */
+.share-btn {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	line-height: 40px;
+	background: url(../images/myshow/btn_share.png) no-repeat 0 50%;
+	vertical-align: top;
+	text-align: center;
+}
+.share-btn strong, .share-btn em {
+	display: block;
+	height: 15px;
+	line-height: 15px;
+	color: #666666;
+}
+.share-btn strong {
+	margin-top: 5px;
+}
+
+/* share-hbtn */
+.share-hbtn {
+	height: 50px;
+	line-height: 50px;
+	background-image: url(../images/myshow/btn_share_big.png);
+}
+.share-hbtn strong {
+	margin-top: 8px;
+}
+
+/* share-bbtn */
+.share-bbtn {
+	display: inline-block;
+	width: 51px;
+	height: 50px;
+	/* border: 1px solid #CFCFCF; */
+	/* border-radius: 3px; */
+	background: #F6F6F6 url(../images/myshow/bg_share_bbtn.png) no-repeat 0 50%;
+	text-align: center;
+}
+.share-bbtn strong, .share-bbtn em {
+	display: block;
+	height: 16px;
+	line-height: 16px;
+	color: #666666;
+}
+.share-bbtn strong {
+	margin-top: 8px;
+}
+
+/* album-bar */
+.album-bar a {
+	display: block;
+	margin-bottom: 8px;
+	padding-left: 5px;
+	height: 32px;
+	line-height: 32px;
+	overflow: hidden;
+	overflow: hidden;
+	border: 1px solid #DDDDDD;
+	border-radius: 3px;
+	color: #999999;
+	font-weight: 400;
+	box-shadow: 0 1px #FFFFFF inset, 0 0 1px rgba(34, 25, 25, 0.1);
+	background-color: #F9F9F9;
+	*position: relative;
+	*zoom: 1;
+}
+.album-bar .text {
+	display: inline-block;
+	height: 100%;
+	width: 155px;
+}
+.album-bar .stats {
+	float: right;
+	width: 37px;
+	height: 100%;
+	border-left: 1px solid #DDDDDD;
+	text-align: center;
+	*float: none;
+	*display: block;
+	*position: absolute;
+	*right: 0;
+	top: 0;
+	*zoom: 1;
+}
+.album-bar a:hover {
+	color: #EA5265;
+}
+.album-bar > a:hover {
+	color: #EA5265;
+	background-color: #fefefe;/* 加了这句会触发 IE6 一个很操蛋的问题 */
+}
+
+/* fancy */
+.fancy {
+	position: relative;
+	background-color: #fff;
+}
+.fancy input, .fancy textarea {
+	position: relative;
+	z-index: 3;
+	background-color: transparent !important;
+}
+.fancy label {
+	position: absolute;
+	z-index: 2;
+	top: 20px;
+	left: 8px;
+	display: block;
+	font-size: 14px;
+	color: #bbb;
+	cursor: text;
+}
+.fancy .label {
+	top: 1px;
+}
+
+/* pagination */
+.pagination {
+	padding: 10px 0;
+	text-align: right;
+	height: 20px;
+	line-height: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.pagination a {
+	padding: 2px 1px;
+}
+.pagination-normal a {
+	margin-left: 1px;
+	padding: 1px 4px;
+}
+.pagination .dot {
+	padding: 1px;
+	border: none;
+}
+.pagination a:link, .pagination a:visited {
+	border: 1px solid #dedede;
+	color: #696969;
+	text-decoration: none;
+}
+.pagination a:hover,
+.pagination a:active,
+.pagination a.current:link,
+.pagination a.current:visited {
+	color: #fff;
+	border: 1px solid #ff6600;
+	background-color: #ff6600;
+}
+.pagination a.tips {
+	/* _padding: 4px 7px 1px; */
+}
+/* 专辑详细页隐藏首页和末页 */
+#pagination a.first-page, #pagination a.last-page {
+	display: none;
+}
+
+/* card */
+.card {
+	display: none;
+	clear: both;
+	width: 305px;
+	position: absolute;
+	z-index: 1;
+	left: -3px;
+	bottom: 29px;
+	/* box-shadow: 0 0 3px rgba(0, 0, 0, 0.3); */
+}
+.card .info {
+	padding: 15px;
+	border: 1px solid #DCDCDC;
+	border-bottom: none;
+	border-radius: 3px 3px 0 0;
+	background-color: #fff;
+}
+.card .avatar {
+	margin-right: 8px;
+}
+.card .avatar img {
+	width: 60px;
+	height: 60px;
+}
+.card .name {
+	float: left;
+	padding-left: 18px;
+	color: #555555;
+	font-size: 14px;
+	width: 195px;
+	background: url(../images/myshow/head_user.png) no-repeat 0 50%;
+}
+.card .stats {
+	margin-top: 15px;
+	color: #B5B5B5;
+	font-size: 14px;
+}
+.card .stats em {
+	color: #777;
+	margin-right: 8px;
+}
+.card .stats strong {
+	color: #777;
+	font-weight: bold;
+	font-style: italic;
+}
+.card .signature {
+	clear: both;
+	padding-top: 15px;
+	color: #888;
+	font-size: 14px;
+}
+.card .actions {
+	height: 44px;
+	background: url(../images/myshow/bg_follow_bar.png) no-repeat 0 100%;
+	background: url(../images/myshow/bg_follow_bar.gif) no-repeat 0 100%\9;
+	_background-position: 2px 100%;
+}
+.card .actions .btn {
+	float: right;
+	margin: 3px 15px 0 0;
+	height: 24px;
+	line-height: 24px;
+	padding: 0 8px 0 24px;
+	border: 1px solid #bbb;
+	border-radius: 3px;
+	color: #444;
+	background: url(../images/myshow/bg_btn_follow_bar.png) repeat-x 0 0;
+}
+.card .actions .follow {
+	background: transparent url(../images/myshow/icon_follow_user_hover.png) no-repeat 8px 50%;
+}
+.card .actions .letter {
+	padding-left: 30px;
+	background: transparent url(../images/myshow/icon_send_msg_hover.png) no-repeat 8px 50%;
+}
+.card .actions .btn:hover {
+	color: #E34141;
+}
+/*.card .actions .follow:hover {
+	background-image: url(../images/myshow/icon_follow_user_hover.png);
+}
+.card .actions .letter:hover {
+	background-image: url(../images/myshow/icon_send_msg_hover.png);
+}*/
+
+/** 表单验证 **/
+.data-valid, .data-invalid {
+	display: inline-block;
+	margin-left: 7px;
+	min-width: 14px;
+	_width: expression(document.body.clientWidth < 14 ? '14px' : 'auto');
+	height: 14px;
+	line-height: 14px;
+	text-indent: 15px;
+	color: #999;
+	background: url(../images/myshow/data_valid.gif) no-repeat 0 50%;
+}
+.data-invalid {
+	background-image: url(../images/myshow/data_invalid.gif);
+}
+
+/** 弹窗 **/
+.dialog {
+	position: fixed;
+	z-index: 1001;
+	top: 20%;
+	left: 50%;
+	margin-left: -281px;
+	width: 560px;
+	border: 1px solid #C9C9C9;
+	background-color: #fff;
+	box-shadow: 0 0 4px rgba(121, 121, 121, .6);
+	_position: absolute;
+	_left: expression(-documentElement.scrollLeft-281);
+	_margin-left: 50%;
+	_top: expression(documentElement.scrollTop+100);
+}
+.dialog .header {
+	position: relative;
+	border-bottom: 1px solid #EBEBEB;
+	background-color: #FAFAFA;
+}
+.dialog .title {
+	height: 50px;
+	line-height: 50px;
+	padding: 0 20px;
+	font-size: 18px;
+	font-weight: normal;
+	color: #B4B4B4;
+}
+.dialog .close {
+	display: block;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 57px;
+	border-left: 1px solid #EBEBEB;
+	text-indent: -9999px;
+	background: url(../images/myshow/btn_close.png) no-repeat 50% 50%;
+	_height: 50px;
+}
+.dialog .close:hover {
+	background-color: #EA5265;
+	background-image: url(../images/myshow/btn_close_hover.png);
+}
+.dialog .btn {
+	display: block;
+	margin: 50px auto 30px;
+	width: 240px;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #BBBBBB;
+	border-radius: 3px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	color: #736D6D;
+	text-shadow: 0 1px rgba(255, 255, 255, 0.9);
+	cursor: pointer;
+	background: url(../images/myshow/bg_btn_silver.png) repeat-x 0 0;
+}
+.dialog .btn:hover {
+	opacity: 0.8;
+	color: #222;
+}
+
+/* 专辑框 */
+.ui-album {
+	position: relative;
+	left: -7px;
+	float: left;
+	display: inline;
+	margin: 12px 0 12px 28px;
+	width: 208px;
+	background: url(../images/myshow/bg_album.png) no-repeat 0 0;
+}
+.ui-album .img {
+	display: block;
+	margin: 11px 0 0 7px;
+	padding: 1px 0 0 1px;
+	/* width: 190px; */
+	height: 189px;
+	background: url(../images/myshow/bg_ui_album.png) no-repeat 0 0;
+	overflow: hidden;
+	*zoom: 1;
+}
+.ui-album .img img {
+	float: left;
+	margin: 0 3px 3px 0;
+	/* width: 60px; */
+	/* height: 60px; */
+}
+.ui-album .img-single {
+	width: 200px;
+	text-align: center;
+}
+.ui-album .img-single img {
+	float: none;
+}
+.ui-album .img:hover {
+	text-decoration: none;
+}
+/*.ui-album h4 {
+	width: 202px;
+	height: 25px;
+	line-height: 25px;
+	overflow: hidden;
+	margin: -19px 0 0 1px;
+	text-align: center;
+	color: #fff;
+	font-weight: bold;
+	background-color: #000;
+	opacity: .8;
+	filter: Alpha(opacity=80);
+}
+.ui-album h4 a {
+	color: #fff;
+}*/
+.ui-album .intro {
+	position: absolute;
+	left: 1px;
+	bottom: 41px;
+	width: 190px;
+	max-height: 121px;
+	overflow: hidden;
+	padding: 6px;
+	background-color: #000;
+	opacity: .8;
+	filter: Alpha(opacity=80);
+	color: #adadad;
+}
+.ui-album .intro h3 {
+	height: 18px;
+	line-height: 18px;
+	overflow: hidden;
+}
+.ui-album .intro a {
+	display: block;
+	color: #fff;
+	text-align: center;
+}
+.ui-album .intro:hover h3 {
+	/* overflow: visible; */
+}
+.ui-album .intro:hover a {
+	/* text-align: left; */
+}
+.ui-album .intro:hover p,
+.ui-album .intro.hover p {
+	display: block;
+}
+.ui-album .pinner {
+	width: 208px;
+	margin: 17px 0 0;
+	overflow: hidden;
+	#padding-top: 16px;
+	*zoom: 1;
+}
+.ui-album .avatar {
+	float: left;
+	margin-right: 5px;
+	border: 1px solid #CCCCCC;
+}
+.ui-album .avatar img {
+	display: block;
+	width: 28px;
+	height: 28px;
+}
+.ui-album .name, .ui-album .stats {
+	float: left;
+	width: 170px;
+	height: 14px;
+	line-height: 14px;
+	overflow: hidden;
+	color: #333333;
+	*width: 168px;
+}
+.ui-album .name {
+	margin-bottom: 2px;
+	font-weight: bold;
+}
+.ui-album .stats {
+	color: #999;
+}
+.ui-album .action {
+	position: absolute;
+	top: 15px;
+	left: 10px;
+}
+.ui-album .action a {
+	display: inline-block;
+	padding: 0 14px;
+	height: 25px;
+	line-height: 25px;
+	border: 1px solid #BBBBBB;
+	border-radius: 4px;
+	background-color: #FCF9F9;
+	text-align: center;
+	color: #333;
+	opacity: 0.88;
+	filter: alpha(opacity=88);
+}
+.ui-album .action .share {
+	padding: 0 10px 0 25px;
+	background: #FCF9F9 url(../images/myshow/icon_share_btn.png) no-repeat 10px 50%;
+}
+.ui-album .action .follow {
+	padding: 0;
+	width: 52px;
+	height: 27px;
+	line-height: 27px;
+	text-indent: 22px;
+	border: none;
+	border-radius: 3px;
+	color: #f4f4f4;
+	text-align: left;
+	background: #FCF9F9 url(../images/myshow/btn_followto_album.png) no-repeat 0 0;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.ui-album .action .followed {
+	width: 75px;
+	background-image: url(../images/myshow/btn_followed_album.png);
+}
+.ui-album .action a:hover {
+	color: #000;
+	text-decoration: none;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.ui-album .action .follow:hover {
+	color: #fff;
+}
+
+/* 喜欢提示弹层 */
+.tip-like {
+	position: absolute;
+	bottom: 35px;
+	left: 37px;
+	display: block;
+	width: 113px;
+	height: 64px;
+	background: url(../images/myshow/tip_like.png) no-repeat 0 100%;
+	_background: url(../images/myshow/tip_like.gif) no-repeat 0 100%;
+}
+
+/*
+ * @name: 图片弹窗
+ * @overview: 图片列表弹窗
+ * @require: null
+ */
+.ui-img-dialog {
+	position: relative;
+	width: 608px;
+	border: 1px solid #999;
+	background-color: #fcfcfc;
+}
+.ui-img-dialog .header {
+	padding: 0 10px;
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #E5E5E5;
+	font-size: 14px;
+	font-weight: bold;
+	color: #4F4F4F;
+	background-color: #F3F3F3;
+}
+.ui-img-dialog .body {
+	margin: 10px;
+	padding: 0 0 0 4px;
+	height: 358px;
+	overflow: auto;
+	overflow-y: scroll;
+	border: 1px solid #dedede;
+	background-color: #fff;
+	*position: relative;
+}
+.ui-img-dialog .body .img {
+	position: relative;
+	display: inline-block;
+	padding: 2px;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	overflow: hidden;
+	margin: 8px 0 0 4px;
+	border: 1px solid #ededed;
+	text-align: center;
+	*margin-left: 2px;
+}
+.ui-img-dialog .body .img img {
+	max-width: 100px;
+	max-height: 100px;
+	_width: 100px;
+	_height: 100px;
+	vertical-align: middle;
+	*vertical-align: top;
+}
+.ui-img-dialog .body .img .mark {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	opacity: .72\9;/* for IE9+ */
+	filter: alpha(opacity=72);
+	background: rgba(255, 255, 255, 0.68) url(../images/myshow/icon_selected_green.png) no-repeat center center;
+	background: #fff url(../images/myshow/icon_selected_green.png) no-repeat center center\9;
+	cursor: pointer;
+	_width: 100%;
+	_height: 100%;
+}
+.ui-img-dialog .body .img.selected .mark {
+	display: block;
+}
+.ui-img-dialog .body .img .mark:hover {
+	background-color: rgba(255, 255, 255, 0.63);
+	background-color: #fff\9;
+	opacity: .65\9;
+	filter: alpha(opacity=65);
+}
+.ui-img-dialog .footer {
+	padding: 0 10px;
+	height: 30px;
+	line-height: 30px;
+	border-top: 1px solid #B8BFC5;
+	color: #444;
+	background-color: #ECF0F9;
+}
+.ui-img-dialog .closer {
+	position: absolute;
+	right: 4px;
+	top: 4px;
+	display: block;
+	width: 20px;
+	height: 20px;
+	text-indent: -9999px;
+	background: url(../images/myshow/btn_close.gif) no-repeat 0 0;
+	cursor: pointer;
+}
+.ui-img-dialog .closer:hover {
+	background-position: 0 100%;
+}
+
+/* 瀑布流模板
+---------------------------------------------- */
+/* ks-waterfall */
+.ks-waterfall-fixed-left {
+	/* position: absolute; */
+	/* left: 0; */
+	/* top: 0; */
+}
+.ks-waterfall-fixed-right {
+	/* position: absolute; */
+	/* right: 16px; */
+	/* top: 0; */
+}
+
+/* pin */
+.pin {
+	position: absolute;
+	left: -600px;
+	top: 800px;
+	width: 208px;
+	padding: 9px 9px 0;
+	border: 1px solid #D2D2D2;
+	background-color: #fff;
+	/* overflow: hidden; */
+	margin-bottom: 17px;
+	word-wrap: break-word;
+}
+.pin-album-meta {
+	left: auto;
+	right: 0;
+	top: 0;
+}
+.pin-empty {
+	left: 0;
+	top: 0;
+}
+.pin .image {
+	position: relative;
+	display: block;
+	min-height: 50px;
+	max-height: 800px;
+	overflow: hidden;
+	background-color: #fff;
+	*zoom: 1;
+	_height: expression(this.scrollHeight > 799 ? '800px' : 'auto');
+}
+.pin a.image .image-overlay {
+	position: absolute;
+	left: 0;
+	bottom: -1px;
+	display: block;
+	height: 15px;
+	width: 208px;
+	background: url(../images/myshow/image_overlay.png) repeat-x left top;
+}
+.pin .image img {
+	display: block;
+	/* height: auto;todo */
+	max-width: 208px;
+	/* height: auto; */
+	margin: 0 auto;
+	background-color: #fff;/* 如果没有背景色，在FF中图片有闪烁现象 */
+	/* _width: 50px; */
+	/* height: auto; */
+	_width: expression(document.body.clientWidth > 207 ? '208px' : 'auto');
+	/* _width: 208px; */
+	/* width: 208px;todo */
+	/* height: 200px; */
+}
+.pin .image:hover img, .pin .image:active img {
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+}
+.pin .image .meta {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	width: 52px;
+	height: 35px;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}
+.pin .image .meta:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.pin .image .music {
+	background: url(../images/myshow/meta_music.png) no-repeat 0 0;
+}
+.pin .image .video {
+	background: url(../images/myshow/meta_video.png) no-repeat 0 0;
+}
+.pin .image .price {
+	left: auto;
+	right: 0;
+	display: block;
+	padding: 0 4px 0 8px;
+	width: auto;
+	max-width: 180px;
+	height: 17px;
+	line-height: 17px;
+	overflow: hidden;
+	opacity: 1;
+	filter: alpha(opacity=100);
+	color: #444;
+	background: url(../images/myshow/meta_price.png) no-repeat 0 0;
+	background: url(../images/myshow/meta_price.gif) no-repeat 0 0\9;
+	_width: expression(document.body.clienWidth > 179 ? '180px' : 'auto');
+}
+.pin .image .img-price {
+	text-align: right;
+	padding: 0;
+	background: none;
+}
+.pin .image .img-price img {
+	display: inline;
+	height: 100%;
+	width: auto;
+	max-width: 160px;
+	_width: expression(document.body.clientWidth > 159 ? '160px' : 'auto');
+}
+.pin .tag {
+	margin-top: 12px;
+	width: 100%;
+	height: 24px;
+	line-height: 24px;
+	overflow: hidden;
+	color: #666666;
+	text-indent: 33px;
+	background: #F0F0F0 url(../images/myshow/icon_tag.png) no-repeat 0 50%;
+}
+.pin .tag.goods {
+	background: #F0F0F0 url(../images/myshow/icon_tag_shopping.png) no-repeat 0 50%;
+}
+.pin .tag a {
+	margin: 0 1px;
+	color: #666666;
+}
+.pin .tag a:hover {
+	color: #CC0033;
+	text-decoration: none;
+}
+.pin .tag a:hover {
+	color: #CC0033;
+	text-decoration: none;
+}
+.pin .user {
+	position: relative;
+	margin-top: 12px;
+}
+.pin .user-photo {
+	float: left;
+	margin-right: 5px;
+	border: 1px solid #CCCCCC;
+}
+.pin .user-photo img {
+	display: block;
+	width: 28px;
+	height: 28px;
+}
+.pin .user-name, .pin .user-msg {
+	float: left;
+	width: 170px;
+	height: 14px;
+	line-height: 14px;
+	overflow: hidden;
+	color: #333333;
+}
+.pin .user-name {
+	margin-bottom: 2px;
+	font-weight: bold;
+}
+.pin .user-msg {
+	color: #999999;
+}
+.pin .user-msg a {
+	color: #CC0033;
+}
+.pin .user-info {
+	position: absolute;
+	z-index: 1;
+	left: -3px;
+	bottom: 28px;
+	display: none;
+	clear: both;
+	width: 305px;
+}
+.pin .user-info-right {
+	left: auto;
+	right: -3px;
+}
+.pin .user-info .user-details {
+	padding: 15px;
+	border: 1px solid #DCDCDC;
+	border-bottom: none;
+	border-radius: 3px 3px 0 0;
+	background-color: #fff;
+	*zoom: 1;
+}
+.pin .user-info .user-photo {
+	margin-right: 8px;
+}
+.pin .user-info .user-photo img {
+	width: 60px;
+	height: 60px;
+}
+.pin .user-info .user-name {
+	padding-left: 18px;
+	background: url(../images/myshow/head_user.png) no-repeat 0 50%;
+}
+.pin .user-info .user-msg {
+	width: 200px;
+	margin-top: 15px;
+	color: #B5B5B5;
+}
+.pin .user-info .user-msg em {
+	color: #777;
+	margin-right: 5px;
+}
+.pin .user-info .user-msg strong {
+	color: #777;
+	font-weight: bold;
+	font-style: italic;
+}
+.pin .user-info .user-signature {
+	clear: both;
+	padding-top: 15px;
+	color: #888;
+	font-size: 14px;
+}
+.pin .user-info .follow-bar {
+	height: 44px;
+	background: url(../images/myshow/bg_follow_bar.png) no-repeat 0 100%;
+	_background-image: url(../images/myshow/bg_follow_bar.gif);
+}
+.pin .user-info .follow-bar.owner {
+	height: 13px;
+}
+.pin .user-info-right .follow-bar {
+	background: url(../images/myshow/bg_follow_bar_right.png) no-repeat 0 100%;
+	_background-image: url(../images/myshow/bg_follow_bar_right.gif);
+}
+.pin .user-info .follow-bar .btn {
+	float: right;
+	margin: 3px 15px 0 0;
+	height: 24px;
+	line-height: 24px;
+	padding: 0 8px 0 24px;
+	border: 1px solid #bbb;
+	border-radius: 3px;
+	color: #444;
+	background: url(../images/myshow/bg_btn_follow_bar.png) repeat-x 0 0;
+}
+.pin .user-info .follow-bar.owner .btn {
+	display: none;
+}
+.pin .user-info .follow-bar .follow-user {
+	background: url(../images/myshow/icon_follow_user_hover.png) no-repeat 8px 50%;
+	_background-image: url(../images/myshow/icon_follow_user_hover.gif);
+}
+.pin .user-info .follow-bar .followed {
+	padding: 0 10px;
+	background: none;
+}
+.pin .user-info .follow-bar .send-msg {
+	padding-left: 30px;
+	background: url(../images/myshow/icon_send_msg_hover.png) no-repeat 8px 50%;
+	_background-image: url(../images/myshow/icon_send_msg_hover.gif);
+}
+.pin .user-info .follow-bar .btn:hover {
+	color: #E34141;
+}
+/*.pin .user-info .follow-bar .follow-user:hover {
+	background-image: url(../images/myshow/icon_follow_user_hover.png);
+	_background-image: url(../images/myshow/icon_follow_user_hover.gif);
+}
+.pin .user-info .follow-bar .send-msg:hover {
+	background-image: url(../images/myshow/icon_send_msg_hover.png);
+	_background-image: url(../images/myshow/icon_send_msg_hover.gif);
+}*/
+.pin .description {
+	margin: 12px 0;
+	text-indent: 2em;
+	color: #666666;
+	line-height: 1.5;
+}
+.pin .actions {
+	position: relative;
+	width: 226px;
+	height: 34px;
+	margin: 0 -9px;
+	line-height: 34px;
+	border-top: 1px solid #EBEBEB;
+	border-bottom: 1px solid #fff;
+	background-color: #F0F0F0;
+	color: #999999;
+	text-align: right;
+}
+.pin .actions-wrapper {
+	border-top: 1px solid #fff;
+}
+.pin .actions a {
+	padding: 0 7px 0 17px;
+	margin-left: 10px;
+	white-space: nowrap;
+	color: #999999;
+	*zoom: 1;
+}
+.pin .actions a span {
+	display: none;
+}
+.pin .actions .like {
+	padding-left: 20px;
+	background: url(../images/myshow/icon_like.png) no-repeat 0 50%;
+}
+.pin .actions .like:hover {
+	padding-left: 20px;
+	background: url(../images/myshow/icon_like.png) no-repeat 0 50%;
+}
+.pin .actions .like:hover strong, .pin .actions .repin:hover strong {
+	display: none;
+}
+.pin .actions .repin {
+	background: url(../images/myshow/icon_repin.png) no-repeat 0 50%;
+}
+.pin .actions .like:hover, .pin .actions .repin:hover {
+	display: inline-block;
+	padding: 0;
+	margin: 0 -5px;
+	width: 88px;
+	height: 25px;
+	line-height: 25px;
+	background: url(../images/myshow/btn_actions.png) no-repeat 0 0;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+}
+.pin .actions .like:hover span, .pin .actions .repin:hover span {
+	display: inline;
+	padding: 0 4px 0 18px;
+	background: url(../images/myshow/icon_like_hover.png) no-repeat 0 40%;
+}
+.pin .actions .repin:hover span {
+	background: url(../images/myshow/icon_repin_hover.png) no-repeat 0 100%;
+}
+.pin .actions .comment {
+	background: url(../images/myshow/icon_comment.png) no-repeat 0 100%;
+	*background: url(../images/myshow/icon_comment.png) no-repeat 0 60%;
+}
+.pin .actions .comment.opened,
+.pin .actions .comment:hover {
+	background: url(../images/myshow/icon_comment_hover.png) no-repeat 0 100%;
+	*background: url(../images/myshow/icon_comment_hover.png) no-repeat 0 60%;
+	color: #E34242;
+}
+.pin .comment-form {
+	position: relative;
+	width: 208px;
+	margin: -1px -9px 0;
+	padding: 0 9px 9px;
+	background-color: #F0F0F0;
+}
+.pin .comment-form textarea {
+	width: 198px;
+	height: 60px;
+	padding: 4px;
+	border: 1px solid #CCCCCC;
+	color: #444;
+	resize: none;
+	_margin: 9px 0 0 9px;
+}
+.pin .comment-form button {
+	margin-top: 7px;
+	width: 56px;
+	height: 25px;
+	border: none;
+	text-indent: -9999px;
+	background: url(../images/myshow/btn_comment.png) no-repeat 0 0;
+}
+
+/* 动作按钮 */
+.pin:hover .action,
+.pin-hover .action {
+	display: block;
+	position: absolute;
+	right: 17px;
+	top: 15px;
+}
+.pin .action {
+	position: absolute;
+	right: 17px;
+	top: 15px;
+}
+.pin .action .btn {
+	display: inline-block;
+	border: 1px solid #A9A9A9;
+	border-radius: 3px;
+	font-weight: bold;
+	color: #333333;
+	opacity: 0.88;
+	filter: alpha(opacity=88);
+	background: #FBFAF9 url(../images/myshow/pin-action-bg.png) repeat-x 0 0;
+}
+.pin .action .btn span {
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	padding: 0 24px 0 6px;
+	cursor: pointer;
+	background: url(../images/myshow/btn-shield.png) no-repeat 90% 50%;
+}
+.pin .action .btn-top span {
+	background-image: url(../images/myshow/btn-top.png);
+}
+.pin .action .btn:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+/* 专辑 */
+.pin .ui-album {
+	position: relative;
+	left: 0;
+	float: none;
+	display: block;
+	margin: 0 auto;
+}
+.pin .ui-album .img {
+	margin: 0;
+	padding: 12px 0 0 8px;
+	background-position: 7px 11px;
+}
+.pin .ui-album .intro {
+	bottom: 50px;
+}
+.pin .ui-album .pinner {
+	padding-bottom: 9px;
+}
+.pin .ui-album .name {
+	font-weight: normal;
+}
+.pin .ui-album .intro a:hover {
+	color: #F58888;
+}
+
+/* 首页
+---------------------------------------------- */
+/** 注册登录框 **/
+#loginbar {
+	position: relative;
+	z-index: 3;
+	width: 660px;
+	margin: 0 auto;
+	padding: 20px 0;
+	border: 1px solid #C1C1C1;
+	border-width: 0 1px 2px 1px;
+	box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+	background-color: #FCFAF2;
+	overflow: hidden;
+	*zoom: 1;
+}
+#loginbar .connect {
+	float: left;
+	display: inline;
+	margin-left: 88px;
+	height: 42px;
+	line-height: 42px;
+}
+#loginbar .connect h4 {
+	float: left;
+	margin-right: 5px;
+	font-weight: normal;
+	color: #999;
+}
+#loginbar .connect .login-button {
+	float: left;
+	display: inline;
+	margin: 11px 5px;
+	width: 20px;
+	height: 20px;
+	text-indent: -9999px;
+	overflow: hidden;
+	background: url(../images/myshow/icon_weibo.png) no-repeat 0 0;
+}
+#loginbar .connect .login-button:hover {
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+}
+#loginbar .connect .renren {
+	background-image: url(../images/myshow/icon_renren.png);
+}
+#loginbar .connect .douban {
+	background-image: url(../images/myshow/icon_douban.png);
+}
+#loginbar .connect .qq {
+	background-image: url(../images/myshow/icon_qq.png);
+}
+#loginbar .reg {
+	float: right;
+	display: inline;
+	margin-right: 7px;
+	width: 122px;
+	height: 42px;
+	text-indent: -9999px;
+	background: url(../images/myshow/btn_reg.png) no-repeat 0 0;
+}
+#loginbar .login {
+	float: right;
+	display: inline;
+	margin-right: 26px;
+	width: 85px;
+	height: 42px;
+	text-indent: -9999px;
+	background: url(../images/myshow/btn_login.png) no-repeat 0 0;
+}
+#loginbar .reg:hover,
+#loginbar .reg:focus,
+#loginbar .login:hover,
+#loginbar .login:focus {
+	opacity: 0.88;
+	filter: alpha(opacity=88);
+}
+
+/** 主内容 **/
+#navbar {
+	width: 960px;
+	margin: 20px auto -20px;
+	_position: relative;
+}
+#navbar .nav {
+	float: left;
+	border: 1px solid #D9D9D9;
+	border-radius: 1px;
+}
+#navbar .nav li {
+	position: relative;
+	float: left;
+	border-left: 1px solid #D9D9D9;
+	background: #FBFBFB url(../images/myshow/bg_navbar.png) repeat-x 0 0;
+}
+#navbar .nav li:first-child, #navbar .nav li.first {
+	border: none;
+}
+#navbar .nav .the-pins, #navbar .nav .the-albums, #navbar .nav .shopping {
+	position: relative;
+	float: left;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	color: #444;
+	font-size: 14px;
+}
+#navbar .nav .the-pins {
+	padding: 0 30px 0 12px
+}
+#navbar .nav .shopping {
+	width: auto;
+	padding: 0 30px 0 10px;
+	background: url(../images/myshow/icon_shopping_cart.png) no-repeat 88% 50%;
+}
+#navbar .nav .shopping-info {
+	padding: 0 20px;
+	text-align: center;
+	background: none;
+}
+#navbar .nav .new {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	display: block;
+	width: 28px;
+	height: 18px;
+	background: url(../images/myshow/icon_new2.png) no-repeat 0 0;
+}
+#navbar .nav li.selected {
+	background: #eee url(../images/myshow/bg_navbar_hover.png) no-repeat 0 0;
+}
+#navbar .nav li.selected a, #navbar .nav li a:hover {
+	color: #E34141;
+}
+#navbar .nav .the-pins em, #navbar .nav .the-albums em {
+	position: absolute;
+	right: 6px;
+	top: 8px;
+	width: 14px;
+	height: 15px;
+	background: url(../images/myshow/icon_the_pins.png) no-repeat 0 0;
+}
+#navbar .nav .the-albums em {
+	right: 12px;
+	background: url(../images/myshow/icon_the_albums.png) no-repeat 0 0;
+}
+#navbar .nav .the-pins:hover em, #navbar .nav li.selected .nowat.the-pins em {
+	background: url(../images/myshow/icon_the_pins_hover.png) no-repeat 0 0;
+}
+#navbar .nav .the-albums:hover em, #navbar .nav li.selected .nowat.the-albums em {
+	background: url(../images/myshow/icon_the_albums_hover.png) no-repeat 0 0;
+}
+
+/** 内容 **/
+#content {
+	position: relative;
+	left: 8px;
+	max-width: 976px;
+	min-width: 500px;
+	margin: 30px auto;
+	_width: 500px;
+	_width: expression(document.body.clientWidth > 975 ? '976px' : 'auto');
+	*z-index: 1;
+}
+#canvas {
+	position: relative;
+	min-height: 500px;/* TODO */
+}
+
+/* 分类标签 */
+#canvas .category {
+	*z-index: 1;
+}
+#canvas .category .cats {
+	margin-bottom: 10px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #F3F3F3;
+}
+#canvas .category .cats:last-child, #canvas .category .cats-last {
+	padding: 0;
+	border: none;
+}
+#canvas .category .cats-title {
+	position: relative;
+	margin-bottom: 10px;
+	font-size: 16px;
+	color: #FF2927;
+	*zoom: 1;
+	*z-index: 2;
+}
+#canvas .category .cats-shopping .cats-title {
+	padding-left: 24px;
+	font-size: 14px;
+	height: 21px;
+	line-height: 21px;
+	color: #666;
+	background: url(../images/myshow/icon_tag_sprite.png) no-repeat 0 0;
+}
+
+/* 热门分类 */
+#canvas .category .cats-hot .cats-header {
+	margin-bottom: 12px;
+	padding-left: 24px;
+	font-size: 12px;
+	color: #989898;
+	font-weight: normal;
+	background: url(../images/myshow/icon_cats_hot.png) no-repeat 5px 50%;
+}
+#canvas .category .cats-more-btn {
+	text-align: right;
+}
+#canvas .category .cats-more-btn a {
+	position: relative;
+	z-index: 3;
+	display: inline-block;
+	margin-right: -10px;
+	margin-bottom: 1px;
+	padding: 0 15px 0 20px;
+	height: 25px;
+	line-height: 25px;
+	border-right: 1px solid #D2D2D2;
+	font-size: 12px;
+	font-weight: normal;
+	color: #666666;
+}
+#canvas .category .cats-more-btn a:hover,
+#canvas .category .cats-more-btn a.hover {
+	margin-top: -1px;
+	margin-bottom: 0;
+	border: 1px solid #D2D2D2;
+	border-right-color: #fff;
+	background-color: #fff;
+}
+#canvas .category .cats-more {
+	position: absolute;
+	z-index: 1;
+	left: 226px;
+	top: -1px;
+	width: 218px;
+	border: 1px solid #D2D2D2;
+	border-left: none;
+	background-color: #fff;
+}
+#canvas .category .cats-more-list {
+	float: left;
+	width: 108px;
+	border-right: 1px solid #D2D2D2;
+	border-left: 1px solid #D2D2D2;
+	margin-right: -1px;
+}
+#canvas .category .cats-more-list-item {
+	display: block;
+	padding: 0 4px 0 20px;
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	color: #666;
+	font-size: 12px;
+}
+#canvas .category .cats-more-list-item-all {
+	background: url(../images/myshow/icon_home.png) no-repeat 4px 50%;
+	_background: url(../images/myshow/ie6_icon_home.png) no-repeat 4px 3px;
+}
+#canvas .category .cats-more-list-item-cut {
+	display: block;
+	height: 22px;
+}
+#canvas .category .cats-more-list-item:hover {
+	color: #000;
+	background-color: #ccc;
+}
+#canvas .category .cats-shopping .cats-title-women {
+	background-position: 0 0;
+}
+#canvas .category .cats-shopping .cats-title-men {
+	background-position: 0 -21px;
+}
+#canvas .category .cats-shopping .cats-title-accessories {
+	background-position: 0 -42px;
+}
+#canvas .category .cats-shopping .cats-title-beauty {
+	background-position: 0 -63px;
+}
+#canvas .category .cats-shopping .cats-title-digital {
+	background-position: 0 -84px;
+}
+#canvas .category .cats-shopping .cats-title-household {
+	background-position: 0 -105px;
+}
+#canvas .category .cats-shopping .cats-title-baby {
+	background-position: 0 -126px;
+}
+#canvas .category .cats-shopping .cats-title-health {
+	background-position: 0 -147px;
+}
+#canvas .category .cats-shopping .cats-title-sports {
+	background-position: 0 -168px;
+}
+#canvas .category .cats-shopping .cats-title-virtual {
+	background-position: 0 -189px;
+}
+#canvas .category .cats-tag {
+	margin-bottom: 15px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #FF2927;
+	overflow: hidden;
+	*zoom: 1;
+}
+#canvas .category .cats-tag .cats-filter {
+	float: right;
+}
+#canvas .category .cats-tag .cats-filter input {
+	vertical-align: middle;
+}
+#canvas .category .cats-tag .cats-filter label {
+	display: inline-block;
+	height: 16px;
+	line-height: 16px;
+	padding-right: 18px;
+	vertical-align: middle;
+	font-size: 12px;
+	color: #666;
+	background: url(../images/myshow/icon_shopping_cart.png) no-repeat 100% 50%;
+}
+#canvas .category .cats-meta {
+	margin-bottom: 10px;
+	padding-left: 22px;
+	color: #666;
+	background: url(../images/myshow/icon_stag.png) no-repeat 0 50%;
+	overflow: hidden;
+	*zoom: 1;
+}
+#canvas .category .cats-meta .cats-nav {
+	float: right;
+}
+#canvas .category .cats-meta .cats-nav a {
+	float: left;
+	height: 20px;
+	line-height: 20px;
+	padding: 0 10px;
+	font-weight: normal;
+	color: #333333;
+	background-color: #D2D2D2;
+}
+#canvas .category .cats-meta .cats-nav a.hot {
+	border-radius: 2px 0 0 2px;
+}
+#canvas .category .cats-meta .cats-nav a.new {
+	border-radius: 0 2px 2px 0;
+}
+#canvas .category .cats-meta .cats-nav a.selected,
+#canvas .category .cats-meta .cats-nav a:hover {
+	color: #fff;
+	background-color: #D6383B;
+}
+#canvas .category .cats-list {
+	/* outline: 1px solid #f00; */
+}
+#canvas .category .cats-list li {
+	float: left;
+	margin: 0 5px 6px;
+	*float: none;
+	*display: inline;
+	*zoom: 1;
+}
+#canvas .category .scats-list li {
+	position: relative;
+	left: -5px;
+	margin: 0 0 6px 5px;
+}
+#canvas .category .cats-list a {
+	display: block;
+	padding: 1px 8px;
+	padding: 2px 8px 0px\9;
+	padding: 3px 8px 0px\0;
+	/* height: 24px; */
+	/* line-height: 24px; */
+	/* overflow: hidden; */
+	border: 1px solid #D9D9D9;
+	border-radius: 3px;
+	font-size: 14px;
+	color: #999;
+	background-color: #F6F6F6;
+}
+#canvas .category .cats-list a.load-cats {
+	color: #CC0033;
+}
+#canvas .category .scats-list a {
+	width: 62px;
+	padding: 0;
+	text-align: center;
+	overflow: hidden;
+}
+#canvas .category .scats-list .selected {
+	/* border: 1px solid #C62F2F; */
+	border-radius: 3px;
+}
+#canvas .category .cats-list a.shopping {
+	padding-left: 31px;
+	padding-right: 17px;
+	background: #F6F6F6 url(../images/myshow/icon_cats_shopping.png) no-repeat 10px 50%;
+}
+#canvas .category .cats-list a.video {
+	padding-left: 24px;
+	background: #F6F6F6 url(../images/myshow/icon_cats_video.png) no-repeat 6px 50%;
+}
+#canvas .category .cats-list a:hover {
+	color: #444;
+	background-color: #fff;
+}
+#canvas .category .cats-list .selected a {
+	border: 1px solid #E96767;
+	color: #fff;
+	background-color: #E34141;
+}
+#canvas .category .scats-list .selected a {
+	border: 1px solid #E96767;
+	width: 60px;
+	height: 22px;
+	line-height: 22px;
+	color: #fff;
+	background-color: #E34141;
+	border-radius: 0;
+}
+
+/* 分类搜索 */
+.cats-search {
+	margin: 20px 0 10px;
+	overflow: hidden;
+	*zoom: 1;
+}
+.cats-search input {
+	float: left;
+	width: 178px;
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid #D4D4D4;
+	border-radius: 3px 0 0 3px;
+	color: #999;
+	text-indent: 4px;
+	background: url(../images/myshow/bg_cats_search.png) repeat-x 0 0;
+	_background: url(../images/myshow/bg_input.png) repeat-x 0 0;
+	_width: 177px;
+}
+.cats-search .fancy {
+	*zoom: 1;
+}
+.cats-search .label {
+	padding: 0;
+	height: 28px;
+	line-height: 28px;
+	width: 150px;
+}
+.cats-search input:focus {
+	color: #444;
+}
+.cats-search button {
+	float: left;
+	width: 27px;
+	height: 30px;
+	border: none;
+	margin-left: -1px;
+	background: url(../images/myshow/btn_cats_search.png) no-repeat 0 0;
+}
+
+/* 账号注册与信息完善
+---------------------------------------------- */
+#wrapper.account {
+	width: 770px;
+	margin: 0 auto;
+}
+#wrapper.account .header {
+	margin: 45px 0 22px;
+	border-bottom: 1px solid #fff;
+	font-size: 16px;
+	/* font-weight: normal; */
+	color: #555;
+	text-align: center;
+}
+#wrapper.account .header .wrapper {
+	display: block;
+	padding-bottom: 22px;
+	border-bottom: 1px solid #e5e5e5;
+}
+#wrapper.account .header .reg-new-account {
+	display: block;
+	padding-bottom: 8px;
+	text-align: right;
+	border-bottom: 1px solid #e5e5e5;
+	font-size: 14px;
+	font-weight: normal;
+}
+#wrapper.account .welcome {
+	margin: 15px 0;
+	font-size: 14px;
+	font-weight: bold;
+	color: #555;
+}
+#wrapper.account .welcome a {
+	color: #E34141;
+	text-decoration: underline;
+}
+#wrapper.account .welcome a:hover {
+	text-decoration: none;
+}
+#wrapper.account .account-info,
+#wrapper.account .reg-social {
+	margin: 40px 0;
+}
+#wrapper.account .account-info .avatar,
+#wrapper.account .reg-social .avatar {
+	float: left;
+	display: inline;
+	margin: 10px 75px 0 30px;
+	width: 100px;
+	height: 100px;
+	padding: 5px;
+	border: 1px solid #D3D1D0;
+	border-radius: 3px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.3);
+	background-color: #fff;
+}
+#wrapper.account .reg-social .avatar {
+	width: 180px;
+	height: 180px;
+}
+#wrapper.account .account-info .avatar img,
+#wrapper.account .reg-social .avatar img {
+	display: block;
+	width: 180px;
+	height: 180px;
+}
+#wrapper.account .account-info .info {
+	float: left;
+	width: 212px;
+}
+#wrapper.account .account-info .info div,
+#wrapper.account .account-info .info p {
+	margin-bottom: 12px;
+}
+#wrapper.account .account-info input.checkbox {
+	vertical-align: middle;
+}
+#wrapper.account .account-info label.checkbox {
+	vertical-align: middle;
+	color: #666666;
+	padding-left: 4px;
+}
+#wrapper.account .account-info button {
+	margin-top: 20px;
+}
+#wrapper.account .reg-social .social-buttons {
+	float: left;
+	margin: 10px 0 0 10px;
+	width: 200px;
+}
+#wrapper.account .reg-social .social-buttons a {
+	display: block;
+	height: 40px;
+	margin-bottom: 21px;
+	text-indent: -99999px;
+	background: url(../images/myshow/btn_weibo_reg.png) no-repeat 0 0;
+	opacity: 0.93;
+	filter: alpha(opacity=93);
+}
+#wrapper.account .reg-social .social-buttons a.weibo {
+	background-image: url(../images/myshow/btn_weibo_reg.png);
+}
+#wrapper.account .reg-social .social-buttons a.renren {
+	background-image: url(../images/myshow/btn_renren_reg.png);
+}
+#wrapper.account .reg-social .social-buttons a.douban {
+	background-image: url(../images/myshow/btn_douban_reg.png);
+}
+#wrapper.account .reg-social .social-buttons a.tqq {
+	background-image: url(../images/myshow/btn_tqq_reg.png);
+}
+#wrapper.account .reg-social .social-buttons a:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+/* 登录后－推荐关注专辑页&用户
+---------------------------------------------- */
+/* 完善注册账号框 */
+.top_nav_right {
+	float: right;
+	height: 30px;
+}
+.top_nav_right a {
+	color: #414141;
+}
+.top_nav_right .reg {
+	float: left;
+}
+.top_nav_right .reg a {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll 0 -111px transparent;
+	display: block;
+	line-height: 29px;
+	padding: 0 10px 0 30px;
+}
+.top_nav_right .signin {
+	float: left;
+	position: relative;
+}
+#login_popup_trigger {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll 14px -148px transparent;
+	display: block;
+	line-height: 29px;
+	padding: 0 33px 0 40px;
+}
+.top_nav_right .userinfo {
+	color: #808080;
+	float: left;
+	line-height: 30px;
+	margin-right: 10px;
+}
+.top_nav_right .userinfo span {
+	color: #00A0E9;
+	font-weight: bold;
+	margin-left: 8px;
+}
+.panel_center_quit {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll 0 -555px transparent;
+	display: block;
+	height: 20px;
+	margin-top: 5px;
+	overflow: hidden;
+	text-indent: -999em;
+	width: 56px;
+}
+.top_nav_right .setting {
+	float: left;
+	position: relative;
+}
+#panel {
+	background: none repeat scroll 0 0 #FFFFFF;
+	color: #666666;
+	display: none;
+	font-size: 12px;
+	position: absolute;
+	right: 0;
+	top: 29px;
+	width: 189px;
+	z-index: 9999;
+}
+.panel_top {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll 0 -449px transparent;
+	height: 3px;
+	overflow: hidden;
+}
+.panel_center {
+	background: none repeat scroll 0 0 #F4F4F4;
+	border-bottom: 1px solid #D6D6D6;
+	border-left: 1px solid #D6D6D6;
+	border-right: 1px solid #D6D6D6;
+	padding: 0 2px 2px;
+}
+.panel_content {
+	background: none repeat scroll 0 0 #FFFFFF;
+	display: block;
+	padding: 4px;
+}
+.panel_info_img {
+	float: right;
+	padding: 7px 7px 0 0;
+}
+.panel_info_img .avatar {
+	border: 1px solid #DEDCDD;
+}
+.panel_info {
+	padding: 7px;
+}
+.panel_info li {
+	height: 23px;
+	line-height: 23px;
+}
+.panel_info strong {
+	color: #8A8A8A;
+	display: inline-block;
+	font-weight: normal;
+	margin-right: 2px;
+	text-align: right;
+	width: 50px;
+}
+.panel_info .number {
+	color: #414141;
+}
+.panel_info .usergroup {
+	color: #A40000;
+}
+.panel_info .coin {
+	clear: both;
+	color: #F39800;
+}
+.recharge {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll 0 -463px transparent;
+	float: right;
+	height: 20px;
+	overflow: hidden;
+	width: 37px;
+}
+.withdraw {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll 0 -490px transparent;
+	float: right;
+	height: 20px;
+	overflow: hidden;
+	width: 37px;
+}
+.panel_content .my_huoshow_top {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll 0 -518px transparent;
+	height: 29px;
+	overflow: hidden;
+}
+.panel_content .my_huoshow_top_box {
+	background: none repeat scroll 0 0 #FAFAFA;
+	border-bottom: 1px solid #DEDCDD;
+	border-left: 1px solid #DEDCDD;
+	border-right: 1px solid #DEDCDD;
+	padding: 5px 10px 10px;
+}
+.panel_content .my_huoshow_top_box .menu {
+	border-bottom: 1px solid #E0E0E0;
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+}
+.panel_content .my_huoshow_top_box .menu span {
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	vertical-align: middle;
+	width: 50px;
+}
+.panel_content_blog {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll -284px -32px transparent;
+	padding: 0 0 3px 19px;
+}
+.panel_content_photo {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll -284px -2px transparent;
+	padding: 0 0 3px 19px;
+}
+.panel_content_myshow {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll -284px -92px transparent;
+	padding: 0 0 3px 19px;
+}
+.panel_content_topic {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll -284px -122px transparent;
+	padding: 0 0 3px 19px;
+}
+.panel_content_gift {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll -284px -62px transparent;
+	padding: 0 0 3px 19px;
+}
+.panel_content .my_huoshow_top_box .manage {
+	padding-bottom: 0;
+}
+.panel_content .my_huoshow_top_box .manage span {
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	vertical-align: middle;
+	width: 50px;
+}
+.panel_content_notice {
+	width: 75px !important;
+}
+.panel_content_friend {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll -284px -152px transparent;
+	padding: 0 0 3px 19px;
+}
+.panel_content_task {
+	background: url("../images/common/top_nav_icon.png") no-repeat scroll -284px -182px transparent;
+	padding: 0 0 3px 19px;
+}
+
+/* 登录提示框 */
+#loginbar .tips {
+	float: left;
+	display: inline;
+	width: 370px;
+	margin: 15px 0 10px 40px;
+}
+#loginbar .tips h4 {
+	font-size: 16px;
+	color: #666666;
+}
+#loginbar .tips p {
+	font-size: 14px;
+	color: #A9A9A9;
+}
+#loginbar .bbutton {
+	float: right;
+	display: inline;
+	margin: 15px 40px 10px 0;
+}
+
+/* 关注专辑 */
+#wrapper.follow-albums .navbar {
+	margin: 30px 0;
+	overflow: hidden;
+	*zoom: 1;
+}
+#wrapper.follow-albums .navbar h2 {
+	float: left;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 0 0 10px;
+	border: 1px solid #D9D9D9;
+	color: #EA5265;
+	background-color: #F6F6F6;
+}
+#wrapper.follow-albums .navbar h2 strong {
+	font-size: 14px;
+}
+#wrapper.follow-albums .navbar h2 a {
+	font-weight: normal;
+	margin: 0 10px;
+	padding-left: 20px;
+	color: #EA5265;
+}
+#wrapper.follow-albums .navbar h2 a.album {
+	background: url(../images/myshow/icon_the_pins_hover.png) no-repeat 0 50%;
+}
+#wrapper.follow-albums .navbar h2 a.pinner {
+	background: url(../images/myshow/icon_pinner.png) no-repeat 0 50%;
+}
+#wrapper.follow-albums .navbar h2 a:hover {
+	text-decoration: underline;
+}
+#wrapper.follow-albums .header,
+#wrapper.follow-albums .footer {
+	position: relative;
+	*zoom: 1;
+}
+#wrapper.follow-albums .footer {
+	height: 42px;
+	margin: 30px 0;
+}
+#wrapper.follow-albums .header .tips {
+	margin-right: 252px;
+	font-size: 16px;
+	color: #333333;
+	font-weight: bold;
+}
+#wrapper.follow-albums .header .actions,
+#wrapper.follow-albums .footer .actions {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+#wrapper.follow-albums .header .actions .lbtn,
+#wrapper.follow-albums .footer .actions .lbtn {
+	display: inline-block;
+	width: 162px;
+	background-image: url(../images/myshow/btn_follow_album.png);
+}
+#wrapper.follow-albums .header .actions .lbtn:hover,
+#wrapper.follow-albums .footer .actions .lbtn:hover {
+	opacity: 0.93;
+	filter: alpha(opacity=93);
+}
+#wrapper.follow-albums .header .actions .skip,
+#wrapper.follow-albums .footer .actions .skip {
+	margin-left: 10px;
+	height: 42px;
+	line-height: 42px;
+	font-size: 14px;
+	color: #999999;
+}
+#wrapper.follow-albums .header .actions .skip:hover,
+#wrapper.follow-albums .footer .actions .skip:hover {
+	color: #777;
+}
+#wrapper.follow-albums .albums {
+	margin: 8px 0 12px;
+	border: 1px solid #CFCECD;
+	border-radius: 10px;
+	background-color: #fff;
+}
+#wrapper.follow-albums .albums .title {
+	position: relative;
+	margin: 10px 17px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #444444;
+}
+#wrapper.follow-albums .albums .title input {
+	vertical-align: middle;
+	margin-right: 2px;
+}
+#wrapper.follow-albums .albums .title .action {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	padding-left: 15px;
+	font-weight: normal;
+	background: url(../images/myshow/arr_down_gray.png) no-repeat 0 50%;
+	cursor: pointer;
+}
+#wrapper.follow-albums .albums .title .action:hover {
+	text-decoration: underline;
+}
+#wrapper.follow-albums .albums .album-list {
+	margin-left: 17px;
+}
+#wrapper.follow-albums .albums .album-item {
+	position: relative;
+	float: left;
+	margin: 0 12px 10px 0;
+	width: 220px;
+	height: 238px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.2);
+	background-color: #fff;
+}
+#wrapper.follow-albums .albums .album-item .header {
+	position: relative;
+	margin: 7px 15px 5px;
+	padding-right: 4em;
+	font-size: 14px;
+	color: #666;
+}
+#wrapper.follow-albums .albums .album-item .header .num {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	font-size: 12px;
+	font-weight: normal;
+	color: #999;
+}
+#wrapper.follow-albums .albums .album-item .pins {
+	margin: 0 0 10px 15px;
+	overflow: hidden;
+	*zoom: 1;
+}
+#wrapper.follow-albums .albums .album-item .pins img {
+	float: left;
+	width: 60px;
+	height: 60px;
+	margin: 0 5px 5px 0;
+}
+#wrapper.follow-albums .albums .album-item .mark,
+#wrapper.follow-pinner .pinners .pinner .mark {
+	position: absolute;
+	z-index: 3;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.68);
+	cursor: pointer;
+	background: #fff\9;
+	opacity: .72\9;/* for IE9+ */
+	filter: alpha(opacity=72);
+	_width: 100%;
+	_height: 100%;
+}
+#wrapper.follow-albums .albums .album-item.selected .mark,
+#wrapper.follow-pinner .pinners .pinner.selected .mark {
+	background: rgba(255, 255, 255, 0.68) url(../images/myshow/icon_selected.png) no-repeat center center;
+	background: #fff url(../images/myshow/icon_selected.png) no-repeat center center\9;
+}
+#wrapper.follow-albums .albums .album-item .mark:hover,
+#wrapper.follow-pinner .pinners .pinner .mark:hover {
+	background-color: rgba(255, 255, 255, 0.63);
+	background-color: #fff\9;
+	opacity: .65\9;
+	filter: alpha(opacity=65);
+}
+#wrapper.follow-albums .albums .load-more {
+	margin: 10px 17px;
+	text-align: center;
+	background: url(../images/myshow/bg_border.png) no-repeat center center;
+}
+#wrapper.follow-albums .albums .load-more a {
+	display: inline-block;
+	margin: 0 auto;
+	padding: 4px 15px;
+	border: 1px solid #DDDDDD;
+	border-radius: 15px;
+	color: #666666;
+	background-color: #F2F2F2;
+}
+
+/* 关注用户 */
+#wrapper.follow-pinner .pinners {
+	margin: 8px 0;
+	padding-bottom: 30px;
+	border: 1px solid #CFCECD;
+	border-radius: 3px;
+	background-color: #fff;
+}
+#wrapper.follow-pinner .pinners .pinner {
+	position: relative;
+	left: 27px;
+	float: left;
+	margin: 30px 28px 0 0;
+	_width: 440px;
+	_height: 117px;
+}
+#wrapper.follow-pinner .pinners .pinner .avatar {
+	float: left;
+	width: 93px;
+	height: 93px;
+	margin-right: 4px;
+}
+#wrapper.follow-pinner .pinners .pinner .avatar img {
+	display: block;
+	width: 93px;
+	height: 93px;
+}
+#wrapper.follow-pinner .pinners .pinner .pins {
+	float: left;
+	width: 343px;
+	overflow: hidden;
+}
+#wrapper.follow-pinner .pinners .pinner .pins img {
+	float: left;
+	width: 45px;
+	height: 45px;
+	margin: 0 4px 4px 0;
+}
+#wrapper.follow-pinner .pinners .pinner .name {
+	clear: both;
+	font-size: 16px;
+	color: #444;
+}
+
+/* 登录后－查找&邀请好友页
+---------------------------------------------- */
+#wrapper.invite-friends .header {
+	margin: 20px 0 70px;
+	border-bottom: 1px solid #fff;
+	text-align: right;
+}
+#wrapper.invite-friends .header .wrapper {
+	display: block;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #E5E5E5;
+	*zoom: 1;
+}
+#wrapper.invite-friends .header .step {
+	display: inline-block;
+	height: 32px;
+	line-height: 32px;
+	margin-left: -5px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #666;
+	text-align: center;
+}
+#wrapper.invite-friends .header .left {
+	width: 192px;
+	color: #999;
+	text-indent: -8px;
+	background: url(../images/myshow/bg_step_left.png) no-repeat 0 0;
+}
+#wrapper.invite-friends .header .center {
+	width: 157px;
+	color: #fff;
+	background: url(../images/myshow/bg_step_center_current.png) no-repeat 0 0;
+	background-position: 0 1px;
+}
+#wrapper.invite-friends .header .right {
+	width: 108px;
+	text-indent: 8px;
+	background: url(../images/myshow/bg_step_right.png) no-repeat 0 0;
+}
+#wrapper.invite-friends .next-step {
+	margin: 30px 0;
+	border-bottom: 1px solid #fff;
+}
+#wrapper.invite-friends .next-step .wrapper {
+	padding-bottom: 15px;
+	border-bottom: 1px solid #E5E5E5;
+	overflow: hidden;
+	*zoom: 1;
+}
+#wrapper.invite-friends .next-step .tips {
+	float: left;
+	width: 68%;
+	font-size: 14px;
+	line-height: 1.8;
+	font-weight: bold;
+	color: #333333;
+}
+#wrapper.invite-friends .next-step button {
+	float: right;
+}
+#wrapper.invite-friends .bind-social {
+	position: relative;
+	margin: 20px 0;
+	padding: 10px 0;
+}
+#wrapper.invite-friends .bind-social dt {
+	float: left;
+	clear: left;
+	width: 185px;
+	height: 35px;
+	line-height: 35px;
+	margin-top: 1px;
+	padding-right: 30px;
+	font-weight: bold;
+	font-size: 13px;
+	color: #666;
+	text-align: right;
+}
+#wrapper.invite-friends .bind-social dt.selected,
+#wrapper.invite-friends .bind-social dt:hover {
+	background: url(../images/myshow/bg_bind_social.png) no-repeat 100% 50%;
+	cursor: pointer;
+}
+#wrapper.invite-friends .bind-social dd {
+	display: none;
+	position: absolute;
+	top: 0;
+	width: 572px;
+	margin-left: 225px;
+	border: 1px solid #E3E2E2;
+	padding: 25px;
+	background-color: #fff;
+}
+#wrapper.invite-friends .bind-social dd.selected {
+	display: block;
+}
+#wrapper.invite-friends .bind-social dd .tips {
+	height: 42px;
+	line-height: 42px;
+	margin-bottom: 25px;
+	padding: 0 20px;
+	border: 1px solid #F2CECE;
+	font-size: 14px;
+	color: #595959;
+	text-indent: 38px;
+	background: #FFFEBE url(../images/myshow/icon_tips_yellow.png) no-repeat 22px 50%;
+}
+#wrapper.invite-friends .bind-social dd .btn-wrapper {
+	text-align: center;
+}
+#wrapper.invite-friends .bind-social dd.loading p {
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: 25px;
+	padding: 0 10px;
+	border-left: 3px solid #B00505;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333333;
+}
+#wrapper.invite-friends .bind-social dd.loading button {
+	width: 176px;
+	height: 48px;
+	line-height: 48px;
+	border: 1px solid #D5D5D5;
+	text-align: center;
+	font-size: 21px;
+	color: #CECECE;
+	background-color: #F0F0F0;
+	font-family: '黑体';
+}
+#wrapper.invite-friends .bind-social dd.success {
+	width: 574px;
+	border: none;
+	padding: 0;
+	background: none;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite,
+#wrapper.invite-friends .bind-social dd.success .follow {
+	margin-bottom: 25px;
+	padding: 18px 25px 25px;
+	border: 1px solid #E3E2E2;
+	border-radius: 3px;
+	background-color: #fff;
+}
+#wrapper.invite-friends .bind-social dd.success .subtitle {
+	font-size: 16px;
+	color: #333333;
+	border-left: 3px solid #B00505;
+	margin-bottom: 15px;
+	padding-left: 12px;
+	line-height: 1.2;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide-title {
+	margin-bottom: 10px;
+	color: #666666;
+	font-weight: normal;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide {
+	position: relative;
+	margin: 10px 0 30px;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide_container {
+	margin: 0 18px;
+	height: 50px;
+	overflow: hidden;
+	*zoom: 1;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide_list {
+	position: relative;
+	left: 2px;
+	float: left;
+	width: 99999px;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide_list_item {
+	position: relative;
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin-right: 4px;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide_list_item img {
+	display: block;
+	width: 50px;
+	height: 50px;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide_list_item img:hover {
+	opacity: 0.88;
+	filter: alpha(opacity=88);
+	cursor: pointer;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide_list_item span {
+	position: absolute;
+	right: 2px;
+	bottom: 2px;
+	display: block;
+	width: 22px;
+	height: 22px;
+	background: url(../images/myshow/icon_selected_small.png) no-repeat 0 0;
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide_list_item span:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+	cursor: pointer;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide_nav a {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	display: block;
+	width: 18px;
+	height: 50px;
+	text-indent: -9999px;
+	outline: none;
+	opacity: 0.78;
+	filter: alpha(opacity=78);
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite a.prev_btn {
+	left: 0;
+	background: url(../images/myshow/bg_prev_btn.png) no-repeat -1px 0;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite a.next_btn {
+	right: 0;
+	background: url(../images/myshow/bg_next_btn.png) no-repeat -1px 0;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .slide_nav a:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite textarea {
+	width: 510px;
+	height: 88px;
+	padding: 5px;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .label {
+	top: 5px;
+	left: 5px;
+	width: 510px;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .text-count {
+	height: 10px;
+	padding-right: 5px;
+	text-align: right;
+	font: 18px 'georgia';
+	color: #BBBBBB;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .submit {
+	margin: 0 0 0;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .submit .sbtn {
+	width: auto;
+	padding: 0 20px;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .submit p {
+	position: relative;
+	bottom: 13px;
+	display: inline-block;
+	margin-left: 15px;
+	color: #B2B2B2;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .add-sucess {
+	display: none;
+	height: 37px;
+	line-height: 37px;
+	margin-top: 20px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #666666;
+	text-indent: 48px;
+	background: url(../images/myshow/icon_ok_green.png) no-repeat 0 50%;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .add-sucess a {
+	color: #E34141;
+}
+#wrapper.invite-friends .bind-social dd.success .send-invite .add-sucess a:hover {
+	text-decoration: underline;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans {
+	position: relative;
+	padding: 10px 0;
+	border-top: 1px solid #f4f4f4;
+	background-color: #fff;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .avatar {
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin-right: 8px;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .avatar img {
+	display: block;
+	width: 50px;
+	height: 50px;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .card {
+	left: 21px;
+	bottom: 52px;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .meta {
+	float: left;
+	width: 140px;
+	font-size: 14px;
+	color: #555555;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .meta .id {
+	font-weight: normal;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .action {
+	float: left;
+	display: inline;
+	width: 50px;
+	margin-top: 8px;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .action .fbtn {
+	display: block;
+	width: 80px;
+	height: 35px;
+	line-height: 33px;
+	text-align: center;
+	font-weight: bold;
+	color: #666666;
+	background: url(../images/myshow/btn_fbtn.png) no-repeat 50% 50%;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .action .fbtn.dbfollowed {
+	text-indent: -9999px;
+	background-image: url(../images/myshow/icon_folled.png);
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .action .fbtn.dbfollowed:hover {
+	text-indent: 0;
+	background-image: url(../images/myshow/btn_fbtn.png)
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .action .fbtn span {
+	display: block;
+	text-indent: 18px;
+	background: url(../images/myshow/icon_follow_user_light.png) no-repeat 12px 50%;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .action .fbtn:hover {
+	opacity: 0.93;
+	filter: alpha(opacity=93);
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .hot-pins {
+	float: right;
+	width: 225px;
+	overflow: hidden;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .hot-pins a {
+	float: right;
+	display: inline;
+	margin-left: 5px;
+	width: 50px;
+	height: 50px;
+}
+#wrapper.invite-friends .bind-social .success .follow .fans .hot-pins a img {
+	display: block;
+	width: 50px;
+	height: 50px;
+}
+
+/* 登录后－创建专辑页
+---------------------------------------------- */
+#wrapper.create-album .header .center {
+	color: #999;
+	background-image: url(../images/myshow/bg_step_center.png);
+	background-position: 0 0;
+}
+#wrapper.create-album .header .right {
+	color: #fff;
+	background-image: url(../images/myshow/bg_step_right_current.png);
+	background-position: 0 1px;
+}
+#wrapper.create-album .add-album {
+	margin: 15px 0 30px;
+	border: 1px solid #D2D2D2;
+	border-radius: 3px;
+	background-color: #fff;
+	*padding-bottom: 100px;
+}
+#wrapper.create-album .add-album .ui-album {
+	left: 0;
+	margin: 75px 45px 100px 88px;
+}
+#wrapper.create-album .add-album .ui-album .intro {
+	bottom: 0;
+}
+#wrapper.create-album .add-album .add-album-form {
+	float: left;
+	display: inline;
+	width: 500px;
+	margin: 75px 0 100px;
+}
+#wrapper.create-album .add-album .add-album-form .new-album {
+	margin: 0 0 18px 15px;
+	*display: block;
+}
+#wrapper.create-album .add-album .add-album-form .new-album input {
+	width: 370px;
+	text-indent: 3px;
+	vertical-align: middle;
+	*color: #666;
+}
+#wrapper.create-album .add-album .add-album-form .new-album label {
+	*line-height: 36px;
+}
+#wrapper.create-album .add-album .add-album-form .new-album .close {
+	display: inline-block;
+	width: 25px;
+	height: 32px;
+	text-indent: -9999px;
+	background: url(../images/myshow/bg_close_gray.png) no-repeat 100% 50%;
+	opacity: 0.68;
+	filter: alpha(opacity=68);
+	vertical-align: middle;
+}
+#wrapper.create-album .add-album .add-album-form .new-album .close:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#wrapper.create-album .add-album .add-album-form .action-add-album {
+	margin-bottom: 25px;
+	width: 397px;
+	padding-right: 30px;
+	height: 33px;
+	line-height: 33px;
+	text-align: right;
+	font-size: 14px;
+	color: #999999;
+	background: url(../images/myshow/bg_dbbrv.png) no-repeat 0 0;
+}
+#wrapper.create-album .add-album .add-album-form .action-add-album a {
+	padding-left: 15px;
+	background: url(../images/myshow/icon_add_gray.png) no-repeat 0 50%;
+}
+#wrapper.create-album .add-album .add-album-form .action-add-album a:hover {
+	color: #777;
+}
+#wrapper.create-album .add-album .add-album-form .ebtn {
+	margin-left: 100px;
+}
+
+/* 弹窗样式
+---------------------------------------------- */
+/* 上传采集弹窗 */
+#upload-pin-dialog {
+	/* position: absolute; */
+}
+#upload-pin-dialog .upload-pin {
+	margin: 0 21px 21px;
+	border-bottom: 1px solid #eee;
+	*padding-bottom: 21px;
+}
+#upload-pin-dialog .fbtn {
+	position: relative;
+	margin: 21px auto;
+	opacity: 1;
+	*z-index: 11;
+}
+#upload-pin-dialog .fbtn:hover {
+	color: #736D6D;
+}
+#upload-pin-dialog .fbtn .upload-btn {
+	position: relative;
+	overflow: hidden;
+	cursor: default;
+	color: #666;
+	*zoom: 1;
+}
+#upload-pin-dialog .fbtn .upload-btn:hover {
+	color: #333;
+}
+#upload-pin-dialog .fbtn .upload-file {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 100px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	*top: -25px;
+	*right: -25px;
+}
+#upload-pin-dialog .fbtn .upload-select-dialog {
+	position: absolute;
+	z-index: 11;
+	display: none;
+	top: 48px;
+	left: -30px;
+	width: 300px;
+	height: 75px;
+	border: 1px solid #C6C6C6;
+	border-radius: 3px;
+	font-weight: normal;
+	font-size: 12px;
+	text-align: center;
+	text-shadow: none;
+	cursor: default;
+	background-color: #fff;
+}
+#upload-pin-dialog .fbtn .upload-file-btn {
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	margin: 27px 5px 0;
+	height: 24px;
+	line-height: 24px;
+	width: 86px;
+	border: 1px solid #B84209;
+	border-radius: 3px;
+	text-indent: 18px;
+	*text-indent: 8px;
+	color: #f0f0f0;
+	background: #D01E0A url(../images/myshow/icon-upload-simple.png) no-repeat 10px 50%;
+}
+#upload-pin-dialog .fbtn .upload-splice {
+	text-indent: 22px;
+	background-image: url(../images/myshow/icon-upload-splice.png);
+}
+#upload-pin-dialog .fbtn .upload-file-btn:hover {
+	color: #fff;
+}
+#upload-pin-dialog .fbtn .upload-closer {
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: block;
+	width: 22px;
+	height: 22px;
+	line-height: 22px;
+	text-indent: -9999px;
+	background: #F7F7F7 url(../images/myshow/btn-close-tags.png) no-repeat 50% 50%;
+}
+#upload-pin-dialog .fbtn .upload-closer:hover {
+	background-color: #f0f0f0;
+}
+#upload-pin-dialog .fbtn .arrow {
+	position: absolute;
+	left: 30px;
+	top: -7px;
+	display: block;
+	width: 14px;
+	height: 7px;
+	background: url(../images/myshow/arrow-upload-select-dialog.png) no-repeat 0 0;
+}
+#upload-pin-dialog .fbtn .fuck {
+	position: absolute;
+	left: 0;
+	top: -11px;
+	display: block;
+	width: 100%;
+	height: 11px;
+	*background-color: #fff; /* 为了那操蛋的 IE7 */
+	*filter: alpha(opacity=0);
+}
+#upload-pin-dialog .notice {
+	height: 20px;
+	line-height: 20px;
+	margin: 8px 20px;
+	text-align: center;
+	color: #999;
+}
+#upload-pin-dialog .notice .icon-fn {
+	display: inline-block;
+	width: 33px;
+	height: 20px;
+	text-indent: -9999px;
+	background: url(../images/myshow/icon-ctrl.png) no-repeat 0 0;
+}
+#upload-pin-dialog .notice .icon-shift {
+	width: 51px;
+	background-image: url(../images/myshow/icon-shift.png);
+}
+
+/* 多张图片 */
+#upload-pin-dialog.upload-pin-batch-dialog {
+	z-index: 1;
+}
+#upload-pin-dialog .pin-info-form-batch {
+	display: block;
+	float: none;
+	margin: 21px;
+	width: auto;
+}
+#upload-pin-dialog .pin-info-way-one {
+	padding-bottom: 28px;
+	margin: 38px 0 28px;
+	border-bottom: 1px solid #eee;
+	_margin-top: 0;
+}
+#upload-pin-dialog .pin-info-way .pin-info-wrapper {
+	float: left;
+	width: 450px;
+}
+#upload-pin-dialog .pin-info-way .pin-info-title {
+	margin-bottom: 21px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #565656;
+}
+#upload-pin-dialog .pin-info-way .pin-info-item {
+}
+#upload-pin-dialog .pin-info-way .pint-info-label {
+	display: inline-block;
+	width: 58px;
+	vertical-align: middle;
+	text-align: right;
+	color: #333;
+}
+#upload-pin-dialog .pin-info-way .pin-info-desc .pint-info-label {
+	margin-top: 17px;
+	vertical-align: top;
+}
+#upload-pin-dialog .pin-info-way .pin-info-tags .pint-info-label {
+	margin-top: 12px;
+}
+#upload-pin-dialog .pin-info-way .pin-info-input {
+	display: inline-block;
+	vertical-align: middle;
+	background: none;
+	*display: inline;
+	*zoom: 1;
+}
+#upload-pin-dialog .pin-info-way .pin-info-desc .pin-info-input {
+	vertical-align: top;
+}
+#upload-pin-dialog .pin-info-way .divselect,
+#upload-pin-dialog .pin-info-way .divselect .options {
+	width: 370px;
+}
+#upload-pin-dialog .pin-info-way .divselect .options .create-album input {
+	width: 273px;
+}
+#upload-pin-dialog .pin-info-way .pin-info-input .desc,
+#upload-pin-dialog .pin-info-way .pin-info-input .tags {
+	width: 358px;
+	background-color: #fff;
+}
+#upload-pin-dialog .pin-info-way .select-tags {
+	vertical-align: top;
+}
+#upload-pin-dialog .pin-info-way .pin-item {
+	margin: 0 0 10px 0;
+}
+#upload-pin-dialog .pin-info-way .pin-item-img {
+	float: left;
+	display: inline;
+	margin: 12px 10px 0 10px;
+}
+#upload-pin-dialog .pin-info-way .pin-item-img .img {
+	position: relative;
+	display: block;
+	padding: 2px;
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	border: 1px solid #D2D2D2;
+}
+#upload-pin-dialog .pin-info-way .pin-item-img img {
+	display: block;
+	max-width: 100px;
+	max-height: 100px;
+	/* height: 100%; */
+	_width: 100px;
+}
+#upload-pin-dialog .pin-info-way .pin-item-img .status {
+	position: absolute;
+	left: 2px;
+	right: 2px;
+	bottom: 2px;
+	margin: 0; /* 覆盖 default.css 样式 */
+	height: 18px;
+	line-height: 18px;
+	overflow: hidden;
+	color: #77FD08;
+	text-align: center;
+	background-color: rgba(0, 0, 0, .5);
+	background-color: #000\9;
+	opacity: 0.5\9;
+	filter: alpha(opacity=50);
+	_width: 100px;
+}
+#upload-pin-dialog .pin-info-way .pin-item-img .set-cover {
+	margin-top: 5px;
+	text-align: center;
+}
+#upload-pin-dialog .pin-info-way .pin-item-img .set-cover label {
+	vertical-align: middle;
+	color: #525252
+}
+#upload-pin-dialog .pin-info-way .pin-item-img .set-cover input {
+	vertical-align: middle;
+}
+#upload-pin-dialog .pin-info-way .pin-item-info {
+	float: left;
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .pint-info-label {
+	width: 50px;
+	text-align: right;
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .desc,
+#upload-pin-dialog .pin-info-way .pin-item-info .tags {
+	width: 410px;
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .desc {
+	height: 70px;
+}
+#upload-pin-dialog .pin-info-way .pin-item .del-pin {
+	float: left;
+	display: inline;
+	width: 15px;
+	height: 15px;
+	margin: 12px 0 0 8px;
+	text-indent: -9999px;
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+	background: url(../images/myshow/del-pin.png) no-repeat 0 0;
+}
+#upload-pin-dialog .pin-info-way .pin-item .del-pin:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .select-tags {
+	position: absolute;
+	left: 0;
+	top: 48px;
+	z-index: 10;
+	float: none;
+	display: none;
+	margin: 0;
+	width: 420px;
+	border: 1px solid #CCCDCF;
+	border-radius: 3px;
+	background-color: #F6F6F6;
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .select-tags h3 {
+	padding: 0;
+	height: 27px;
+	line-height: 27px;
+	text-indent: 8px;
+	color: #444;
+	background-color: #f9f9f9;
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .select-tags .tags-nav {
+	position: absolute;
+	top: 0;
+	right: 8px;
+	height: 27px;
+	line-height: 27px;
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .select-tags .tags-nav a {
+	position: static;
+	display: inline;
+	margin: 0 0 0 7px;
+	color: #666;
+	text-indent: 0;
+	width: auto;
+	background: none;
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .select-tags .tags-nav a:hover {
+	text-decoration: underline;
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .select-tags .tags-nav a.tags-close {
+	display: inline-block;
+	margin-left: 12px;
+	width: 7px;
+	height: 27px;
+	text-indent: -9999px;
+	background: url(../images/myshow/btn-close-tags.png) no-repeat 0 50%;
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .select-tags .tags-nav a.tags-close:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .select-tags .tag-list-wrapper,
+#upload-pin-dialog .pin-info-way .pin-item-info .select-tags .tag-list-item {
+	width: 414px;
+}
+#upload-pin-dialog .pin-info-way .pin-item-info .select-tags .tag-list-item li {
+	margin: 5px 0 0 8px;
+}
+#upload-pin-dialog .pin-info-form-batch .submit {
+	/* margin-left: 216px; */
+}
+
+/* 采集弹窗 */
+#collect-dialog {
+	/* width: auto; */
+}
+#collect-dialog .pin-it {
+	font-size: 13px;
+	padding: 10px;
+	text-align: center;
+	border-bottom: 1px solid #D5D2C1;
+	background-color: #FFFBCC;
+}
+#collect-dialog .actions {
+	overflow: hidden;
+	*zoom: 1;
+}
+#collect-dialog .actions .cell {
+	float: left;
+	width: 146px;
+	height: 160px;
+	padding: 20px;
+	color: #666666;
+	font-size: 18px;
+	text-align: center;
+	border-left: 1px solid #E1DFDF;
+	*padding-bottom: 10px;
+}
+#collect-dialog .actions .cell:hover {
+	text-decoration: none;
+	background-color: #F0EFEF;
+	cursor: pointer;
+}
+#collect-dialog .actions .scrape {
+	border-left: none;
+}
+#collect-dialog .actions .album {
+	border-right: none;
+}
+#collect-dialog .actions .cell .icon {
+	width: 66px;
+	height: 81px;
+	margin: 15px auto 30px;
+	background: url(../images/myshow/icon_upload_pin.png) no-repeat 50% 50%;
+}
+#collect-dialog .actions .scrape .icon {
+	background-image: url(../images/myshow/icon_collect_website.png);
+}
+#collect-dialog .actions .album .icon {
+	background-image: url(../images/myshow/icon_album.png);
+}
+
+/* 网址采集弹窗 */
+.collect-website-dialog {
+	width: 727px;
+	margin-left: -365px;
+	_left: expression(-documentElement.scrollLeft-365);
+	_margin-left: 50%;
+}
+.collect-all-dialog {
+	margin-top: 60px;
+	width: 563px;
+	height: 256px;
+	margin-left: -283px;
+	_left: expression(-documentElement.scrollLeft-283);
+	_margin-left: 50%;
+}
+.collect-all-dialog .header {
+	position: absolute;
+	top: -55px;
+	left: -1px;
+	width: 100%;
+	border: none;
+	background: none;
+}
+.collect-all-dialog .header .close {
+	bottom: auto;
+	height: 47px;
+	border: none;
+}
+.collect-all-dialog .header .title-tab {
+	border: none;
+	padding: 0;
+}
+.collect-all-dialog .header .title-tab a {
+	float: left;
+	margin-right: 4px;
+	border: 1px solid #C7C7C7;
+	color: #EA5265;
+	width: 162px;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	background-color: #f4f4f4;
+}
+.collect-all-dialog .header .title-tab a:hover {
+	background-color: #efefef;
+}
+.collect-all-dialog .header .title-tab a.selected,
+.collect-all-dialog .header .title-tab a:hover.selected {
+	height: 54px;
+	border-bottom: none;
+	border-color: #C9C9C9;
+	background-color: #fff;
+	box-shadow: 0 -2px 2px 0 rgba(121, 121, 121, 0.3);
+}
+.collect-all-dialog .header .title-tab a:first-child.selected {
+	box-shadow: -2px -2px 2px 0 rgba(121, 121, 121, 0.3);
+}
+.collect-all-dialog .header .title-tab a:last-child.selected {
+	box-shadow: 2px -2px 2px 0 rgba(121, 121, 121, 0.3);
+}
+.collect-website-dialog .search-pin-form {
+	margin: 24px;
+}
+.collect-all-dialog .search-pin-form {
+	margin: 30px 24px;
+}
+.collect-website-dialog .search-pin-form input,
+.collect-all-dialog .search-pin-form input {
+	width: 603px;
+	height: 36px;
+	line-height: 36px;
+	text-indent: 5px;
+	border: 1px solid #BBBBBB;
+	border-radius: 3px;
+	font-size: 16px;
+	color: #444;
+	vertical-align: middle;
+	background: #fff url(../images/myshow/bg_input.png) repeat-x 0 0;
+	width: 597px;
+}
+.collect-all-dialog .search-pin-form input {
+	width: 439px;
+	color: #ccc;
+	*width: 430px;
+	*color: #666;
+}
+.collect-all-dialog .search-pin-form input:focus {
+	color: #444;
+}
+.collect-website-dialog .search-pin-form .label,
+.collect-all-dialog .search-pin-form .label {
+	width: 580px;
+	height: 36px;
+	line-height: 36px;
+	left: 5px;
+	font-size: 16px;
+}
+.collect-all-dialog .search-pin-form .label {
+	font-size: 18px;
+	width: 421px;
+}
+.collect-website-dialog .search-pin-form button,
+.collect-all-dialog .search-pin-form button {
+	display: inline-block;
+	margin: 0 0 0 10px;
+	width: 64px;
+	height: 38px;
+	line-height: 36px;
+	border: 1px solid #bbb;
+	font-size: 14px;
+	color: #444;
+	vertical-align: middle;
+	_position: relative;
+}
+.collect-all-dialog .search-tips {
+	margin: 30px 24px;
+	font-size: 14px;
+	color: #333333
+}
+.collect-all-dialog .search-tips strong {
+	color: #EA5265;
+	font-weight: normal;
+}
+.collect-all-dialog .search-tips strong a {
+	margin: 0 2px;
+	color: #EA5265;
+}
+.collect-all-dialog .search-tips strong a:hover {
+	text-decoration: underline;
+}
+.collect-all-dialog .search-tips .shop {
+	padding-left: 20px;
+	margin-right: 5px;
+	color: #666;
+}
+.collect-all-dialog .search-tips .taobao {
+	background: url(../images/myshow/icon_shop_taobao.jpg) no-repeat 0 50%;
+}
+.collect-all-dialog .search-tips .paipai {
+	background: url(../images/myshow/icon_shop_paipai.jpg) no-repeat 0 50%;
+}
+.collect-all-dialog .search-tips .dangdang {
+	background: url(../images/myshow/icon_shop_dangdang.jpg) no-repeat 0 50%;
+}
+.collect-all-dialog .search-tips .fanke {
+	background: url(../images/myshow/icon_shop_fanke.jpg) no-repeat 0 50%;
+}
+.collect-all-dialog .search-tips .jingdong {
+	background: url(../images/myshow/icon_shop_jingdong.jpg) no-repeat 0 50%;
+}
+.collect-all-dialog .search-tips .taomao {
+	background: url(../images/myshow/icon_shop_taomao.jpg) no-repeat 0 50%;
+}
+.collect-all-dialog .search-tips .caomeipai {
+	background: url(../images/myshow/icon_shop_caomeipai.jpg) no-repeat 0 50%;
+}
+.collect-website-dialog .select-pin {
+	margin-bottom: 30px;
+}
+.collect-website-dialog .select-pin .pin-img {
+	position: relative;
+	float: left;
+	display: inline;
+	width: 170px;
+	height: 224px;
+	overflow: hidden;
+	margin-left: 24px;
+	border: 5px solid #ccc;
+}
+.collect-website-dialog .select-pin .pin-img:hover {
+	border-color: #bbb;
+}
+.collect-website-dialog .select-pin .pin-img img {
+	display: block;
+	margin: 0 auto;
+	max-width: 170px;
+	max-height: 224px;
+	_width: expression(document.body.clientWidth > 169 ? '170px' : 'auto');
+	_height: expression(document.body.clientHeight > 159 ? '160px' : 'auto');
+}
+.collect-website-dialog .select-pin .pin-img .img-list {
+	position: relative;
+	left: 0;
+	top: 0;
+	float: left;
+}
+.collect-website-dialog .select-pin .pin-img .img-item {
+	float: left;
+	width: 170px;
+	height: 224px;
+}
+.collect-website-dialog .select-pin .pin-img .img-nav {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, .5);
+	background-color: #999\9;
+	*zoom: 1;
+}
+.collect-website-dialog .select-pin .pin-img .img-nav a {
+	padding: 0 7px;
+	color: #fff;
+	font-family: verdana,sans-serif;
+}
+.collect-website-dialog .select-pin .pin-img .img-nav .prev {
+	float: left;
+}
+.collect-website-dialog .select-pin .pin-img .img-nav .next {
+	float: right;
+}
+.collect-website-dialog .select-pin .pin-img .img-nav a:hover {
+	color: #FDCB19;
+}
+.collect-website-dialog .select-pin .pin-img .img-nav a.disabled {
+	color: #ccc;
+	cursor: default;
+}
+.collect-website-dialog .select-pin .pin-img .video {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	display: block;
+	width: 52px;
+	height: 35px;
+	margin: -17px 0 0 -26px;
+	opacity: 0.86;
+	filter: alpha(opacity=86);
+	background: url(../images/myshow/meta_video.png) no-repeat 0 0;
+}
+.collect-website-dialog .select-pin .pin-img .video:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.collect-website-dialog .select-pin .pin-img .price {
+	position: absolute;
+	right: 0;
+	bottom: 30px;
+	display: block;
+	padding: 0 2px 0 10px;
+	/* width: 48px; */
+	height: 25px;
+	line-height: 25px;
+	color: #FDCB19;
+	text-align: center;
+	font-size: 14px;
+	background: url(../images/myshow/meta_price_trans.png) no-repeat 0 0;
+}
+.collect-website-dialog .select-pin .pin-img .price-img {
+	padding: 0;
+	height: 22px;
+	background: none;
+}
+.collect-website-dialog .select-pin .pin-img .price-img img {
+	height: 100%;
+	width: auto;
+	border: 1px solid #F6DBAF;
+	border-radius: 4px 0 0 4px;
+}
+.collect-website-dialog .select-pin .pin-img .invalid {
+	display: block;
+	color: #E34141;
+}
+.collect-website-dialog .select-pin .pin-info-form {
+	float: left;
+	display: inline;
+	width: 262px;
+	margin-left: 15px;
+}
+.collect-website-dialog .select-pin .pin-info-form .divselect {
+	position: relative;
+	z-index: 10;
+}
+.collect-website-dialog .select-pin .pin-info-form .desc,
+.collect-website-dialog .select-pin .pin-info-form .tags {
+	margin-top: 12px;
+	height: 82px;
+	width: 250px;
+	border: 1px solid #A4A2A2;
+	border-radius: 3px;
+	padding: 5px;
+	font-size: 14px;
+	color: #BBBBBB;
+	overflow: auto;
+	resize: vertical;
+	background: transparent url(../images/myshow/bg_input.png) repeat-x 0 0;
+	*color: #666;
+}
+.collect-website-dialog .select-pin .pin-info-form .tags {
+	margin-top: 12px;
+	padding: 0 5px;
+	height: 32px;
+	line-height: 32px;
+}
+.collect-website-dialog .select-pin .pin-info-form .desc:focus,
+.collect-website-dialog .select-pin .pin-info-form .tags:focus {
+	color: #666;
+}
+.collect-website-dialog .select-pin .pin-info-form .submit {
+	position: relative;
+	width: 100px;
+	/* *z-index: 11; */
+}
+.collect-website-dialog .select-pin .pin-info-form button {
+	margin-top: 12px;
+	width: 100px;
+	height: 34px;
+	line-height: 34px;
+	border: none;
+	font-size: 16px;
+	color: #fff;
+	text-align: left;
+	text-indent: 8px;
+	font-weight: bold;
+	cursor: pointer;
+	background: url(../images/myshow/arrow_btn.png) no-repeat 0 0;
+}
+.collect-website-dialog .select-pin .pin-info-form button:hover {
+	opacity: 0.93;
+}
+.collect-website-dialog .select-pin .pin-info-form .menu-openness {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 29px;
+	height: 34px;
+	cursor: pointer;
+}
+.collect-website-dialog .select-pin .pin-info-form .openness {
+	display: none;
+	position: absolute;
+	top: 34px;
+	left: 0;
+}
+.collect-website-dialog .select-pin .pin-info-form .openness li a {
+	display: block;
+	min-width: 150px;
+	height: 26px;
+	line-height: 26px;
+	padding-left: 30px;
+	color: #fff;
+	background-color: #D73C3C;
+	_width: 150px;
+}
+.collect-website-dialog .select-pin .pin-info-form .openness li a span {
+	display: block;
+	text-indent: 5px;
+	background-color: #EC5E5E;
+}
+.collect-website-dialog .select-pin .pin-info-form .openness li a:hover,
+.collect-website-dialog .select-pin .pin-info-form .openness li.selected a {
+	background: #EB5A5A url(../images/myshow/icon_right_white.png) no-repeat 7px 50%;
+}
+.collect-website-dialog .select-pin .pin-info-form .openness li a:hover span,
+.collect-website-dialog .select-pin .pin-info-form .openness li.selected a span {
+	background-color: #F68D8D;
+}
+.collect-website-dialog .select-pin .select-tags {
+	position: relative;
+	float: left;
+	display: inline;
+	width: 207px;
+	min-height: 188px;
+	margin-left: 15px;
+	padding-bottom: 10px;
+	background-color: #F6F6F6;
+	_height: 188px;
+}
+.collect-website-dialog .select-pin .select-tags h3 {
+	padding-bottom: 5px;
+	font-size: 14px;
+	color: #999999;
+	text-indent: 10px;
+	font-weight: normal;
+	background-color: #fff;
+}
+.collect-website-dialog .select-pin .tag-list-wrapper {
+	width: 207px;
+	overflow: hidden;
+	position: relative;
+}
+.collect-website-dialog .select-pin .tag-list-nav a {
+	position: absolute;
+	right: 2px;
+	top: 50%;
+	display: block;
+	width: 19px;
+	height: 29px;
+	margin: -15px;
+	text-indent: -9999px;
+	background: url(../images/myshow/btn-tag-list-nav.png) no-repeat -19px 0;
+}
+.collect-website-dialog .select-pin .tag-list-nav .tag-list-prev {
+	right: auto;
+	left: 2px;
+	background-position: 0 0;
+}
+.collect-website-dialog .select-pin .tag-list-nav .tag-list-prev:hover {
+	background-position: 0 -29px;
+}
+.collect-website-dialog .select-pin .tag-list-nav .tag-list-next:hover {
+	background-position: -19px -29px;
+}
+.collect-website-dialog .select-pin .tag-list {
+	position: relative;
+	width: 9999px;
+}
+.collect-website-dialog .select-pin .tag-list .tag-list-item {
+	float: left;
+	/* height: 195px; */
+	/* height: 160px; */
+	width: 207px;
+	/* overflow: hidden; */
+	/* *zoom: 1; */
+}
+#collect-video-pin .select-pin .tag-list .tag-list-item,
+#collect-goods-pin .select-pin .tag-list .tag-list-item {
+	/* height: 198px; */
+}
+.collect-website-dialog .select-pin .tag-list .tag-list-item li {
+	float: left;
+	display: inline;
+	margin: 10px 0 0 9px;
+	margin-top: 9px\0;/* TODO 操蛋的 IE8 这句 Opera 也可以识别 */
+}
+.collect-website-dialog .select-pin .tag-list .tag-list-item a {
+	display: block;
+	padding: 1px 7px;
+	border: 1px solid #D9D9D9;
+	border-radius: 5px;
+	color: #999999;
+	text-decoration: none;
+	background-color: #FBFBFB;
+	cursor: pointer;
+	*padding: 2px 7px 0;
+	padding: 3px 7px 0\0;
+	white-space: nowrap;
+}
+.collect-website-dialog .select-pin .select-tags .tag-list-item a:hover {
+	color: #444;
+	background-color: #fff;
+}
+.collect-website-dialog .select-pin .select-tags .tag-list-item a.selected {
+	color: #666;
+	background-color: #dedede;
+	/* background: #ddd url(../images/myshow/icon_right.png) no-repeat 96% 96%; */
+}
+.collect-website-dialog .select-pin .select-tags .tips {
+	margin: 15px 5px 0;
+	padding: 7px 10px;
+	border: 1px solid #D9D39E;
+	background-color: #FEF8C4;
+	color: #666666;
+	line-height: 1.6;
+}
+.collect-website-dialog .select-pin .select-tags .tips a {
+	color: #E34141;
+}
+.collect-website-dialog .select-pin .select-tags .tips a:hover {
+	text-decoration: underline;
+}
+.collect-website-dialog.loading .select-pin .pin-img, .collect-website-dialog.loading .search-pin-form input {
+	background: url(../images/myshow/loading.gif) no-repeat center center;
+}
+.collect-website-dialog.loading .search-pin-form input {
+	background-position: 98% 50%;
+}
+
+/* 转藏弹窗：大部分样式来自采集弹窗 */
+.dialog-repin .header {
+	margin-bottom: 30px;
+}
+.dialog-repin .select-pin .pin-info-form button {
+	text-indent: 18px;
+}
+
+/* 转藏弹窗todo */
+/*.dialog .repin {
+	margin: 20px 0 60px;
+	overflow: hidden;
+	*zoom: 1;
+}
+.dialog .repin-form {
+	float: left;
+	margin-right: 20px;
+}
+.dialog .repin-form label {
+	display: inline-block;
+	margin-right: 8px;
+	color: #666666;
+	width: 80px;
+	text-align: right;
+}
+.dialog .repin-form div {
+	margin: 7px 0 8px;
+}
+.dialog .repin-form .divselect {
+	display: inline-block;
+	margin-left: -4px;
+}
+.dialog .repin-form .divselect .selected span,
+.dialog .repin-form .divselect .options span {
+	display: block;
+	padding-left: 27px;
+	background: url(../images/myshow/icon_img_album.png) no-repeat 4px 50%;
+}
+.dialog .repin-form .divselect span.music {
+	background-image: url(../images/myshow/icon_music_album.png);
+}
+.dialog .repin-form .divselect span.video {
+	background-image: url(../images/myshow/icon_video_album.png);
+}
+.dialog .repin-form .divselect .options {
+	background: #fff url(../images/myshow/bg_input.png) repeat-x 0 0;
+	margin-top: -36px;
+}
+.dialog .divselect .options .option-list {
+	max-height: 100px;
+	overflow: auto;
+}
+.dialog .divselect .options .create-album {
+	padding: 8px 10px 0;
+	border-top: 1px solid #EBEBEB;
+}
+.dialog .divselect .options .create-album input {
+	width: 163px;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 4px;
+	border: 1px solid #BFBFBF;
+	border-radius: 3px;
+	color: #666;
+}
+.dialog .divselect .options .create-album .button {
+	width: 56px;
+	margin-left: 5px;
+	border: 1px solid #BFBFBF;
+	color: #666;
+}
+.dialog .divselect .options .create-album .disabled {
+	border: 1px solid #EBEBEB;
+	color: #D9D6D6;
+	cursor: default;
+}
+.dialog .divselect .options .create-album input:focus {
+	box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+}
+.dialog .repin-form textarea {
+	width: 252px;
+	height: 88px;
+	vertical-align: top;
+	color: #444444;
+	border: 1px solid #A4A2A2;
+	border-radius: 3px;
+	padding: 4px;
+	overflow: auto;
+	background: url(../images/myshow/bg_input.png) repeat-x 0 0;
+	resize: none;
+}
+.dialog .repin-form textarea:focus {
+	border-color: #AA0014;
+	box-shadow: 0 0 4px rgba(170, 0, 20, .6);
+}
+.dialog .repin-form button {
+	width: 78px;
+	height: 34px;
+	line-height: 34px;
+	margin: 6px 0 10px 83px;
+	text-align: center;
+	color: #fff;
+	font-size: 18px;
+	border: none;
+	font-weight: bold;
+	background: url(../images/myshow/btn_default_small.png) no-repeat 0 0;
+}
+.dialog .repin-form button:hover,
+.dialog .repin-form button:active {
+	opacity: 0.95;
+	filter: alpha(opacity=95);
+}
+.dialog .repin-form .share {
+	margin-left: 83px;
+	color: #999999;
+}
+.dialog .repin-img {
+	float: right;
+	display: inline;
+	margin-right: 28px;
+	margin-top: 15px;
+}
+.dialog .repin-img img {
+	display: block;
+	width: 170px;
+	height: 220px;
+	padding: 1px;
+	border: 4px solid #CCCCCC;
+}*/
+
+/* 转藏成功弹窗 */
+#repin-success-dialog .repin-success h3 {
+	margin: 35px 8px 8px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	color: #444444;
+}
+#repin-success-dialog .repin-success h3 span {
+	display: inline-block;
+	height: 24px;
+	line-height: 24px;
+	padding-left: 30px;
+	background: url(../images/myshow/icon_success.png) no-repeat 0 50%;
+}
+#repin-success-dialog .repin-success h3 a {
+	color: #E04852;
+}
+#repin-success-dialog .repin-success .pin-operations {
+	margin: 15px 110px 25px;
+	color: #A5A5A5;
+	text-align: center;
+	font-size: 14px;
+}
+#repin-success-dialog .repin-success .pin-operations a {
+	color: #666;
+}
+#repin-success-dialog .repin-success .pin-operations a:hover {
+	text-decoration: underline;
+}
+#repin-success-dialog .repin-success .close-tips {
+	margin: 15px 0;
+	text-align: center;
+	color: #D60921;
+	font-size: 14px;
+}
+#repin-success-dialog .repin-success .pin-share-description {
+	margin: 25px 110px 10px;
+	color: #999999;
+}
+#repin-success-dialog .repin-success .pin-share-description p {
+	margin-bottom: 5px;
+}
+#repin-success-dialog .repin-success .pin-share-description textarea {
+	width: 100%;
+	height: 90px;
+	padding: 4px 0 4px 6px;
+	color: #666;
+	overflow: auto;
+	border: 1px solid #A4A2A2;
+	border-radius: 3px;
+	background: url(../images/myshow/bg_input.png) repeat-x 0 0;
+	resize: vertical;
+}
+#repin-success-dialog .repin-success .pin-share-btn {
+	margin: 10px 110px 15px;
+}
+#repin-success-dialog .repin-success .pin-share {
+	margin: 10px 110px 20px;
+	color: #999;
+}
+
+/* 创建专辑弹窗 */
+#create-album-dialog .create-album-form {
+	margin: 20px 15px;
+}
+#create-album-dialog .create-album-form .create-album-item {
+	margin: 12px 0;
+	color: #666;
+}
+#create-album-dialog .create-album-form strong, #create-album-dialog .create-album-form label {
+	display: inline-block;
+	width: 75px;
+	margin-right: 8px;
+	color: #666666;
+	font-weight: normal;
+	text-align: right;
+}
+#create-album-dialog .create-album-form .divselect {
+	position: relative;
+	left: -4px;
+	display: inline-block;
+	vertical-align: middle;
+	*left: -8px;
+	*display: inline;
+	*zoom: 1;
+}
+#create-album-dialog .create-album-form .divselect li {
+	padding: 0;
+}
+#create-album-dialog .create-album-form input {
+	width: 252px;
+	height: 32px;
+	line-height: 32px;
+	border: 1px solid #A4A2A2;
+	border-radius: 3px;
+	padding: 0 4px;
+	vertical-align: middle;
+}
+#create-album-dialog .create-album-form textarea {
+	width: 360px;
+	height: 112px;
+	vertical-align: top;
+	overflow: auto;
+	color: #444444;
+	border: 1px solid #A4A2A2;
+	border-radius: 3px;
+	padding: 4px 0 4px 4px;
+	background: url(../images/myshow/bg_input.png) repeat-x 0 0;
+}
+#create-album-dialog .create-album-form input:focus, #create-album-dialog .create-album-form textarea:focus {
+	border-color: #AA0014;
+	box-shadow: 0 0 4px rgba(170, 0, 20, .6);
+}
+#create-album-dialog .create-album-form .sbtn {
+	margin-left: 83px;
+}
+
+/* 登录弹窗 */
+#login-dialog {
+	display: none;
+	position: fixed;
+	z-index: 1002;
+	left: 50%;
+	margin-left: -330px;
+	width: 660px;
+	padding: 20px 0;
+	border: 1px solid #C1C1C1;
+	border-width: 1px 1px 2px;
+	box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+	background-color: #FCFAF2;
+	_position: absolute;
+	_left: expression(-documentElement.scrollLeft-330);
+	_margin-left: 50%;
+}
+.login-dialog {
+	position: relative;
+	z-index: 100;
+	box-shadow: 0 0 4px rgba(121, 121, 121, .6);
+}
+.login-dialog .header {
+	margin: 0 10px;
+	padding: 20px 0 10px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	color: #777;
+	border-bottom: 1px solid #ECEBE6;
+}
+.login-dialog .close {
+	display: block;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	background: url(../images/myshow/btn_close.gif) no-repeat 0 0;
+}
+.login-dialog .close:hover {
+	background-position: 0 -30px;
+}
+.login-dialog .body {
+	padding: 10px 15px;
+	border-top: 1px solid #FFFFFF;
+}
+.login-dialog .login-connect {
+	float: left;
+	width: 250px;
+	height: 180px;
+	padding: 10px 0 10px 50px;
+	border-right: 1px solid #F6F4EE;
+}
+.login-dialog .body h4 {
+	margin-bottom: 14px;
+	color: #444444;
+	font-size: 14px;
+	font-weight: 700;
+}
+.login-dialog .connections {
+	margin-top: 12px;
+}
+.login-dialog .connections a {
+	display: inline-block;
+	width: 110px;
+	height: 32px;
+	margin: 0 12px 12px 0;
+	text-indent: -999999px;
+	*text-indent: 0;
+	font-size: 0;
+	background: url(../images/myshow/btn_sprite.png) no-repeat 0 0;
+}
+.login-dialog .connections a.renren:hover {
+	background-position: 0 -32px;
+}
+.login-dialog .connections a.weibo {
+	background-position: -440px 0;
+}
+.login-dialog .connections a.weibo:hover {
+	background-position: -440px -32px;
+}
+.login-dialog .connections a.qq {
+	background-position: -330px 0;
+}
+.login-dialog .connections a.qq:hover {
+	background-position: -330px -32px;
+}
+.login-dialog .connections a.douban {
+	background-position: -220px 0;
+}
+.login-dialog .connections a.douban:hover {
+	background-position: -220px -32px;
+}
+.login-dialog .login-connect p {
+	margin-top: 20px;
+	color: #999999;
+}
+.login-dialog .login-form {
+	border-left: 1px solid #FFFFFF;
+	float: left;
+	width: 220px;
+	height: 180px;
+	padding: 10px 50px;
+}
+.login-dialog li {
+	font-size: 21px;
+	font-weight: 300;
+	margin-bottom: 12px;
+}
+.login-dialog .login-form li input {
+	width: 208px;
+}
+.login-dialog .login-form .login-help {
+	clear: left;
+	float: left;
+	width: 100%;
+}
+.login-dialog .login-form .login-help .lbtn {
+	float: left;
+}
+.login-dialog .login-form .login-help .help {
+	float: right;
+	color: #8C7E7E;
+}
+.login-dialog .login-form .login-help .help:hover {
+	color: #E34141;
+}
+
+/* 举报不良信息弹窗 */
+#report-dialog {
+	width: 545px;
+}
+#report-dialog .body {
+	margin: 25px 20px;
+}
+#report-dialog .body .tips {
+	padding: 0 0 5px 25px;
+	border-bottom: 1px solid #E9E9E9;
+	color: #666666;
+	background: url(../images/myshow/icon_tips.png) no-repeat 8px 50%;
+}
+#report-dialog .body h3 {
+	margin: 18px 25px 5px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #666666;
+}
+#report-dialog .body h3 a {
+	font-weight: bold;
+	color: #EA5265;
+}
+#report-dialog .body .report-pin {
+	margin: 5px 25px 15px;
+	border: 1px solid #D2D2D2;
+	background-color: #FFFCF3;
+	overflow: hidden;
+	*zoom: 1;
+	*padding-bottom: 10px;
+}
+#report-dialog .body .report-pin .avatar {
+	float: left;
+	display: inline;
+	width: 52px;
+	height: 52px;
+	margin: 15px 12px;
+}
+#report-dialog .body .report-pin .avatar img {
+	display: block;
+	width: 52px;
+	height: 52px;
+}
+#report-dialog .body .report-pin p {
+	float: left;
+	width: 360px;
+	margin: 15px 0 15px;
+	font-size: 14px;
+}
+#report-dialog .body .report-type {
+	margin: 15px 25px;
+	font-size: 14px;
+	color: #666666;
+}
+#report-dialog .body .report-type label {
+	margin: 0 17px 0 5px;
+}
+#report-dialog .body .report-type input {
+	vertical-align: middle;
+}
+#report-dialog .body .detail {
+	margin: 18px 25px 10px;
+}
+#report-dialog .body .detail label {
+	height: 34px;
+	line-height: 34px;
+	font-size: 14px;
+	color: #666666;
+	vertical-align: middle;
+}
+#report-dialog .body .detail label span {
+	font-size: 12px;
+	color: #999999;
+}
+#report-dialog .body .detail textarea {
+	width: 260px;
+	min-height: 32px;
+	vertical-align: top;
+	resize: vertical;
+	vertical-align: middle;
+}
+#report-dialog .body .submit {
+	margin: 12px 25px 30px;
+	padding-top: 12px;
+	border-top: 1px solid #E9E9E9;
+}
+#report-dialog .body .submit .sbtn {
+	padding: 0 10px;
+}
+#report-dialog .body .submit p {
+	position: relative;
+	bottom: 5px;
+	display: inline-block;
+	margin-left: 5px;
+	color: #B2B2B2;
+	*display: inline;
+	*zoom: 1;
+}
+
+/* 注册页面
+---------------------------------------------- */
+#wrapper.reg-page {
+	width: 880px;
+	box-shadow: none;
+	/* background-color: #FCFAF2; */
+}
+#wrapper.reg-page .logo a {
+	display: block;
+	width: 200px;
+	height: 35px;
+	margin: 40px auto;
+	text-align: center;
+	background: url(../images/myshow/reg_logo.png) no-repeat center center;
+	_background-image: url(../images/myshow/reg_logo.gif);
+}
+#reg-form {
+	float: left;
+	margin: 15px 0;
+	width: 499px;
+	border-right: 1px dashed #CCCCCC;
+}
+#reg-form h4 {
+	margin: 35px 20px 40px;
+	font-size: 16px;
+	color: #524D4D;
+}
+#reg-form div {
+	margin: 15px;
+}
+#reg-form div.bind_agree {
+	margin-left: 135px;
+}
+#reg-form div label {
+	display: inline-block;
+	width: 100px;
+	margin-right: 20px;
+	text-align: right;
+	font-size: 14px;
+	color: #000000;
+	vertical-align: middle;
+}
+#reg-form div input {
+	display: inline-block;
+	width: 254px;
+	vertical-align: middle;
+}
+#reg-form div label.bind_agree,
+#reg-form div input.bind_agree {
+	width: auto;
+	margin-right: 4px;
+	color: #999;
+}
+#reg-form div label.bind_agree a:hover {
+	color: #E34141;
+	text-decoration: underline;
+}
+#reg-form div .lbtn {
+	margin: 27px 0 35px 120px;
+}
+#wrapper.reg-page .login-connect {
+	float: left;
+	width: 260px;
+	height: auto;
+	border: none;
+	padding: 50px 0 50px 50px;
+}
+#wrapper.reg-page .login-connect h4 {
+	font-size: 14px;
+	margin-bottom: 27px;
+}
+
+/* 注册协议 */
+#reg-agree {
+	width: 800px;
+	margin: 0 auto;
+}
+#reg-agree h2 {
+	margin: 20px 0;
+	font-size: 20px;
+	text-align: center;
+}
+#reg-agree h3 {
+	font-size: 14px;
+}
+#reg-agree p {
+	margin: 0 0 20px;
+	text-align: justify;
+}
+#reg-agree .agree-btns {
+	margin: 30px 0 20px;
+	text-align: center;
+}
+#reg-agree button {
+	height: auto;
+	line-height: 30px;
+	font-size: 14px;
+}
+
+/* 修改页面（修改专辑页、修改分享页）
+---------------------------------------------- */
+.edit-page {
+	position: relative;
+	width: 958px;
+	margin: 20px auto;
+	padding: 30px;
+	border: 1px solid #D2D2D2;
+	background-color: #fff;
+}
+.edit-page h2 {
+	margin-bottom: 18px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #333333;
+}
+.edit-page .form-list {
+	float: left;
+	width: 500px;
+	margin-right: 100px;
+}
+.edit-page .form-list-item {
+	padding: 15px 0 10px;
+	/* border-bottom: 1px solid #EFEFEE; */
+	font-size: 14px;
+	color: #666;
+}
+/*.edit-page .form-list-item:last-child,
+.edit-page .album-form-list li.last {
+	border: none;
+}*/
+.edit-page .form-list-item strong, .edit-page .form-list-item label {
+	display: inline-block;
+	margin-right: 8px;
+	color: #666666;
+	font-weight: normal;
+	width: 75px;
+	text-align: right;
+	vertical-align: middle;
+}
+.edit-page .form-list-item input {
+	width: 252px;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 4px;
+	border: 1px solid #A4A2A2;
+	border-radius: 3px;
+	vertical-align: middle;
+}
+.edit-page .form-list-item .divselect {
+	display: inline-block;
+	margin-left: -4px;
+	vertical-align: middle;
+	*display: inline;
+	*zoom: 1;
+}
+/*.edit-page .form-list-item .divselect li {
+	border: none;
+	padding: 0;
+}*/
+.edit-page .form-list-item textarea {
+	width: 252px;
+	height: 112px;
+	vertical-align: top;
+	color: #444444;
+	border: 1px solid #A4A2A2;
+	border-radius: 3px;
+	padding: 4px;
+	background: url(../images/myshow/bg_input.png) repeat-x 0 0;
+}
+.edit-page .form-list-item input:focus, .edit-page .form-list-item textarea:focus {
+	border-color: #AA0014;
+	box-shadow: 0 0 4px rgba(170, 0, 20, .6);
+}
+.edit-page .form-list-item .esbtn {
+	margin-left: 83px;
+}
+.edit-page .album-cover {
+	float: left;
+	margin-top: 15px;
+	width: 226px;
+}
+.edit-page .ui-album-box {
+	width: 208px;
+	padding: 9px;
+	border: 1px solid #D2D2D2;
+	background-color: #fff;
+}
+.edit-page .ui-album-box .ui-album {
+	left: 0;
+	float: none;
+	display: block;
+	margin: 0 auto;
+}
+.edit-page .ui-album-box .ui-album .img {
+	margin: 0;
+	padding: 12px 0 8px 8px;
+	background-position: 7px 11px;
+}
+.edit-page .ui-album-box .ui-album .single-img {
+	display: none;
+	padding: 12px 0 8px 8px;
+	background-position: 7px 11px;
+}
+.edit-page .ui-album-box .ui-album .single-img img {
+	display: block;
+	width: 188px;
+	height: 188px;
+}
+.edit-page .album-cover .set-album-cover {
+	margin-top: 10px;
+	text-align: center;
+}
+.edit-page .album-cover .set-album-cover input {
+	vertical-align: middle;
+}
+.edit-page .album-cover .set-album-cover input.single {
+	margin-left: 8px;
+}
+.edit-page .ui-img-dialog {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -305px;
+}
+
+/** 修改分享页 **/
+#edit-pin .pin-img {
+	float: left;
+	display: inline;
+	margin: 12px 0 0 80px;
+	border: 1px solid #D2D2D2;
+	padding: 4px;
+	min-width: 200px;
+	min-height: 200px;
+	_width: 200px;
+	_height: 200px;
+	_overflow: hidden;
+}
+#edit-pin .pin-img img {
+	display: block;
+	margin: 0 auto;
+	max-width: 208px;
+	max-height: 300px;
+}
+
+/* 广场页
+---------------------------------------------- */
+/* 人气专辑 */
+#wrapper.square .popular-album {
+	padding: 10px 0 15px;
+	border: 1px solid #D2D2D2;
+	border-radius: 2px;
+	background-color: #FFFFFF;
+	overflow: hidden;
+	*zoom: 1;
+	*position: relative;
+	_width: 958px;
+}
+#wrapper.square .popular-album .title {
+	height: 33px;
+	margin: 0 21px;
+	text-indent: -9999px;
+	background: url(../images/myshow/title_popular_album.png) no-repeat 0 0;
+}
+#wrapper.square .popular-album .ui-album-list {
+	width: 2000px;
+	height: 464px;
+	overflow: hidden;
+	*position: relative;
+}
+#wrapper.square .popular-album .ui-album-list-item {
+	float: left;
+	width: 958px;
+}
+#wrapper.square .popular-album .ui-album {
+	height: 208px;
+}
+#wrapper.square .popular-album .ui-album .intro {
+	bottom: 0;
+}
+
+/* 热门分类 */
+#wrapper.square .popular-tags {
+	margin-top: 15px;
+	padding: 15px 15px 20px;
+	border: 1px solid #D2D2D2;
+	border-radius: 2px;
+	background-color: #FFFFFF;
+}
+#wrapper.square .popular-tags table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	text-align: left;
+}
+#wrapper.square .popular-tags thead th {
+	padding: 10px 10px 10px 15px;
+	font-size: 14px;
+	color: #CE1B41;
+}
+#wrapper.square .popular-tags tbody tr.odd {
+	background-color: #E9ECF2;
+}
+#wrapper.square .popular-tags tbody tr:hover {
+	/* background-color: #f8f8f8; */
+}
+#wrapper.square .popular-tags tbody td {
+	padding: 8px 10px 8px 15px;
+	border: 1px solid #CDD8DA;
+	vertical-align: middle;
+}
+#wrapper.square .popular-tags tbody td .user {
+	display: inline-block;
+	position: relative;
+	margin-right: 4px;
+	height: 40px;
+	vertical-align: middle;
+}
+#wrapper.square .popular-tags tbody td .user-photo img {
+	display: block;
+	width: 40px;
+	height: 40px;
+}
+#wrapper.square .popular-tags tbody td .user-medal {
+	position: absolute;
+	top: 26px;
+	left: 0;
+	z-index: 1;
+}
+#wrapper.square .popular-tags tbody td .tag {
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	padding-right: 33px;
+	color: #000000;
+}
+#wrapper.square .popular-tags tbody td .new {
+	font-size: 14px;
+	background: url(../images/myshow/icon_new.png) no-repeat 100% 7px;
+}
+#wrapper.square .popular-tags tbody td .hot {
+	color: #F04D4D;
+}
+/*.popular-tags tbody td .share-btn {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	line-height: 40px;
+	background: url(../images/myshow/btn_share.png) no-repeat 0 50%;
+	vertical-align: top;
+	text-align: center;
+}
+.popular-tags tbody td .share-btn strong, .popular-tags tbody td .share-btn em {
+	display: block;
+	height: 15px;
+	line-height: 15px;
+	color: #666666;
+}
+.popular-tags tbody td .share-btn strong {
+	margin-top: 5px;
+}*/
+
+/* 专辑列表首页
+---------------------------------------------- */
+/* 专辑标签列表 */
+#wrapper.album-list .album-box {
+	margin: 15px 0;
+	position: relative;
+}
+#wrapper.album-list .album-box .album-title-list {
+	height: 30px;
+	line-height: 24px;
+	background: url(../images/myshow/bg_album_title_list.png) repeat-x 0 100%;
+	overflow: hidden;
+	*position: relative;/* 当子元素设置 position: relative; 时父元素也要设置此属性，overflow: hidden; 才会生效 */
+	*background-position: 0 26px;
+}
+#wrapper.album-list .album-box .album-title-list li {
+	position: relative;
+	float: left;
+	height: 30px;
+	_float: none;
+	_display: inline;
+	*zoom: 1;
+	_overflow: hidden;
+	_vertical-align: bottom;
+}
+#wrapper.album-list .album-box .album-title-list li a {
+	display: inline-block;
+	height: 30px;
+	padding: 0 3px;
+	color: #666;
+	text-align: center;
+	font-size: 14px;
+	outline: none;
+	vertical-align: middle;
+}
+#wrapper.album-list .album-box .album-title-list li .hot,
+#wrapper.album-list .album-box .album-title-list li .new,
+#wrapper.album-list .album-box .album-title-list li .divide {
+	font-weight: bold;
+	color: #333;
+	padding: 0 7px;
+	*padding: 0 10px;
+	_padding: 0 7px;
+}
+#wrapper.album-list .album-box .album-title-list li .divide {
+	width: 15px;
+	font-weight: normal;
+	padding: 0 4px;
+}
+#wrapper.album-list .album-box .album-title-list li span {
+	display: block;
+	height: 4px;
+	background-color: #8C8C8C;
+	border-left: 1px solid #8C8C8C;
+	border-right: 1px solid #8C8C8C;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	_overflow: hidden;
+}
+#wrapper.album-list .album-box .album-title-list li.selected a,
+#wrapper.album-list .album-box .album-title-list li a:hover {
+	color: #FF2927;
+	text-decoration: none;
+}
+#wrapper.album-list .album-box .album-title-list li.selected  span,
+#wrapper.album-list .album-box .album-title-list li:hover span,
+#wrapper.album-list .album-box .album-title-list li.hover span {
+	background-color: #FF2927;
+	border-color: #fff;
+}
+#wrapper.album-list .album-box .create-album {
+	position: absolute;
+	right: 0;
+	top: -1px;
+	text-align: center;
+	background-color: #FBFBFB;
+}
+#wrapper.album-list .album-box .create-album-btn {
+	display: block;
+	width: 88px;
+	height: 26px;
+	line-height: 26px;
+	border: 1px solid #B5B5B5;
+	color: #666;
+	text-indent: 22px;
+	background: url(../images/myshow/icon_create_album.png) no-repeat 8px 50%;
+}
+#wrapper.album-list .album-box .create-album-list {
+	border: 1px solid #B5B5B5;
+	border-top: none;
+	padding: 2px 0;
+}
+#wrapper.album-list .album-box .create-album-list a {
+	display: block;
+	margin: 5px 0;
+	color: #666666;
+	text-indent: 22px;
+	background: url(../images/myshow/icon_create_img_album.png) no-repeat 10px 50%;
+}
+#wrapper.album-list .album-box .create-album-list .create-music-album { background-image: url(../images/myshow/icon_create_music_album.png); }
+#wrapper.album-list .album-box .create-album-list .create-video-album { background-image: url(../images/myshow/icon_create_video_album.png); }
+#wrapper.album-list .album-box .create-album a:hover {
+	color: #EE326C;
+	text-decoration: none;
+}
+#wrapper.album-list .album-box .album-content-list {
+	padding: 8px 0;
+	border: 1px solid #D2D2D2;
+	border-top: none;
+	background-color: #fff;
+}
+#wrapper.album-list .album-box .album-content-item {
+	float: left;
+	/* width: 22%; */
+	height: 81px;
+	overflow: hidden;
+	padding: 0 1.5%;
+}
+#wrapper.album-list .album-box .album-content-item a {
+	display: inline-block;
+	height: 27px;
+	line-height: 27px;
+	padding: 0 2px;
+	color: #666666;
+	text-decoration: underline;
+	font-family: '宋体',arial,verdana,sans-serif;
+}
+#wrapper.album-list .album-box .album-content-item a.recommend {
+	color: #FF2927;
+}
+#wrapper.album-list .album-box .album-content-item a:hover {
+	color: #FF2927;
+	text-decoration: none;
+}
+#wrapper.album-list .album-box .album-content-item strong {
+	color: #EE326C;
+}
+#wrapper.album-list .popular-album {
+	padding: 10px 0 15px;
+	border: 1px solid #D2D2D2;
+	border-radius: 2px;
+	background-color: #FFFFFF;
+	overflow: hidden;
+	*zoom: 1;
+}
+
+/* 用户专辑页
+---------------------------------------------- */
+#wrapper.user-album {
+	margin: 15px auto;
+}
+#wrapper.user-album .nav-bar {
+	position: relative;
+	margin: 15px 0;
+	border-bottom: 1px solid #fff;
+	*z-index: 33;
+	*zoom: 1;
+}
+#wrapper.user-album .nav-bar, .user-album .album-actions {
+	text-shadow: 0 1px rgba(255, 255, 255, 0.9);
+}
+#wrapper.user-album .nav-bar h2 {
+	padding: 5px 0;
+	color: #444;
+	font-size: 18px;
+	border-bottom: 1px solid #E5E5E5;
+}
+#wrapper.user-album .nav-bar h2 .stats {
+	margin-left: 5px;
+	color: #999999;
+	font-size: 12px;
+	font-weight: 400;
+}
+#wrapper.user-album .album-actions {
+	position: absolute;
+	right: 0;
+	top: 2px;
+}
+#wrapper.user-album .album-actions .share {
+	float: right;
+	padding: 0 .4em 0 .7em;
+	cursor: pointer;
+}
+#wrapper.user-album .album-actions .share .title {
+	padding-left: 15px;
+	color: #666;
+	background: url(../images/myshow/icon_share_btn_black.png) no-repeat 0 50%;
+}
+#wrapper.user-album .album-actions .share .title span {
+	font-size: 12px;
+	font-weight: normal;
+	padding-left: 4px;
+}
+#wrapper.user-album .album-actions .share .title:hover {
+	color: #333;
+}
+#wrapper.user-album .album-actions .share ul {
+	border: 1px solid #CCCACA;
+	position: absolute;
+	right: 0;
+	top: 33px;
+	z-index: 3;
+	width: 91px;
+	background-color: #FFFFFF;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+#wrapper.user-album .album-actions .share ul a {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	text-indent: 36px;
+	color: #666;
+	/* padding: 0 .5em; */
+}
+#wrapper.user-album .album-actions .share ul a.tsina {
+	background: url(../images/myshow/icon_share_tsina.png) no-repeat 10px 50%;
+}
+#wrapper.user-album .album-actions .share ul a.tqq {
+	background: url(../images/myshow/icon_share_tqq.png) no-repeat 10px 50%;
+}
+#wrapper.user-album .album-actions .share ul a.qzone {
+	background: url(../images/myshow/icon_share_qzone.png) no-repeat 10px 50%;
+}
+#wrapper.user-album .album-actions .share ul a.douban {
+	background: url(../images/myshow/icon_share_douban.png) no-repeat 10px 50%;
+}
+#wrapper.user-album .album-actions .share ul a:hover {
+	background-color: #eee;
+}
+#wrapper.user-album .album-actions .follow,
+#wrapper.user-album .album-actions .edit {
+	float: right;
+	display: inline;
+	margin-right: 8px;
+	color: #666;
+}
+#wrapper.user-album .album-actions .follow:hover,
+#wrapper.user-album .album-actions .edit:hover {
+	color: #333;
+}
+#canvas.user-album .pin-empty {
+	position: relative;
+	height: 300px;
+	background: #F7F7F7 url(../images/myshow/icon_add_pin.png) no-repeat 50% 50%;
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+}
+#canvas.user-album .pin-empty:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+	cursor: pointer;
+}
+#canvas.user-album .pin-tips {
+	/* position: relative; */
+	/* top: 350px; */
+	padding-bottom: 15px;
+	width: 638px;
+	height: 434px;
+	background: url(../images/myshow/pin_tips.png) no-repeat 0 0;
+	_background: url(../images/myshow/pin_tips.gif) no-repeat 0 0;
+}
+#canvas.user-album .album-meta {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 9px;
+}
+#canvas.user-album .album-meta h3 {
+	margin: 15px 0 2px;
+	font-size: 15px;
+	font-weight: 400;
+	color: #999;
+}
+#canvas.user-album .album-meta h3 span {
+	font-size: 12px;
+	color: #BBBBBB;
+}
+#canvas.user-album .album-meta h3 a {
+	color: #aaa;
+}
+#canvas.user-album .album-meta h3 a:hover {
+	text-decoration: underline;
+}
+#canvas.user-album .album-meta .album-user .title {
+	margin-top: 0;
+}
+#canvas.user-album .album-meta .album-user .avatar {
+	float: left;
+	width: 60px;
+	height: 60px;
+	margin: 0 10px 5px 0;
+}
+#canvas.user-album .album-meta .album-user img {
+	display: block;
+	width: 60px;
+	height: 60px;
+}
+#canvas.user-album .album-meta .album-user .name {
+	display: block;
+	margin-left: 70px;
+	padding-left: 14px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #444444;
+	background: url(../images/myshow/head_user.png) no-repeat 0 2px;
+}
+#canvas.user-album .album-meta .album-user .stats {
+	clear: both;
+}
+#canvas.user-album .album-meta .album-user .stats span {
+	margin-right: 5px;
+}
+#canvas.user-album .album-meta .album-user .stats em {
+	color: #EB5E6F;
+	font-weight: bold;
+}
+#canvas.user-album .album-meta .album-category .name {
+	display: block;
+	border: 1px solid #DDDDDD;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 0 1px #FFFFFF inset, 0 0 1px rgba(34, 25, 25, 0.1);
+	color: #999999;
+	padding: 5px 8px;
+	background-color: #f9f9f9;
+}
+#canvas.user-album .album-meta .album-desc p {
+	color: #555555;
+	font-size: 13px;
+}
+
+/* 用户的分享、喜欢、专辑
+---------------------------------------------- */
+#wrapper.pinner-page {
+	margin-top: 15px;
+}
+#wrapper.pinner-page .header {
+	margin: 0 0 15px;
+	border-bottom: 1px solid #fff;
+	text-shadow: 0 1px rgba(255, 255, 255, 0.9);
+}
+#wrapper.pinner-page .header h2 {
+	padding-bottom: 6px;
+	font-size: 16px;
+	border-bottom: 1px solid #E5E5E5;
+}
+#wrapper.pinner-page .header h2 a {
+	margin-right: 15px;
+	padding-bottom: 1px;
+	border-bottom: 1px solid #666;
+	color: #444;
+}
+#wrapper.pinner-page .header h2 a.current,
+#wrapper.pinner-page .header h2 a:hover {
+	border: none;
+	color: #E34141;
+}
+#canvas.pinner-page .pinner .pinner-info {
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #F6F6F6;
+}
+#canvas.pinner-page .pinner .pinner-info .avatar {
+	display: block;
+}
+#canvas.pinner-page .pinner .pinner-info .avatar img {
+	display: block;
+	max-width: 208px;
+}
+#canvas.pinner-page .pinner .pinner-info .name {
+	margin-top: 10px;
+	font-size: 14px;
+	text-align: center;
+}
+#canvas.pinner-page .pinner .pinner-info .name a {
+	padding-left: 18px;
+	color: #444444;
+	background: url(../images/myshow/head_user.png) no-repeat 0 50%;
+}
+#canvas.pinner-page .pinner .pinner-info .signature {
+	position: relative;
+	margin-top: 10px;
+	padding: 7px;
+	border: 1px dashed #D8D8D8;
+	border-radius: 3px;
+	color: #666666;
+	*zoom: 1;
+}
+#canvas.pinner-page .pinner .pinner-info .signature strong {
+	color: #ED4F5B;
+}
+#canvas.pinner-page .pinner .pinner-info .signature .arr {
+	position: absolute;
+	top: -8px;
+	left: 80px;
+	display: block;
+	width: 16px;
+	height: 8px;
+	background: url(../images/myshow/bg_arr_up.png) no-repeat 0 0;
+}
+#canvas.pinner-page .pinner .pinner-info .stats {
+	margin-top: 8px;
+	overflow: hidden;
+	*zoom: 1;
+}
+#canvas.pinner-page .pinner .pinner-info .stats span {
+	float: left;
+	width: 51px;
+	margin-right: -1px;
+	border: 1px solid #D2D2D2;
+	border-width: 0 1px;
+	font-size: 14px;
+	text-align: center;
+	color: #999999;
+}
+#canvas.pinner-page .pinner .pinner-info .stats span.new {
+	background: url(../images/myshow/icon_newly.png) no-repeat 90% 0;
+}
+#canvas.pinner-page .pinner .pinner-info .stats span.first,
+#canvas.pinner-page .pinner .pinner-info .stats span:first-child {
+	border-left: none;
+}
+#canvas.pinner-page .pinner .pinner-info .stats span.last,
+#canvas.pinner-page .pinner .pinner-info .stats span:last-child {
+	border-right: none;
+}
+#canvas.pinner-page .pinner .pinner-info .stats em {
+	display: block;
+	color: #EB5E6F;
+	font-size: 12px;
+	font-weight: bold;
+	word-wrap: break-word;
+}
+#canvas.pinner-page .pinner .pinner-info .action-btns {
+	margin-top: 15px;
+}
+#canvas.pinner-page .pinner .pinner-info .action-btns .btn {
+	float: left;
+	display: inline;
+	margin-left: 18px;
+	height: 24px;
+	line-height: 24px;
+	padding: 0 8px 0 24px;
+	border: 1px solid #bbb;
+	border-radius: 3px;
+	color: #444;
+}
+#canvas.pinner-page .pinner .pinner-info .action-btns .follow-user {
+	background: #EBEBEB url(../images/myshow/icon_follow_user_hover.png) no-repeat 8px 50%;
+}
+#canvas.pinner-page .pinner .pinner-info .action-btns .followed {
+	padding: 0 10px;
+	background: #EBEBEB;
+}
+#canvas.pinner-page .pinner .pinner-info .action-btns .send-msg {
+	padding-left: 30px;
+	background: #EBEBEB url(../images/myshow/icon_send_msg_hover.png) no-repeat 8px 50%;
+}
+#canvas.pinner-page .pinner .pinner-info .action-btns .btn:hover {
+	color: #E34141;
+}
+/*#canvas.pinner-page .pinner .pinner-info .action-btns a.follow-user:hover {
+	background-image: url(../images/myshow/icon_follow_user_hover.png);
+}
+#canvas.pinner-page .pinner .pinner-info .action-btns a.send-msg:hover {
+	background-image: url(../images/myshow/icon_send_msg_hover.png);
+}*/
+#canvas.pinner-page .pinner .follower {
+	margin-top: 15px;
+}
+#canvas.pinner-page .pinner .follower h3 {
+	font-size: 14px;
+	font-weight: normal;
+	color: #999999;
+	overflow: hidden;
+	*zoom: 1;
+	*position: relative;
+}
+#canvas.pinner-page .pinner .follower h3 span {
+	float: right;
+	padding-right: 5px;
+	font-size: 12px;
+	color: #bbb;
+	*position: absolute;
+	*right: 0;
+	*bottom: 0;
+}
+#canvas.pinner-page .pinner .follower h3 a {
+	color: #bbb;
+}
+#canvas.pinner-page .pinner .follower h3 a:hover {
+	text-decoration: underline;
+}
+#canvas.pinner-page .pinner .follower-list {
+	overflow: hidden;
+	*zoom: 1;
+}
+#canvas.pinner-page .pinner .follower-list a {
+	float: left;
+	margin: 5px 9px 0 0;
+	opacity: 0.93;
+	filter: alpha(opacity=93);
+}
+#canvas.pinner-page .pinner .follower-list a.all {
+	width: 72px;
+	height: 32px;
+	border-left: 1px solid #CDD9D9;
+	text-align: center;
+	font-size: 14px;
+	color: #333333;
+	background-color: #F6F6F6;
+}
+#canvas.pinner-page .pinner .follower-list img {
+	width: 32px;
+	height: 32px;
+	vertical-align: bottom;
+}
+#canvas.pinner-page .pinner .follower-list a:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#canvas.pinner-page .pinner .links {
+	margin: 12px 0;
+}
+#canvas.pinner-page .pinner .links li {
+	margin-bottom: 7px;
+}
+#canvas.pinner-page .pinner .links li a {
+	display: block;
+	height: 34px;
+	line-height: 34px;
+	padding: 0 10px;
+	border: 1px solid #E8E8E8;
+	border-radius: 3px;
+	font-size: 14px;
+	color: #999999;
+	background: #FBFBFB url(../images/myshow/arr_left_gray.png) no-repeat 95% 50%;
+	_background: #FBFBFB url(../images/myshow/arr_left_gray_ie6.png) no-repeat 95% 50%;
+}
+#canvas.pinner-page .pinner .links li a span {
+	font-size: 12px;
+}
+#canvas.pinner-page .pinner .links li a:hover {
+	color: #666;
+}
+
+/* 用户的专辑 */
+#canvas.pinner-album .album-list {
+	margin: 0 0 18px 244px;
+	width: 714px;
+	border: 1px solid #D2D2D2;
+	background-color: #fff;
+}
+#canvas.pinner-album .album-list .title {
+	position: relative;
+	margin: 15px 23px;
+	padding: 10px 0;
+	border-bottom: 1px solid #D2D2D2;
+}
+#canvas.pinner-album .album-list .subtitle {
+	clear: both;
+	padding-top: 40px;
+}
+#canvas.pinner-album .album-list .title h2 {
+	margin-right: 100px;
+	font-size: 16px;
+	color: #999999;
+}
+#canvas.pinner-album .album-list .title .create-album {
+	position: absolute;
+	z-index: 1;
+	top: 3px;
+	right: 0;
+	margin-top: 3px;
+	text-align: center;
+	background-color: #FBFBFB;
+}
+#canvas.pinner-album .album-list .title .create-album-btn {
+	display: block;
+	width: 88px;
+	height: 26px;
+	/* border: 1px solid #B5B5B5; */
+	line-height: 26px;
+	color: #EE326C;
+	text-indent: 22px;
+	background: url(../images/myshow/icon_create_album.png) no-repeat 8px 50%;
+}
+#canvas.pinner-album .album-list .title .create-album-list {
+	/* border: 1px solid #B5B5B5; */
+	border-top: none;
+	padding: 2px 0;
+}
+#canvas.pinner-album .album-list .title .create-album-list a {
+	display: block;
+	margin: 5px 0;
+	color: #666666;
+	text-indent: 22px;
+	background: url(../images/myshow/icon_create_img_album.png) no-repeat 10px 50%;
+}
+#canvas.pinner-album .album-list .title .create-album-list .create-music-album { background-image: url(../images/myshow/icon_create_music_album.png); }
+#canvas.pinner-album .album-list .title .create-album-list .create-video-album { background-image: url(../images/myshow/icon_create_video_album.png); }
+#canvas.pinner-album .album-list .title .create-album a:hover {
+	color: #EE326C;
+	text-decoration: none;
+}
+#canvas.pinner-album .album-list .title .link {
+	position: absolute;
+	bottom: 5px;
+	right: 0;
+	font-weight: normal;
+	font-size: 12px;
+}
+#canvas.pinner-album .album-list .title .link:hover {
+	text-decoration: underline;
+}
+#canvas.pinner-album .album-list .ui-album {
+	margin: 0 0 22px 22px;
+	left: 1px;
+}
+#canvas.pinner-album .album-list .pagination {
+	clear: both;
+	margin: 15px;
+	text-align: left;
+}
+#canvas.pinner-album .album-list .pagination a {
+	margin-left: 1px;
+	padding: 1px 4px;
+}
+
+/* 我的分享、喜欢、专辑 */
+#canvas.pinner-page .pinner .setting,
+#canvas.pinner-page .pinner .search-friend {
+	margin: 7px auto 0;
+	width: 185px;
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid #BBBBBB;
+	border-radius: 4px;
+	outline: none;
+	color: #544F4F;
+	font-size: 12px;
+	background: #F7F4F5;
+}
+#canvas.pinner-page .pinner .setting:hover,
+#canvas.pinner-page .pinner .search-friend:hover {
+	color: #666;
+}
+#canvas.pinner-page .pinner .search-friend {
+	margin-top: 0;
+	width: 188px;
+}
+#canvas.pinner-page .pinner .search-friend span {
+	display: inline-block;
+	height: 100%;
+	padding-right: 66px;
+	background: url(../images/myshow/bg_search_friends.png) no-repeat 100% 50%;
+}
+#canvas.pinner-page .pinner .search-friend .logo {
+	display: none;
+	/* display: inline-block; */
+	width: 20px;
+	height: 20px;
+	text-indent: -9999px;
+	background: url(../images/myshow/icon_weibo.png) no-repeat 0 0;
+}
+#canvas.pinner-page .pinner .search-friend .weibo {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	text-indent: -9999px;
+	background: url(../images/myshow/icon_weibo.png) no-repeat 0 0;
+}
+
+/* 搜索页
+---------------------------------------------- */
+#wrapper.search .header .divider {
+	margin: 0 7px 0 -8px;
+	color: #666;
+}
+#canvas.search .pinner .pinner-info {
+	padding-bottom: 5px;
+	border: none;
+}
+#canvas.search .pinner .pinner-info .name {
+	text-align: left;
+}
+#canvas.search .pinner .pinner-info .action-btns {
+	margin-top: 18px;
+}
+#canvas.search .pinner .pinner-info .action-btns .btn {
+	background-color: #f8f8f8;
+}
+#canvas.search .pinner .pinner-info .action-btns .disabled {
+	color: #aaa;
+	cursor: default;
+	visibility: hidden;
+}
+#canvas.search .pinner .pinner-info .action-btns .disabled:hover {
+	color: #aaa;
+}
+
+/* 我的粉丝
+---------------------------------------------- */
+#wrapper.fans-page, .fans-page {/* 操蛋的 IE6 */
+	width: 958px;
+	margin: 35px auto;
+	padding: 25px 0;
+	border: 1px solid #D2D2D2;
+	border-radius: 5px;
+	background-color: #fff;
+	*position: relative;
+	*z-index: 11;
+}
+#wrapper.fans-page .header {
+	margin: 0 22px 10px;
+	font-size: 14px;
+	color: #333333;
+}
+#wrapper.fans-page .fans {
+	position: relative;
+	margin: 0 22px;
+	padding: 10px 15px;
+	background-color: #fff;
+}
+#wrapper.fans-page .fans.odd {
+	border: 1px solid #F4F1F1;
+	border-width: 1px 0;
+	background-color: #F9F9F9;
+}
+#wrapper.fans-page .fans:hover {
+	/* background-color: #FbFbFb; */
+}
+#wrapper.fans-page .fans .avatar {
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+}
+#wrapper.fans-page .fans .avatar img {
+	display: block;
+	width: 50px;
+	height: 50px;
+}
+#wrapper.fans-page .fans .card {
+	left: 21px;
+	bottom: 52px;
+	clear: none;
+}
+#wrapper.fans-page .fans .card.first {
+	bottom: 44px;
+	_bottom: 14px;
+	_left: 40px;
+}
+#wrapper.fans-page .fans .name {
+	float: left;
+	width: 225px;
+	padding-left: 18px;
+	font-size: 14px;
+	color: #555555;
+	background: url(../images/myshow/head_user.png) no-repeat 0 50%;
+}
+#wrapper.fans-page .fans .card .name {
+	width: 195px;
+}
+#wrapper.fans-page .fans .name.girl {
+	background-image: url(../images/myshow/head_user.png);
+}
+#wrapper.fans-page .fans .name.boy {
+	background-image: url(../images/myshow/head_boy.png);
+}
+#wrapper.fans-page .fans .action {
+	float: left;
+	display: inline;
+	width: 80px;
+	margin-top: 8px;
+}
+#wrapper.fans-page .fans .action .fbtn {
+	display: block;
+	width: 80px;
+	height: 35px;
+	line-height: 33px;
+	text-align: center;
+	font-weight: bold;
+	color: #666666;
+	background: url(../images/myshow/btn_fbtn.png) no-repeat 50% 50%;
+	background: url(../images/myshow/btn_fbtn.gif) no-repeat 50% 50%\9;/* 为了那操蛋的 IE，IE7+ 某些情况下半透明有问题 */
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#wrapper.fans-page .fans .action .fbtn.dbfollowed {
+	text-indent: -9999px;
+	background-image: url(../images/myshow/icon_folled.png);
+}
+#wrapper.fans-page .fans .action .fbtn.dbfollowed:hover {
+	text-indent: 0;
+	background-image: url(../images/myshow/btn_fbtn.png);
+	background-image: url(../images/myshow/btn_fbtn.gif)\9;
+}
+#wrapper.fans-page .fans .action .fbtn span {
+	display: block;
+	text-indent: 18px;
+	background: url(../images/myshow/icon_follow_user_light.png) no-repeat 12px 50%;
+}
+#wrapper.fans-page .fans .action .fbtn:hover {
+	opacity: 0.93;
+	filter: alpha(opacity=93);
+}
+#wrapper.fans-page .fans .hot-pins {
+	float: right;
+	width: 275px;
+	overflow: hidden;
+}
+#wrapper.fans-page .fans .hot-pins a {
+	float: right;
+	display: inline;
+	margin-left: 5px;
+	width: 50px;
+	height: 50px;
+}
+#wrapper.fans-page .fans .hot-pins a img {
+	display: block;
+	width: 50px;
+	height: 50px;
+}
+#wrapper.fans-page .load-more {
+	display: block;
+	margin: 15px 22px 0;
+	height: 38px;
+	line-height: 38px;
+	border: 1px solid #BABABA;
+	border-radius: 4px;
+	font-size: 15px;
+	font-weight: bold;
+	color: #555555;
+	text-align: center;
+	background-color: #F9F9F9;
+}
+#wrapper.fans-page .load-more:hover {
+	color: #444;
+	background-color: #fbfbfb;
+}
+
+/* 达人栏目
+---------------------------------------------- */
+#navbar.daren {
+	margin-bottom: 15px;
+}
+#navbar.daren a {
+	height: 28px;
+	line-height: 28px;
+	padding: 0 15px;
+}
+#wrapper.daren {
+	margin-top: 15px;
+}
+#wrapper.daren .daren-box {
+	margin-bottom: 12px;
+	border: 1px solid #D2D2D2;
+	border-radius: 3px;
+	background-color: #fff;
+}
+#wrapper.daren .daren-box .info {
+	float: left;
+	display: inline;
+	width: 160px;
+	margin: 50px 0 15px 55px;
+}
+#wrapper.daren .daren-box .info .avatar {
+	float: left;
+	margin-right: 10px;
+}
+#wrapper.daren .daren-box .info .name {
+	float: left;
+	clear: left;
+	width: 70px;
+	/* height: 14px; */
+	line-height: 14px;
+	/* overflow: hidden; */
+	font-weight: bold;
+	color: #555555;
+	text-indent: 14px;
+	word-wrap: break-word;
+	background: url(../images/myshow/head_user.png) no-repeat 0 0;
+	*margin-top: 4px;
+	*line-height: 16px;
+}
+#wrapper.daren .daren-box .info .name.girl {
+	background-image: url(../images/myshow/head_user.png);
+}
+#wrapper.daren .daren-box .info .name.boy {
+	background-image: url(../images/myshow/head_boy.png);
+}
+#wrapper.daren .daren-box .info .stats {
+	margin-left: 80px;
+}
+#wrapper.daren .daren-box .info .stats li {
+	margin-bottom: 5px;
+	color: #999999;
+}
+#wrapper.daren .daren-box .info .stats strong {
+	padding-left: 28px;
+	font-size: 14px;
+	color: #E75A5A;
+	background: url(../images/myshow/icon_ingot.png) no-repeat 0 50%;
+}
+#wrapper.daren .daren-box .info .stats em {
+	color: #E75A5A;
+}
+#wrapper.daren .daren-box .info .actions {
+	clear: both;
+	padding-top: 10px;
+	overflow: hidden;
+	*zoom: 1;
+	*padding-bottom: 10px;
+}
+#wrapper.daren .daren-box .info .actions a {
+	float: left;
+	width: 70px;
+	height: 24px;
+	line-height: 24px;
+	margin-right: 7px;
+	border: 1px solid #BBBBBB;
+	border-radius: 3px;
+	color: #000000;
+	text-align: center;
+	background: url(../images/myshow/bg_btn_silver.png) repeat-x 0 0;
+}
+#wrapper.daren .daren-box .info .actions a span {
+	display: block;
+	text-indent: 20px;
+}
+#wrapper.daren .daren-box .info .actions a.follow span {
+	text-indent: 14px;
+	background: url(../images/myshow/icon_follow_user_hover.png) no-repeat 7px 45%;
+}
+#wrapper.daren .daren-box .info .actions a.send-letter span {
+	background: url(../images/myshow/icon_send_msg_hover.png) no-repeat 7px 50%;
+}
+#wrapper.daren .daren-box .pin-list {
+	float: right;
+	display: inline;
+	width: 680px;
+	margin: 15px 15px 11px;
+}
+#wrapper.daren .daren-box .pin-list li {
+	float: left;
+	display: inline;
+	width: 80px;
+	height: 80px;
+	margin: 0 0 4px 4px;
+}
+#wrapper.daren .daren-box .pin-list li.big {
+	width: 164px;
+	height: 164px;
+	margin-right: 4px;
+}
+#wrapper.daren .daren-box .pin-list li img {
+	display: block;
+}
+
+/* 专辑页详细页
+---------------------------------------------- */
+#canvas.user-album .album-meta {
+	right: auto;
+}
+#canvas.user-album .follower-list a {
+	display: inline-block;
+	margin: 0 5px 5px 0;
+	opacity: 0.93;
+	filter: alpha(opacity=93);
+}
+#canvas.user-album .follower-list img {
+	width: 30px;
+	height: 30px;
+	vertical-align: bottom;
+}
+#canvas.user-album .follower-list a:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#canvas.user-album .add-comment {
+	margin-top: 10px;
+}
+#canvas.user-album .add-comment textarea {
+	width: 200px;
+	height: 70px;
+	padding: 4px;
+	border: 1px solid #E8E8E8;
+	border-radius: 3px;
+	resize: vertical;
+	color: #bbb;
+}
+#canvas.user-album .add-comment textarea:focus {
+	color: #444;
+}
+#canvas.user-album .add-comment label {
+	top: 5px;
+}
+#canvas.user-album .add-comment .face {
+	float: left;
+	margin-top: 5px;
+	padding-left: 25px;
+	height: 21px;
+	line-height: 21px;
+	color: #BABABA;
+	background: url(../images/myshow/icon_face_white.png) no-repeat 0 50%;
+}
+#canvas.user-album .add-comment button {
+	float: right;
+	margin-top: 5px;
+	width: 56px;
+	height: 25px;
+	border: none;
+	text-indent: -9999px;
+	background: url(../images/myshow/btn_comment.png) no-repeat 0 0;
+}
+#canvas.user-album .comments {
+	margin-top: 20px;
+}
+#canvas.user-album .comments h4 {
+	padding: 0 3px;
+	text-align: right;
+	color: #BBBBBB;
+	font-weight: normal;
+}
+#canvas.user-album .comments .comment-list {
+	border: 1px solid #E8E8E8;
+	border-radius: 3px;
+	background-color: #F7F7F7;
+}
+#canvas.user-album .comments .comment-item {
+	margin: 0 7px;
+	padding: 15px 0 10px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #EBEBEB;
+	*zoom: 1;
+	_width: 190px;
+	_position: relative;
+	_left: 7px;
+	_margin: 0;/* 操蛋的 IE6 */
+}
+#canvas.user-album .comments .comment-item .avatar {
+	float: left;
+	width: 30px;
+	height: 30px;
+}
+#canvas.user-album .comments .comment-item .avatar img {
+	display: block;
+	width: 30px;
+	height: 30px;
+}
+#canvas.user-album .comments .comment-item .comment {
+	margin-left: 35px;
+	color: #666666;
+	*zoom: 1;
+}
+#canvas.user-album .comments .comment-item .user {
+	color: #BBBBBB;
+}
+#canvas.user-album .comments .comment-item .user .name {
+	color: #EA5265;
+}
+#canvas.user-album .comments .comment-item .user .name:hover {
+	text-decoration: underline;
+}
+#canvas.user-album .comments .comment-item .time {
+	display: block;
+	margin-top: 4px;
+	color: #BBBBBB;
+}
+#canvas.user-album .comments .comment {
+	position: relative;
+}
+#canvas.user-album .comments .comment .del {
+	display: none;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: #EA5265;
+}
+#canvas.user-album .comments .comment .del:hover {
+	text-decoration: underline;
+}
+#canvas.user-album .comments .comment:hover .del,
+#canvas.user-album .comments .comment.hover .del {
+	display: block;
+}
+#canvas.user-album .comments .comment-pager {
+	float: right;
+	padding: 10px 0;
+}
+#canvas.user-album .comments .comment-pager li {
+	float: left;
+	margin-left: 3px;
+}
+#canvas.user-album .comments .comment-pager li a,
+#canvas.user-album .comments .comment-pager li span {
+	display: block;
+	height: 16px;
+	line-height: 16px;
+	padding: 0 3px;
+	border: 1px solid #999999;
+	background-color: #fff;
+	font-size: 12px;
+	color: #666666;
+}
+#canvas.user-album .comments .comment-pager li.current span,
+#canvas.user-album .comments .comment-pager li.ellipsis span {
+	border-color: transparent;
+	background: none;
+	color: #000;
+}
+#canvas.user-album .comments .comment-pager li.ellipsis span {
+	padding: 0;
+}
+#canvas.user-album .comments .comment-pager li.prev {
+	margin-left: 0;
+}
+#canvas.user-album .comments .comment-pager li.disabled {
+	display: none;
+}
+#canvas.user-album .comments .comment-pager li a:hover {
+	color: #444;
+	background-color: #efefef;
+}
+
+/* 详细页-上传的分享
+---------------------------------------------- */
+/* aside */
+#aside {
+	float: left;
+	width: 220px;
+	margin-right: 8px;
+	border: 1px solid #D2D2D2;
+	border-radius: 2px;
+	background: #fff url(../images/myshow/bg_aside_show.png) repeat-x 0 4px;
+}
+#aside .album {
+	position: relative;
+	margin: 25px 0 20px;
+}
+#aside .album h5 {
+	margin: 0 15px;
+	padding-bottom: 3px;
+	border-bottom: 1px dashed #E6E6E6;
+	font-size: 14px;
+	color: #666666;
+	font-weight: normal;
+}
+#aside .album h3 {
+	margin: 12px 15px 0;
+	text-align: center;
+	color: #444444;
+	font-size: 16px;
+}
+#aside .album .pin-position {
+	position: absolute;
+	right: 15px;
+	display: block;
+	height: 16px;
+	margin-top: -16px;
+	font: 12px sans-serif;
+}
+#aside .album .pin-position em {
+	color: #ED4F5B;
+}
+#aside .album a.link {
+	display: block;
+	margin: 10px 0 10px 15px;
+	height: 191px;
+	overflow: hidden;
+	*zoom: 1;
+	background: url(../images/myshow/bg_album_link.png) no-repeat 0 0;
+}
+#aside .album a.link img {
+	float: left;
+	width: 61px;
+	height: 61px;
+	margin: 0 4px 4px 0;
+}
+#aside .album .btn {
+	display: block;
+	margin: 0 auto;
+	width: 158px;
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid #CFCFCF;
+	border-radius: 3px;
+	color: #999999;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	background: url(../images/myshow/bg_btn_aside.png) repeat-x 0 0;
+}
+#aside .album .btn:hover {
+	color: #666;
+}
+#aside .domain-pins {
+	padding: 30px 15px 10px;
+	background: url(../images/myshow/bg_domain_pins.png) no-repeat 0 0;
+}
+#aside .domain-pins h3 {
+	margin-bottom: 10px;
+}
+
+/* main */
+#main {
+	float: left;
+	width: 730px;
+	/* width: 618px; */
+	/* margin-right: 8px; */
+}
+#main .pin-show,
+#main .ta {
+	margin-bottom: 8px;
+	padding: 15px 20px;
+	border: 1px solid #D2D2D2;
+	background-color: #fff;
+}
+#main .pin-show .pinner {
+	margin-bottom: 15px;
+}
+#main .pin-show .pinner .pinner-photo {
+	float: left;
+	width: 52px;
+	border: 1px solid #ccc;
+	padding: 3px;
+	margin-right: 10px;
+}
+#main .pin-show .pinner .pinner-photo img {
+	display: block;
+	width: 52px;
+	height: 52px;
+}
+#main .pin-show .pinner .pinner-name {
+	float: left;
+	width: 50%;
+	/* wmargin-bottom: 5px; */
+}
+#main .pin-show .pinner .pinner-name a {
+	font-size: 14px;
+	font-weight: bold;
+	color: #ED4F5B;
+}
+#main .pin-show .pinner .pinner-name a:hover {
+	text-decoration: underline;
+}
+#main .pin-show .pinner .pinner-from {
+	float: left;
+	width: 50%;
+	font-size: 14px;
+	color: #666666;
+}
+#main .pin-show .pinner .pinner-from a {
+	font-weight: bold;
+	color: #524D4D;
+}
+#main .pin-show .pinner .pinner-from a:hover {
+	text-decoration: underline;
+}
+#main .pin-show .pinner .pinner-date {
+	float: right;
+	color: #999;
+}
+
+/* 滚动图 */
+#main .jcarousel-container {
+	margin: 15px 0;
+	width: 642px;
+}
+#main .jcarousel-clip-horizontal {
+	width: 636px;
+}
+
+#main .pin-show .pin-actions {
+	margin: 15px 0;
+}
+#main .pin-show .pin-actions .pin-type {
+	float: right;
+	color: #959595;
+	height: 26px;
+	line-height: 26px;
+}
+#main .pin-show .pin-actions .pin-buttons {
+	float: left;
+}
+#main .pin-show .pin-actions .pin-buttons .btn {
+	position: relative;
+	float: left;
+	margin-right: 7px;
+	border: 1px solid #CFCFCF;
+	border-radius: 3px;
+	background: url(../images/myshow/bg_btn_aside.png) repeat-x 0 0;
+	_float: none;
+	_display: inline;
+	*zoom: 1;
+}
+#main .pin-show .pin-actions .pin-buttons .btn a {
+	display: block;
+	padding: 0 10px 0 28px;
+	height: 26px;
+	line-height: 26px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #444;
+	_display: inline-block;
+}
+#main .pin-show .pin-actions .pin-buttons .btn .tip-like {
+	left: 0;
+	bottom: 30px;
+}
+#main .pin-show .pin-actions .pin-buttons .edit a, #main .pin-show .pin-actions .pin-buttons .del a {
+	padding: 0 10px;
+	background: url(../images/myshow/bg_btn_silver.png) repeat-x 0 0;
+}
+#main .pin-show .pin-actions .pin-buttons .repin a {
+	background: url(../images/myshow/icon_btn_repin.png) no-repeat 8px 50%;
+}
+#main .pin-show .pin-actions .pin-buttons .like a {
+	background: url(../images/myshow/icon_btn_like.png) no-repeat 8px 50%;
+	_background-image: url(../images/myshow/icon_btn_like.gif);
+}
+#main .pin-show .pin-actions .pin-buttons .btn a:hover {
+	color: #666;
+}
+#main .pin-show .pin-img {
+	position: relative;
+	text-align: center;
+	overflow: hidden;
+}
+#main .pin-show .pin-img .img-link {
+	display: block;
+}
+#main .pin-show .pin-img img {
+	display: block;
+	margin: 0 auto;
+	max-width: 576px;
+	_width: expression(document.body.clientWidth > 575 ? '576px' : 'auto');
+}
+#main .pin-show .pin-img .zoom-view {
+	position: absolute;
+	z-index: 2;
+	top: -50px;
+	right: -50px;
+	display: block;
+	width: 32px;
+	height: 32px;
+	background: url(../images/myshow/zoom_view.png) no-repeat 0 0;
+	_background: url(../images/myshow/zoom_view_ie6.png) no-repeat 0 0;
+	cursor: pointer;
+}
+#main .pin-show .pin-img:hover .zoom-view {
+	/* right: 0; */
+	/* top: 0; */
+	background-position: 0 -32px;
+}
+#main .pin-show .pin-img .zoom-view:hover {
+	background-position: 0 -64px;
+}
+#main .pin-show .tags {
+	margin-top: 10px;
+	text-align: right;
+	color: #959595;
+}
+#main .pin-show .tags a {
+	margin: 0 2px;
+}
+#main .pin-show .tags .tag-title {
+	padding-left: 17px;
+	background: url(../images/myshow/icon_default_tag.png) no-repeat 0 50%;
+}
+#main .pin-show .desc {
+	margin-top: 10px;
+	font-size: 14px;
+	color: #666666;
+	word-wrap: break-word;
+}
+#main .pin-show .stats {
+	margin-top: 30px;
+	text-align: right;
+	color: #666666;
+}
+#main .pin-show .stats span {
+	margin: 0 2px;
+}
+#main .pin-show .stats a {
+	margin-right: 5px;
+	color: #444;
+}
+#main .pin-show .stats a:hover {
+	text-decoration: underline;
+}
+#main .pin-show .stats em {
+	color: #ED4F5B;
+}
+
+/* 上/下一个分享 */
+#main .pin-show .pin-cnt {
+	*zoom: 1;
+}
+#main .pin-show .pin-nav-btn {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+	left: 0;
+	width: 30px;
+	height: 69px;
+	margin-top: -35px;
+	text-indent: -9999px;
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+	background: url(../images/myshow/pin-nav-btn.png) no-repeat 0 0;
+}
+#main .pin-show .pin-cnt:hover .pin-nav-btn,
+#main .pin-show .hover .pin-nav-btn {
+	display: block;
+}
+#main .pin-show .pin-nav-btn-next {
+	top: 50%;
+	left: auto;
+	right: 0;
+	background-position: 100% 0;
+}
+#main .pin-show .pin-nav-btn:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+#main .pin-comments {
+	background-color: #fff;
+}
+#main .pin-comments .add-comment {
+	padding: 15px 20px;
+	background-color: #fff;
+	border: 1px solid #D2D2D2;
+	border-bottom: none;
+	border-radius: 3px 3px 0 0;
+}
+#main .pin-comments .add-comment .pin-input {
+	margin: 15px 0 10px;
+	overflow: hidden;
+	*zoom: 1;
+}
+#main .pin-comments .add-comment .pin-input .img {
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin-right: 8px;
+}
+#main .pin-comments .add-comment .pin-input .input-container {
+	float: left;
+	/* width: 518px; */
+	width: 630px;
+}
+#main .pin-comments .add-comment .pin-input .input-container textarea {
+	width: 620px;
+	/* width: 508px; */
+	height: 42px;
+	padding: 4px;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	font-size: 14px;
+	color: #BCBCBC;
+	background: url(../images/myshow/bg_input.png) repeat-x 0 0;
+	_color: #444;
+}
+#main .pin-comments .add-comment .pin-input .input-container textarea:focus {
+	color: #444;
+}
+#main .pin-comments .add-comment .pin-input .input-container label {
+	top: 7px;
+}
+#main .pin-comments .add-comment .add-comment-controls {
+	clear: both;
+	margin-left: 58px;
+	padding-top: 7px;
+	overflow: hidden;
+	*zoom: 1;
+}
+#main .pin-comments .add-comment .comment-face {
+	float: left;
+	padding-left: 26px;
+	height: 21px;
+	line-height: 21px;
+	color: #666666;
+	background: url(../images/myshow/icon_face.png) no-repeat 0 50%;
+}
+#main .pin-comments .add-comment .sbtn {
+	float: right;
+	margin-left: 15px;
+}
+#main .pin-comments .add-comment .sync_to_weibo {
+	float: right;
+	height: 34px;
+	line-height: 34px;
+}
+#main .pin-comments .add-comment .sync_to_weibo input {
+	margin-right: 4px;
+	vertical-align: middle;
+}
+#main .pin-comments .add-comment .sync_to_weibo label {
+	color: #666666;
+}
+#main .pin-comments .comment-list {
+	padding: 10px 20px;
+	border: 1px solid #D2D2D2;
+	border-top: none;
+	border-radius: 0 0 3px 3px;
+	background-color: #fff;
+	*margin-top: -10px;
+}
+#main .pin-comments .comment-item {
+	padding: 12px 0;
+	border-top: 1px dashed #EEEEEE;
+}
+#main .pin-comments .comment-item:first-child {
+	border: none;
+}
+#main .pin-comments .comment-item .img {
+	margin-right: 10px;
+	width: 32px;
+	height: 32px;
+}
+#main .pin-comments .comment-item .img img {
+	display: block;
+}
+#main .pin-comments .comment-item .meta {
+	width: 55%;
+}
+#main .pin-comments .comment-item .meta .author {
+	display: block;
+	font-weight: bold;
+	color: #ED4F5B;
+	line-height: 1em;
+	margin-bottom: 5px;
+	*padding-top: 1px;
+}
+#main .pin-comments .comment-item .meta .text {
+	display: block;
+	color: #666666;
+	word-wrap: break-word;
+}
+#main .pin-comments .comment-item .meta .text a {
+	color: #ED4F5B;
+}
+#main .pin-comments .comment-item a:hover {
+	text-decoration: underline;
+}
+#main .pin-comments .comment-item .stats {
+	width: 30%;
+	color: #959595;
+	line-height: 1em;
+	margin-bottom: 5px;
+	text-align: right;
+}
+#main .pin-comments .comment-item .stats .time {
+}
+#main .pin-comments .comment-item .actions {
+	width: 20%;
+	clear: right;
+	color: #666666;
+	text-align: right;
+}
+#main .pin-comments .comment-item .actions a {
+	margin: 0 4px;
+	color: #666666;
+}
+#main .pin-comments .comment-item .actions a.del {
+	margin-right: 0;
+}
+#main .pin-comments .comment-pager {
+	float: right;
+	padding: 15px 0;
+}
+#main .pin-comments .comment-pager li {
+	float: left;
+	margin-left: 4px;
+}
+#main .pin-comments .comment-pager li a,
+#main .pin-comments .comment-pager li span {
+	display: block;
+	padding: 1px 5px;
+	border: 1px solid #999999;
+	background-color: #fff;
+	font-size: 12px;
+	color: #666666;
+}
+#main .pin-comments .comment-pager li.current span,
+#main .pin-comments .comment-pager li.ellipsis span {
+	border-color: transparent;
+	background: none;
+	color: #000;
+}
+#main .pin-comments .comment-pager li.ellipsis span {
+	padding: 0;
+}
+#main .pin-comments .comment-pager li.disabled {
+	display: none;
+}
+#main .pin-comments .comment-pager li a:hover {
+	color: #444;
+	background-color: #efefef;
+}
+#main .ta .title {
+	width: 80%;
+	font-size: 14px;
+	color: #444444;
+}
+#main .ta .title span {
+	margin-left: 4px;
+	font-weight: normal;
+	color: #959595;
+	font-size: 12px;
+}
+#main .ta .view-all {
+	float: right;
+	color: #ED4F5B;
+}
+#main .ta-like .ta-list {
+	clear: both;
+	overflow: hidden;
+	*zoom: 1;
+}
+#main .ta-like .ta-item {
+	float: left;
+	margin: 12px 8px 0 0;
+}
+#main .ta-like .ta-item img {
+	display: block;
+}
+#main .ta-like .ta-item a:hover {
+	opacity: 0.88;
+	filter: alpha(opacity=88);
+}
+#main .ta-repin .repin-list li {
+	margin-top: 10px;
+	overflow: hidden;
+	*zoom: 1;
+}
+#main .ta-repin .repin-list .photo {
+	float: left;
+	width: 50px;
+	margin-right: 10px;
+}
+#main .ta-repin .repin-list img {
+	display: block;
+	width: 50px;
+	height: 50px;
+}
+#main .ta-repin .repin-list .meta {
+	float: left;
+	width: 260px;
+}
+#main .ta-repin .repin-list .meta .author {
+	font-size: 14px;
+	color: #444;
+}
+#main .ta-repin .repin-list .meta .name {
+	margin-right: 4px;
+	color: #ED4F5B;
+	font-weight: bold;
+}
+#main .ta-repin .repin-list .meta .album {
+	text-decoration: underline;
+	color: #444444;
+}
+#main .ta-repin .repin-list .meta .album:hover {
+	text-decoration: none;
+}
+#main .ta-repin .repin-list .meta .text a {
+	margin: 0 2px;
+	color: #999999;
+}
+#main .ta-repin .repin-list .meta .text a:hover {
+	text-decoration: underline;
+}
+#main .ta-repin .repin-list .share {
+	float: right;
+}
+#main .ta-repin .repin-list .share .img {
+	float: left;
+	display: inline;
+	margin-left: 8px;
+}
+#main .ta-repin .repin-list .share .share-bbtn {
+	float: left;
+	margin-left: 8px;
+}
+
+/* pin-toolbar */
+#pin-toolbar {
+	display: none;
+	position: fixed;
+	top: 188px;
+	left: 50%;
+	margin-left: 376px;
+	width: 104px;
+	_position: absolute;
+	_left: expression(-documentElement.scrollLeft+376);
+	_margin-left: 50%;
+	_top: expression(documentElement.scrollTop+88);
+}
+#pin-toolbar .pin-nav {
+	overflow: hidden;
+	*zoom: 1;
+}
+#pin-toolbar .pin-nav a {
+	float: left;
+	margin-right: 7px;
+	height: 24px;
+	opacity: 0.70;
+	filter: alpha(opacity=70);
+}
+#pin-toolbar .pin-nav a.prev {
+	width: 22px;
+	background: url(../images/myshow/btn_pin_prev.png) no-repeat 0 50%;
+}
+#pin-toolbar .pin-nav a.album {
+	width: 26px;
+	background: url(../images/myshow/btn_pin_album.png) no-repeat 0 50%;
+}
+#pin-toolbar .pin-nav a.next {
+	width: 34px;
+	background: url(../images/myshow/btn_pin_next.png) no-repeat 0 50%;
+}
+#pin-toolbar .pin-nav a:hover {
+	float: left;
+	margin-right: 7px;
+	height: 24px;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#pin-toolbar .pin-nav a.disabled {
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+#pin-toolbar .share .title {
+	margin: 20px 0 5px;
+	font-size: 14px;
+	color: #666666;
+	font-weight: normal;
+}
+#pin-toolbar .share .share-button {
+	width: 60px;
+	height: 22px;
+	line-height: 22px;
+	margin-top: 5px;
+	background: url(../images/myshow/btn_share_pin.png) no-repeat 0 0;
+}
+#pin-toolbar .share .douban {
+	background-position: 0 -44px;
+}
+#pin-toolbar .share .qzone {
+	background-position: 0 -88px;
+}
+#pin-toolbar .share .weibo:hover {
+	background-position: 0 -22px;
+}
+#pin-toolbar .share .douban:hover {
+	background-position: 0 -66px;
+}
+#pin-toolbar .share .qzone:hover {
+	background-position: 0 -110px;
+}
+#pin-toolbar .share .share-button span {
+	display: block;
+	padding-left: 25px;
+	font-size: 14px;
+	color: #666666;
+	cursor: pointer;
+}
+#pin-toolbar .share .share-button span:hover,
+#pin-toolbar .share .share-button.hover span {
+	color: #444;
+}
+
+/* 商品详细页 */
+#main .pin-show .pin-goods {
+	position: relative;
+	margin-top: 30px;
+}
+#main .pin-show .pin-goods .goods-img {
+	float: left;
+	width: 278px;
+	min-height: 250px;
+	margin-right: 36px;
+	padding: 5px;
+	border: 1px solid #CBCBCB;
+}
+#main .pin-show .pin-goods .goods-img img {
+	display: block;
+	margin: 0 auto;
+	max-width: 278px;
+	_width: expression(document.body.clientWidth > 277 ? '278px' : 'auto');
+}
+#main .pin-show .pin-goods .goods-title,
+#main .pin-show .pin-goods .buy-btn,
+#main .pin-show .pin-goods .pin-actions,
+#main .pin-show .pin-goods .tags {
+	float: left;
+	width: 250px;
+}
+#main .pin-show .pin-goods .pin-actions {/* 操蛋的 IE6 重复字符 BUG */
+	_width: 247px;
+}
+#main .pin-show .pin-goods .goods-title {
+	margin: 30px 0 25px;
+	font-size: 14px;
+	line-height: 1.6em;
+	color: #666666;
+}
+#main .pin-show .pin-goods .buy-btn {
+	/* width: 182px; */
+	width: 210px;
+	height: 45px;
+	line-height: 44px;
+	/* background: url(../images/myshow/btn_buy.png) no-repeat 0 0; */
+	background: url(../images/myshow/btn_buy_wide.png) no-repeat 0 0;
+	cursor: pointer;
+}
+#main .pin-show .pin-goods .buy-btn .price {
+	display: inline-block;
+	padding-left: 5px;
+	width: 90px;
+	text-align: center;
+	color: #fff;
+	font: bold 14px '微软雅黑','宋体',arial;
+	vertical-align: middle;
+	word-wrap: break-word;
+}
+#main .pin-show .pin-goods .buy-btn .price-img {
+	vertical-align: middle;
+}
+#main .pin-show .pin-goods .buy-btn .price-img img {
+	height: 22px;
+	max-width: 82px;
+	_width: expression(document.body.clienWidth > 81 ? '82px' : 'auto');
+}
+#main .pin-show .pin-goods .pin-actions {
+	margin: 10px 0;
+}
+#main .pin-show .pin-goods .pin-actions .btn a {
+	color: #ED4F5B;
+}
+#main .pin-show .pin-goods .pin-actions .btn a span {
+	color: #666;
+}
+#main .pin-show .pin-goods .tags {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	text-align: left;
+}
+#main .pin-show .pin-goods .tag-title {
+	padding-left: 21px;
+	background-image: url(../images/myshow/icon_tag_cart.png);
+}
+#main.goods .pin-show .desc {
+	margin-top: 35px;
+	line-height: 1.6;
+	text-indent: 2em;
+}
+
+/* 查看大图页
+---------------------------------------------- */
+#zoomer {
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: auto;
+	background-color: #222;
+}
+#zoomer .body {
+	position: absolute;
+	left: 0;
+	right: 265px;
+	top: 0;
+	bottom: 88px;
+	overflow: hidden;
+	border-right: 1px solid #181818;
+	background: #3F3F3F url(../images/myshow/bg_zoomer_body.png) repeat 0 0;
+}
+#zoomer .body img {
+	position: absolute;
+	top: 25px;
+	left: 20px;
+	display: block;
+	box-shadow: 0 0 25px rgba(25, 25, 25, 0.9);
+	cursor: url(/statics/images/myshow/cur_hand.cur), move;
+	cursor: url(/statics/images/myshow/cur_hand2.cur), move\9;
+}
+#zoomer .body img.ondrag {
+	/* cursor: url(/statics/images/myshow/cur_grab.cur) 6 8, move; *//* Firefox中鼠标的路径必须使用绝对路径 */
+	cursor: url(/statics/images/myshow/cur_grab.cur), move;
+	cursor: url(/statics/images/myshow/cur_grab2.cur), move\9;
+}
+#zoomer-hide, #zoomer-share {
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: block;
+	width: 55px;
+	height: 50px;
+	background: url(../images/myshow/bg_zoomer_hide.png) no-repeat 0 0;
+	_background-image: url(../images/myshow/bg_zoomer_hide.gif);
+	opacity: 0.35;
+	filter: alpha(opacity=35);
+}
+#zoomer-share {
+	top: auto;
+	bottom: 0;
+	width: 74px;
+	height: 74px;
+	background-image: url(../images/myshow/bg_zoomer_share.png);
+	*background-image: url(../images/myshow/bg_zoomer_share.gif);
+}
+#zoomer-hide:hover, #zoomer-share:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#zoomer .aside {
+	position: absolute;
+	top: 0;
+	bottom: 88px;
+	right: 0;
+	width: 244px;
+	padding: 10px;
+	overflow: auto;
+	border-left: 1px solid #2A2A2A;
+	color: #828282;
+	background-color: #181818;
+}
+#zoomer .aside .hr {
+	padding: 12px 4px;
+	border-top: 1px solid #1C1C1C;
+	border-bottom: 1px solid #0C0C0C;
+}
+#zoomer .aside .pinner {
+	border-top: none;
+	padding-bottom: 15px;
+}
+#zoomer .aside .pinner .avatar {
+	float: left;
+	margin-right: 10px;
+	width: 40px;
+	height: 40px;
+}
+#zoomer .aside .pinner .avatar img {
+	display: block;
+	width: 40px;
+	height: 40px;
+}
+#zoomer .aside .pinner .name {
+	float: left;
+	width: 168px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #EA5265;
+}
+#zoomer .aside .pinner .name a {
+	color: #EA5265;
+}
+#zoomer .aside .pinner p {
+	float: left;
+	width: 168px;
+}
+#zoomer .aside .desc .edit {
+	display: inline-block;
+	margin-left: 7px;
+	width: 10px;
+	height: 10px;
+	background: url(../images/myshow/icon_edit_black.png) no-repeat 0 0;
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+}
+#zoomer .aside .desc .edit:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#zoomer .aside .repin, #zoomer .aside .like, #zoomer .comment .title {
+	padding-left: 25px;
+	background: url(../images/myshow/icon_repin_black.png) no-repeat 4px 50%;
+}
+#zoomer .aside .repin {
+	background-image: url(../images/myshow/icon_repin_black.png);
+}
+#zoomer .aside .like {
+	background-image: url(../images/myshow/icon_like_black.png);
+}
+#zoomer .comment .title {
+	margin-bottom: 12px;
+	background-image: url(../images/myshow/icon_comment_black.png);
+	background-position: 0 50%;
+}
+#zoomer .comment .comment-list {
+	margin: 10px 0 20px;
+}
+#zoomer .comment .comment-list li {
+	margin-bottom: 15px;
+	padding-bottom: 10px;
+	border-bottom: 1px dashed #202020;
+	overflow: hidden;
+	*zoom: 1;
+}
+#zoomer .comment .comment-list li .avatar {
+	float: left;
+	width: 30px;
+	height: 30px;
+}
+#zoomer .comment .comment-list li .avatar img {
+	display: block;
+	/* width: 100%; *//* 谷歌中放大后有操蛋的问题 */
+	/* height: 100%; */
+}
+#zoomer .comment .comment-list li p {
+	margin-left: 37px;
+}
+#zoomer .comment .comment-list li p a {
+	margin-right: 4px;
+	color: #963B46;
+}
+#zoomer .comment .comment-list li p a:hover {
+	text-decoration: underline;
+}
+#zoomer .comment .comment-list li .meta {
+	margin: 6px 0 0 37px;
+	color: #4C4C4C;
+}
+#zoomer .comment .comment-list li .meta a {
+	margin-left: 6px;
+	color: #4C4C4C;
+}
+#zoomer .comment .comment-list li .meta a:hover {
+	color: #963B46;
+}
+#zoomer .comment .comment-list li .meta a:hover {
+	color: #963B46;
+}
+#zoomer .comment form {
+	margin: 20px 0;
+	overflow: hidden;
+	*zoom: 1;
+}
+#zoomer .comment form .avatar {
+	float: left;
+	margin-right: 5px;
+	width: 30px;
+	height: 30px;
+}
+#zoomer .comment form .avatar img {
+	display: block;
+	width: 30px;
+	height: 30px;
+}
+#zoomer .comment form textarea {
+	float: left;
+	width: 174px;
+	height: 50px;
+	min-height: 20px;
+	padding: 5px;
+	border: none;
+	border-radius: 3px;
+	background-color: #212121;
+	resize: vertical;
+	color: #666;
+}
+#zoomer .comment form textarea:focus {
+	color: #999;
+}
+#zoomer .comment form .face {
+	float: left;
+	display: inline;
+	width: 15px;
+	height: 15px;
+	margin: 4px 0 0 35px;
+	background: url(../images/myshow/icon_face_black.png) no-repeat 0 0;
+}
+#zoomer .comment form button {
+	float: right;
+	width: 52px;
+	padding: 2px 0;
+	margin-top: 12px;
+	border: none;
+	border-radius: 4px;
+	text-align: center;
+	font-weight: bold;
+	color: #fff;
+	background-color: #686868;
+}
+#zoomer .comment form button:hover {
+	color: #ddd;
+	cursor: pointer;
+}
+#zoomer .footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 58px;
+	padding: 30px 20px 0;
+	text-align: right;
+	font-size: 14px;
+	color: #999999
+	_left: auto;
+}
+#zoomer .footer strong {
+	margin-left: 10px;
+	font-size: 15px;
+}
+#zoomer .footer a {
+	color: #aaa;
+	font-size: 15px;
+}
+#zoomer .footer a.album {
+	color: #FFFFFF;
+}
+
+/* 账号设置页
+---------------------------------------------- */
+#wrapper.account-settings {
+
+}
+#wrapper.account-settings .title {
+	padding: 10px 0 20px;
+	border-bottom: 1px solid #e3e3e3;
+	font-size: 27px;
+	line-height: 1em;
+	color: #524D4D;
+}
+#wrapper.account-settings .accont-settings-form {
+	margin-top: 1px;
+	border-top: 1px solid #e3e3e3;
+}
+#wrapper.account-settings .accont-settings-form .form-item {
+	padding: 21px 0;
+	border-bottom: 1px solid #e4e4e4;
+}
+#wrapper.account-settings .accont-settings-form .labels {
+	display: inline-block;
+	width: 140px;
+	margin-right: 10px;
+	font-size: 16px;
+	color: #8C7E7E;
+}
+#wrapper.account-settings .accont-settings-form .avatar-labels {
+	vertical-align: top;
+}
+#wrapper.account-settings .accont-settings-form .input {
+	height: 34px;
+	line-height: 34px;
+	width: 320px;
+}
+#wrapper.account-settings .accont-settings-form textarea.input {
+	width: 518px;
+	height: 100px;
+	vertical-align: top;
+}
+#wrapper.account-settings .accont-settings-form .button {
+	margin: 0;
+	height: 36px;
+	line-height: 34px;
+	width: auto;
+	padding: 0 15px;
+	font-size: 14px;
+	color: #524D4D;
+	vertical-align: top;
+	background: url(../images/myshow/bg_btn.png) 0 1px;
+}
+#wrapper.account-settings .accont-settings-form a.button {
+	height: 34px;
+	vertical-align: middle;
+}
+#wrapper.account-settings .accont-settings-form .button:hover {
+	background: #fff;
+}
+#wrapper.account-settings .accont-settings-form .avatar {
+	display: inline-block;
+	margin-right: 20px;
+	width: 202px;
+	height: 202px;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+	vertical-align: top;
+}
+#wrapper.account-settings .accont-settings-form .avatar img {
+	display: block;
+	margin: 0 auto;
+	width: 202px;
+	height: 202px;
+}
+#wrapper.account-settings .accont-settings-form .button-wrapper {
+	display: inline-block;
+	background-color: #ccc;
+}
+#wrapper.account-settings .accont-settings-form .tips {
+	margin: 15px 0 0 150px;
+	color: #D60921;
+}
+#wrapper.account-settings .accont-settings-form .button-wrapper iframe {
+	margin: -8px 0 -5px -8px;
+}
+/*#wrapper.account-settings .accont-settings-form .button-wrapper .button {
+	margin-bottom: 20px;
+}*/
+#wrapper.account-settings .accont-settings-form .wibo-url {
+	display: inline-block;
+	margin-right: 8px;
+	height: 36px;
+	line-height: 36px;
+	font-size: 20px;
+	color: #222;
+	vertical-align: middle;
+}
+#wrapper.account-settings .accont-settings-form .submit {
+	margin-top: 1px;
+	border-top: 1px solid #e3e3e3;
+	border-bottom: none;
+	padding-left: 153px;
+}
+
+/* 私信通知页
+---------------------------------------------- */
+body.msg {
+	background: url(../images/myshow/bg_msg.png) 0 0;
+	color: #D1D1D1;
+}
+#wrapper.msg {
+	margin: 0;
+	width: auto;
+}
+#wrapper.msg .msg-header {
+	position: relative;
+	border-bottom: 1px solid #434343;
+}
+#wrapper.msg .msg-header h1 {
+	height: 63px;
+	border-bottom: 1px solid #2A2A2A;
+}
+#wrapper.msg .msg-header h1 a {
+	position: absolute;
+	left: 50%;
+	top: 12px;
+	display: block;
+	width: 90px;
+	height: 37px;
+	text-indent: -9999px;
+	margin-left: -480px;
+	background: url(../images/myshow/logo_msg.png) no-repeat 0 0;
+}
+#wrapper.msg .msg-body {
+	width: 960px;
+	margin: 12px auto 30px;
+}
+#wrapper.msg .msg-body .msg-nav .wrapper {
+	display: inline-block;
+	border-bottom: 1px solid #4C4C4C;
+	border-radius: 5px;
+	box-shadow: 1px 0 0 rgba(0, 0, 0, 0.2);
+}
+#wrapper.msg .msg-body .msg-nav a {
+	position: relative;
+	display: inline-block;
+	padding: 4px 23px;
+	color: #ccc;
+	border: 1px solid #2A2A2A;
+	font-size: 14px;
+	font-weight: normal;
+	border-radius: 5px 0 0 5px;
+	background-color: #3D3D3D;
+}
+#wrapper.msg .msg-body .msg-nav a.notice {
+	border-left: none;
+	border-radius: 0 5px 5px 0;
+}
+#wrapper.msg .msg-body .msg-nav a.current,
+#wrapper.msg .msg-body .msg-nav a:hover {
+	color: #d5d5d5;
+	background-color: #383838;
+}
+#wrapper.msg .msg-body .msg-nav a .arrow {
+	position: absolute;
+	left: 50%;
+	margin-left: -5px;
+	bottom: -1px;
+	display: none;
+	width: 10px;
+	height: 6px;
+	background: url(../images/myshow/arrow_bg_msg.png) no-repeat 0 0;
+	_overflow: hidden;
+}
+#wrapper.msg .msg-body .msg-nav a.current .arrow {
+	display: block;
+}
+#wrapper.msg .msg-body .msg-list {
+	margin-top: 12px;
+}
+#wrapper.msg .msg-body .msg-item {
+	margin-bottom: 11px;
+}
+#wrapper.msg .msg-body .msg-item .avatar {
+	float: left;
+	/* width: 55px; */
+}
+#wrapper.msg .msg-letter .msg-item > .avatar {
+	border: 6px solid #353535;
+	border-radius: 4px;
+}
+#wrapper.msg .msg-body .msg-item .avatar img {
+	display: block;
+}
+#wrapper.msg .msg-body .msg-box {
+	position: relative;
+	float: right;
+	width: 860px;
+	border-radius: 8px;
+	background-color: #474747;
+	wbackground: url(../images/) no-repeat 0 0;
+}
+/*#wrapper.msg .msg-body .msg-box:hover {
+	background-color: #535353;
+}*/
+#wrapper.msg .msg-notice .msg-box:hover {
+	background-color: #535353;
+}
+/* content */
+#wrapper.msg .msg-body .msg-box .content {
+	padding: 10px 0 10px 23px;
+}
+#wrapper.msg .msg-notice .msg-box .content {
+	padding-right: 37px;
+}
+#wrapper.msg .msg-body .msg-box .content a {
+	color: #eee;
+}
+#wrapper.msg .msg-body .msg-box .content a:hover {
+	text-decoration: underline;
+}
+#wrapper.msg .msg-body .msg-box .content .name {
+	color: #EA5265;
+}
+#wrapper.msg .msg-body .msg-box .content .detail {
+	font-size: 12px;
+}
+#wrapper.msg .msg-body .msg-box .content h2 {
+	font-weight: normal;
+}
+#wrapper.msg .msg-body .msg-box .content h2 .name {
+	margin-right: 10px;
+	font-size: 14px;
+}
+#wrapper.msg .msg-body .msg-box .content p {
+	margin-top: 12px;
+	line-height: 1.8;
+	font-size: 14px;
+	word-wrap: break-word;
+}
+#wrapper.msg .msg-letter .msg-box .content {
+	float: left;
+	width: 568px;
+}
+#wrapper.msg .msg-body .msg-box .related-pin {
+	float: right;
+	margin: 30px 37px 30px 0;
+	width: 60px;
+}
+#wrapper.msg .msg-body .msg-box .related-pin img {
+	display: block;
+	width: 60px;
+	height: 60px;
+}
+#wrapper.msg .msg-body .msg-box .related-album {
+	float: right;
+	display: inline;
+	width: 230px;
+	margin: 37px 37px 37px 0;
+	text-align: right;
+}
+#wrapper.msg .msg-body .msg-box .related-album a {
+	display: inline-block;
+	/* margin-left: 5px; */
+}
+#wrapper.msg .msg-body .msg-box .related-album a img {
+	vertical-align: bottom;
+	margin-left: 5px;
+}
+#wrapper.msg .msg-body .msg-box .related-album .share-hbtn {
+	margin-left: 5px;
+}
+
+/* content-list */
+#wrapper.msg .msg-body .msg-box .content-list {
+	clear: both;
+	margin: 0 5px;
+	border-top: 1px solid #404040;
+}
+#wrapper.msg .msg-body .msg-box .content-list .content-item {
+	position: relative;
+	padding: 10px 18px;
+	border-top: 1px solid #4B4B4B;
+	border-bottom: 1px solid #404040;
+}
+#wrapper.msg .msg-body .msg-box .content-item .content {
+	padding: 0 0 10px 25px;
+}
+#wrapper.msg .msg-body .msg-box .content-item .refer-form textarea {
+	width: 720px;
+	height: 50px;
+	padding: 5px;
+	border: 1px solid #505050;
+	border-radius: 4px;
+	background-color: #3B3B3B;
+	resize: vertical;
+	color: #eee;
+	font-size: 14px;
+}
+#wrapper.msg .msg-body .msg-box .content-item .refer-form button {
+	margin-top: 5px;
+	height: 28px;
+	line-height: 26px;
+	padding: 0 14px;
+	text-align: center;
+	border: 1px solid #585858;
+	border-radius: 4px;
+	color: #eee;
+	font-size: 14px;
+	font-weight: bold;
+	background-color: #777;
+	cursor: pointer;
+}
+#wrapper.msg .msg-body .msg-box .content-item .refer-form button.reset {
+	padding: 0 4px;
+	border: none;
+	font-weight: normal;
+	color: #ddd;
+	background: none;
+}
+#wrapper.msg .msg-body .msg-box .content-item .refer-form button.submit:hover {
+	color: #fff;
+	background-color: #7c7c7c;
+}
+#wrapper.msg .msg-body .msg-box .content-item .refer-form button.reset:hover {
+	text-decoration: underline;
+}
+
+/* action */
+#wrapper.msg .msg-body .msg-box .action,
+#wrapper.msg .msg-body .msg-box .action-drop {
+	position: absolute;
+	z-index: 1;
+	top: 10px;
+	right: 10px;
+}
+#wrapper.msg .msg-body .msg-box .action a {
+	display: block;
+	margin-left: 5px;
+	text-indent: -9999px;
+}
+#wrapper.msg .msg-body .msg-box .action .del {
+	width: 14px;
+	height: 15px;
+	background: url(../images/myshow/icon_del_msg.png) no-repeat 0 0;
+	_background-image: url(../images/myshow/icon_del_msg.gif);
+}
+#wrapper.msg .msg-body .msg-box .action .del:hover {
+	background-image: url(../images/myshow/icon_del_msg_hover.png);
+	_background-image: url(../images/myshow/icon_del_msg_hover.gif);
+}
+
+/* action-drop */
+#wrapper.msg .msg-body .msg-box .action-drop {
+	z-index: 3;
+	top: 37px;
+	cursor: pointer;
+}
+#wrapper.msg .msg-body .msg-box .content-item .action-drop {
+	z-index: 2;
+	top: 10px;
+}
+#wrapper.msg .msg-body .msg-box .action-drop .drop-arrow {
+	float: right;
+	width: 16px;
+	height: 16px;
+	background: url(../images/myshow/arrow_drop.png) no-repeat 100% 0;
+	_background-image: url(../images/myshow/arrow_drop.gif);
+}
+#wrapper.msg .msg-body .msg-box .action-drop .wrapper {
+	clear: both;
+	padding: 0 2px;
+	border: 1px solid #3F3F3F;
+	background-color: #343434;
+	_width: 44px;
+	_float: right;
+}
+#wrapper.msg .msg-body .msg-box .action-drop a {
+	display: block;
+	padding: 4px 10px;
+	border-top: 1px solid #4B4B4B;
+	color: #EA5265;
+}
+#wrapper.msg .msg-body .msg-box .action-drop a:first-child {
+	border: none;
+}
+#wrapper.msg .msg-body .msg-box .action-drop a:hover {
+	text-decoration: underline;
+}
+
+/* 标记 */
+/*#wrapper.msg .msg-body .msg-box .arrow {
+	position: absolute;
+	top: 20px;
+	left: -13px;
+	display: block;
+	width: 13px;
+	height: 14px;
+	background: url(../images/myshow/arrow_left_msg.png) no-repeat 0 0;
+}*/
+#wrapper.msg .msg-body .msg-box .arrow {
+	position: absolute;
+	top: 20px;
+	left: -28px;
+	display: block;
+	width: 0;
+	height: 0;
+	border: 14px solid #474747;
+	border-width: 8px 14px;
+	border-color: transparent #474747 transparent transparent;
+	_display: none;
+}
+#wrapper.msg .msg-notice .msg-box:hover .arrow {
+	border-color: transparent #535353 transparent transparent;
+}
+#wrapper.msg .msg-body .msg-box .new {
+	position: absolute;
+	top: 9px;
+	left: 2px;
+	display: block;
+	width: 17px;
+	height: 17px;
+	line-height: 16px;
+	color: #fff;
+	text-align: center;
+	background-color: #9B0F1C;
+}
+#wrapper.msg .msg-body .load-more {
+	display: block;
+	margin-left: 100px;
+	padding: 6px 0;
+	border-radius: 5px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #ccc;
+	text-align: center;
+	background: #4a4a4a;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#505050), to(#414141));
+	background: -webkit-linear-gradient(#505050, #414141);
+	background: -moz-linear-gradient(#505050, #414141);
+	background: -ms-linear-gradient(#505050, #414141);
+	background: -o-linear-gradient(#505050, #414141);
+	background: linear-gradient(#505050, #414141);
+}
+#wrapper.msg .msg-body .load-more:hover {
+	color: #ddd;
+	background: #555;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#555), to(#444));
+	background: -webkit-linear-gradient(#555, #444);
+	background: -moz-linear-gradient(#555, #444);
+	background: -ms-linear-gradient(#555, #444);
+	background: -o-linear-gradient(#555, #444);
+	background: linear-gradient(#555, #444);
+}
+
+/* 分享到 */
+#jt-box {
+}
+.jt-box {
+	display: none;
+	position: absolute;
+	top: 42px;
+	left: 88px;
+	width: 100px;
+	overflow: hidden;
+	border: #ccc solid 1px;
+	background: #ffffff;
+}
+.jt-box-title {
+	padding: 2px 5px;
+	font-size: 14px;
+	color: #000;
+	border-bottom: 1px solid #E5E5E5;
+	background-color: #F2F2F2;
+}
+.jt-box-list {
+	padding: 3px 2px;
+}
+.jt-box-list li {
+	padding: 3px 5px;
+	border: 1px solid #fff;
+}
+.jt-box-list li:hover,
+.jt-box-list li.hover {
+	border: 1px solid #E5E5E5;
+	background-color: #f2f2f2;
+}
+.jt-box-list .jt-ico {
+	display: block;
+	margin: 1px 0;
+	height: 16px;
+	padding-left: 25px;
+	width: 107px;
+	color: #000;
+	font-size: 12px;
+	background: url(http://v3.jiathis.com/code_mini/images/jiathis_ico.png) no-repeat 0 0;
+}
+.jt-box-list .jt-ico:hover {
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}
+.jt-box-footer {
+	padding-right: 5px;
+	border-top: 1px solid #E5E5E5;
+	text-align: right;
+	background: #F2F2F2;
+}
+.jt-box-footer img {
+	vertical-align: middle;
+}
+.jt-box-footer a {
+	margin-left: 4px;
+	color: #333;
+}
+.jt-box-footer a:hover {
+	text-decoration: underline;
+}
+/* 图标位置 */
+.jt-box .jt-ico-copy{background-position:0px 0px}
+.jt-box .jt-ico-email{background-position:0px -32px}
+.jt-box .jt-ico-fav{background-position:0px -16px}
+.jt-box .jt-ico-buzz{background-position:0px -48px}
+.jt-box .jt-ico-qzone{background-position:0px -64px}
+.jt-box .jt-ico-baidu{background-position:0px -80px}
+.jt-box .jt-ico-tsina{background-position:0px -96px}
+.jt-box .jt-ico-tsohu{background-position:0px -112px}
+.jt-box .jt-ico-t163{background-position:0px -128px}
+.jt-box .jt-ico-tqq{background-position:0px -144px}
+.jt-box .jt-ico-renren{background-position:0px -160px}
+.jt-box .jt-ico-kaixin{background-position:0px -176px}
+.jt-box .jt-ico-sohu{background-position:0px -192px}
+.jt-box .jt-ico-taobao{background-position:0px -208px}
+.jt-box .jt-ico-hi{background-position:0px -224px}
+.jt-box .jt-ico-xiaoyou{background-position:0px -240px}
+.jt-box .jt-ico-youshi{background-position:0px -256px}
+.jt-box .jt-ico-gmail{background-position:0px -272px}
+.jt-box .jt-ico-hotmail{background-position:0px -288px}
+.jt-box .jt-ico-ymail{background-position:0px -304px}
+.jt-box .jt-ico-feixin{background-position:0px -320px}
+.jt-box .jt-ico-51{background-position:0px -336px}
+.jt-box .jt-ico-google{background-position:0px -352px}
+.jt-box .jt-ico-youdao{background-position:0px -368px}
+.jt-box .jt-ico-qq{background-position:0px -384px}
+.jt-box .jt-ico-sina{background-position:0px -400px}
+.jt-box .jt-ico-tuita{background-position:0px -416px}
+.jt-box .jt-ico-huaban{background-position:0px -432px}
+.jt-box .jt-ico-douban{background-position: 0 -560px}
+.jt-box .jt-ico-115{background-position:0px -448px}
