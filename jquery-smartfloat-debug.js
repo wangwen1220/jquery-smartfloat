@@ -4,7 +4,7 @@
  * Date: 2013-10-21
  * Author: Steven http://wangwen1220.github.io/
  *
- * 2013-10-21 v1.3.0 整理代码，编写 demo
+ * 2013-10-21 v1.3.0 添加点位元素，在窗口尺寸改变时获取元素的左偏移
  * 2013-08-23 v1.2.0 添加 margin 参数设置
  * 2012-10-31 v1.1.0 添加自定义元素宽度和占位元素
  * 2010-12-06 v1.0.0 看了张鑫旭的浮动层智能定位例子，有了想改成插件的冲动，于是有了此插件
@@ -15,9 +15,10 @@
  */
 
 (function($) {
-  $.fn.smartFloat = function(config) {
+  $.fn.smartFloat = function(opt) {
     return this.each(function() {
       var $this = $(this),
+        window_width = $(window).width(),
         // 距离屏幕顶部和左侧的距离
         offset_top = $this.offset().top,
         offset_left = $this.offset().left,
@@ -30,33 +31,45 @@
         default_width = $this.css('width');
 
       // 默认设置
-      config = $.extend({
+      var config = $.extend({
         top: 10,
         left: offset_left,
         zindex: 999, // 此值不宜过高，要根据具体情况而定
         margin: 0, // margin 也会影响元素的定位，默认重置为 0
         width: default_width,
-        placeholder: false // 若浮动元素为静态流元素，需添加占位元素，默不添加
-      }, config || {});
+        placeholder: false // 是否占位
+      }, opt || {});
       var top = config.top,
         left = config.left,
         zindex = config.zindex,
         margin = config.margin,
         width = config.width,
-        placeholder = config.placeholder;
+        placeholder = config.placeholder,
+        $placeholder;
 
-      // TODO: 设置占位元素
-      if(placeholder) {
-        var $placeholder = $('<div class="smart-float-placeholder" />').insertAfter($this);
-        $placeholder.width($this.outerWidth(true)).height($this.outerHeight(true)).hide();
-      }
+      // 占位元素
+      $placeholder = $('<div/>').css({
+        'position': default_position,
+        // 'top': default_top,
+        'left': default_left,
+        // 'width': $this.outerWidth(),
+        // 'height': $this.outerHeight(),
+        'margin-left': $this.css('margin-left')
+      }).insertAfter($this);
 
-      // 鼠标滚动事件
+      // 鼠标滚动
       $(window).scroll(function() {
         var scroll_top = $(this).scrollTop();
         if(scroll_top + top > offset_top) {
           // 显示占位元素
-          placeholder && $placeholder.show();
+          if (placeholder) {
+            $placeholder.css({
+              'top': default_top,
+              'width': $this.outerWidth(),
+              'height': $this.outerHeight(),
+              'margin': default_margin
+            });
+          }
 
           // 添加类来控制一些复杂的布局
           $this.addClass('smart-float');
@@ -80,11 +93,19 @@
               'width': width
             });
             // 防止出现抖动 - 请慎用，会替换 html 已定义的背景图
-            //$('html').css({'background-image': 'url(about:blank)', 'background-attachment': 'fixed'});
+            // $('html').css({'background-image': 'url(about:blank)', 'background-attachment': 'fixed'});
           }
         } else {
           // 隐藏占位元素
-          placeholder && $placeholder.hide();
+          if (placeholder) {
+            $placeholder.css({
+              'top': 'auto',
+              'width': 'auto',
+              'height': 'auto',
+              'margin': '0',
+              'margin-left': $this.css('margin-left')
+            });
+          }
 
           // 还原初始样式
           $this.removeClass('smart-float').css({
@@ -96,7 +117,11 @@
             'width': default_width
           });
         }
-      });
+      }).resize(function() { // 窗口尺寸改变
+        if (opt && opt.left) return;
+        left = $placeholder.offset().left;
+        $(window).scroll();
+      }).trigger('scroll');
     });
   };
 })(jQuery);
